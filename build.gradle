@@ -1,0 +1,80 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: "config.gradle"
+
+
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+//        maven { url 'https://maven.aliyun.com/repository/public' }
+//        maven { url 'https://maven.aliyun.com/repository/google' }
+//          maven { url "https://jitpack.io" }
+//        maven { url 'https://maven.google.com' }
+//        maven { url "http://mvn.mob.com/android"}
+//        maven {
+//            url "https://mvn.mob.com/android"
+//        }
+        google()
+        mavenCentral()
+        // 阿里云云效仓库：https://maven.aliyun.com/mvn/guide
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        // 华为开源镜像：https://mirrors.huaweicloud.com/
+        maven { url 'https://repo.huaweicloud.com/repository/maven/' }
+        // JitPack 远程仓库：https://jitpack.io
+        maven { url 'https://jitpack.io' }
+        maven {
+            url "https://repo.eclipse.org/content/repositories/paho-snapshots/"
+        }
+
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.4'
+        //classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:9.0.0-rc2'
+//        classpath 'com.mob.sdk:MobSDK-Impl:2021.0309.1445'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://maven.aliyun.com/repository/public' }
+//        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url "https://jitpack.io" }
+//        maven { url 'https://maven.google.com' }
+//        maven { url "http://mvn.mob.com/android"}
+        google()
+        mavenCentral()
+        // 阿里云云效仓库：https://maven.aliyun.com/mvn/guide
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        // 华为开源镜像：https://mirrors.huaweicloud.com/
+        maven { url 'https://repo.huaweicloud.com/repository/maven/' }
+        // JitPack 远程仓库：https://jitpack.io
+        maven { url 'https://jitpack.io' }
+        maven {
+            url "https://repo.eclipse.org/content/repositories/paho-snapshots/"
+        }
+
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+subprojects {
+    project.configurations.all {
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group == 'com.android.support'
+                    && !details.requested.name.contains('multidex')) {
+                details.useVersion "27.1.1"
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+
+rootProject.name = "WellGoApp"
+
+include ':wifiLibrary'
+include ':app',
+        ':JavaTestLib',
+        ':DZBLELibrary',
+        ':SNDBLibrary',
+        ':SNBLELibrary',
+        ':SNToolLibrary',
+        ':SNMapLibrary',
+        ':AppDataLibrary',
+        ':SNNetworkLibrary',
+        ':BleOTASupport',
+        ':SNLoginLibrary',
+        ':CameraLibrary'
+include ':MPChartLib'

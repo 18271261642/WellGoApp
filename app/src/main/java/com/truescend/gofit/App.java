@@ -109,6 +109,12 @@ public class App extends Application implements LoginStatusHelper.LoginStatusLis
         //高德地图
         MapsInitializer.updatePrivacyShow(this,true,true);
         MapsInitializer.updatePrivacyAgree(this,true);
+
+        /**
+         * 基础库设置是否允许采集个人及设备信息
+         * @param collectEnable: true 允许采集 false 不允许采集
+         */
+
         loginStatusHelper.register();
         //不上传日志
         // LogRecorder.uploadLog(getContext(), UserStorage.getUserId(),-1/*上传昨天的数据*/,null);

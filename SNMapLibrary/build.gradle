@@ -53,12 +53,7 @@ dependencies {
     api 'com.google.android.gms:play-services-maps:16.0.0'
     api 'com.google.android.gms:play-services-location:16.0.0'
     //高德地图
-    //    api 'com.amap.api:3dmap:6.0.1'
-    //    api 'com.amap.api:location:3.8.0'
-    //    api 'com.amap.api:search:5.7.0'
-//    api files('libs/AMap_Location_V4.7.1_20190803.jar')
-//    api files('libs/AMap_Search_V6.9.3_20190722.jar')
-//    api files('libs/Android_Map3D_SDK_V6.9.3_20191018.jar')
 
-   // implementation(name: 'AMap3DMap_8.1.0_AMapNavi', ext: 'aar')
+
+   // implementation(name: 'AMap3DMap_10.0.700_20240508', ext: 'aar')
 }

@@ -7,6 +7,7 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.amap.apis.utils.core.api.AMapUtilCoreApi;
 import com.sn.map.bean.SNLocation;
 import com.sn.map.interfaces.ILocation;
 
@@ -36,6 +37,8 @@ public class GaoDeLocationImpl implements ILocation, AMapLocationListener {
     @Override
     public void start() {
         stop();
+        AMapUtilCoreApi.setCollectInfoEnable(false);
+
         try {
             if (mLocationClient == null) {
                 //初始化定位
@@ -43,6 +46,7 @@ public class GaoDeLocationImpl implements ILocation, AMapLocationListener {
 
                 mLocationClient.setLocationListener(this);
             }
+
             //初始化定位参数
             mLocationOption = new AMapLocationClientOption();
             //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式

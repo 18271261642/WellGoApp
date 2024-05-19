@@ -14,6 +14,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.MapsInitializer;
 import com.sn.map.bean.SNLocation;
 import com.sn.map.interfaces.ILocation;
 
@@ -39,6 +40,7 @@ public class GoogleLocationImpl extends LocationCallback implements ILocation, G
         this.context = new WeakReference<>(context.getApplicationContext());
         this.minTime = minTime;
         this.minDistance = minDistance;
+        MapsInitializer.initialize(context);
     }
 
     @Override

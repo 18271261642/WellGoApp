@@ -187,7 +187,7 @@ public class MainActivity extends BaseActivity<MainPresenterImpl, IMainContract.
 
     private void initPermission1() {
         List<String> permissions = new ArrayList<>();
-        permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//        permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
         permissions.add(Manifest.permission.CALL_PHONE);
         if (!SystemUtil.isMIUI12()) {

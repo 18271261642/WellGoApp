@@ -83,7 +83,8 @@ public class SplashActivity extends Activity {
 
                     boolean isAllowed = SNStorage.getValue("is_privacy",false);
                     if(isAllowed){
-                        intoPermissionShow();
+                        //intoPermissionShow();
+                        next1();
                     }else{
                         showPrivacyDialog();
                     }
@@ -183,7 +184,7 @@ public class SplashActivity extends Activity {
     private void next1() {
 
         List<String> permissions = new ArrayList<>();
-        permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//        permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
         permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
         permissions.add(Manifest.permission.CALL_PHONE);
@@ -218,6 +219,10 @@ public class SplashActivity extends Activity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.BLUETOOTH_ADMIN,Manifest.permission.BLUETOOTH_SCAN,Manifest.permission.BLUETOOTH_CONNECT},0x09);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_MEDIA_IMAGES},0x10);
         }
 
     }

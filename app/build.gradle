@@ -258,7 +258,7 @@ dependencies {
     implementation project(':BleOTASupport')
 
     //地图库
-    implementation project(':SNMapLibrary')
+    api project(':SNMapLibrary')
 
     //第三方登录
     implementation project(':SNLoginLibrary')

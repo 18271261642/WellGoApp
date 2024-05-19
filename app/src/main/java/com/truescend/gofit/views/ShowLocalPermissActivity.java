@@ -162,7 +162,12 @@ public class ShowLocalPermissActivity extends AppCompatActivity implements View.
                 requestPermiss(new String[]{Manifest.permission.CAMERA});
                 break;
             case R.id.permissionReadWriteLayout:
-                requestPermiss(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE});
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    requestPermiss(new String[]{Manifest.permission.READ_MEDIA_IMAGES});
+                }else{
+                    requestPermiss(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE});
+                }
+
                 break;
             case R.id.permissionPhoneStatusLayout:
                 requestPermiss(new String[]{Manifest.permission.READ_PHONE_STATE});

@@ -162,6 +162,15 @@
                     android:id="@+id/tvEditMode"
                     style="@style/TextViewButton"
                     android:text="@string/content_edit" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="备案号: 粤ICP备14087938号-8A"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="@dimen/widget_size_10" />

@@ -2,8 +2,8 @@
 ext {
     android = [
             applicationId      : "com.truescend.gofit",
-            versionCode        : 1549,
-            versionName        : "1.5.4.9",
+            versionCode        : 1550,
+            versionName        : "1.5.5",
             updateAppName      : "wellgo",
             appId              : "2",
             isGooglePlayVersion: true

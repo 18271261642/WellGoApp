@@ -134,7 +134,7 @@ public class LoginActivity extends BaseActivity<LoginPresenterImpl, ILoginContra
         }
 
         boolean isAllow =  SNStorage.getValue("is_privacy",false);
-        tvLoginTerms.setChecked(isAllow);
+      //  tvLoginTerms.setChecked(isAllow);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.BLUETOOTH_ADMIN,Manifest.permission.BLUETOOTH_SCAN,Manifest.permission.BLUETOOTH_CONNECT},0x09);
@@ -213,9 +213,9 @@ public class LoginActivity extends BaseActivity<LoginPresenterImpl, ILoginContra
 
                     LoginSDK.init(this);
                 }
-                if(buttonView.isPressed()){
-                    showPrivacyDialog();
-                }
+//                if(buttonView.isPressed()){
+//                    showPrivacyDialog();
+//                }
         }
     }
 
@@ -276,6 +276,13 @@ public class LoginActivity extends BaseActivity<LoginPresenterImpl, ILoginContra
                 PageJumpUtil.startResetPswCheckerActivity(this);
                 break;
             case R.id.btnVideoGuideGuestLoginIn:
+                boolean isChecked = tvLoginTerms.isChecked();
+                if(!isChecked){
+                    SNToast.toast("请阅读并同意用户协议!");
+                    return;
+                }
+
+
                 if (SystemUtil.isMIUI12()) {
                     String tips = "小米 MIUI12 需要将[获取手机信息]权限从[空白通行证]修改为[始终允许], 否则你以前的数据可能会丢失. 为了你的数据稳定, 建议使用账号注册";
                     if(!LanguageUtil.isZH()){

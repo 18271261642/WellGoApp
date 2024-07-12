@@ -35,7 +35,7 @@ public class HelpActivity extends BaseActivity<HelpPresenterImpl, IHelpContract.
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
-        mWebView.loadUrl("file:///android_asset/privacy_policy.html");
+        mWebView.loadUrl("file:///android_asset/wellgo_privacy_agreement.html");
     }
 
 

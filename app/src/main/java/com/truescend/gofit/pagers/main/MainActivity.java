@@ -283,27 +283,27 @@ public class MainActivity extends BaseActivity<MainPresenterImpl, IMainContract.
         }
 
 
-        if (!PermissionUtils.hasNotificationEnablePermission(this)) {
-            if (dialog != null && dialog.isShowing()) {
-                dialog.dismiss();
-            }
-            String permissionNames = getString(R.string.content_permission_notification_enable);
-            SpannableStringBuilder message = new SpannableStringBuilder(getString(R.string.content_authorized_to_use) + "\n" + permissionNames);
-            message.setSpan(new ForegroundColorSpan(Color.RED), message.length() - permissionNames.length(), message.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-            dialog = new AlertDialog.Builder(this)
-                    .setCancelable(true)
-                    .setTitle(R.string.content_authorized)
-                    .setMessage(message)
-                    .setNegativeButton(getString(R.string.content_cancel), null)
-                    .setPositiveButton(getString(R.string.content_approve), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            PermissionUtils.startToNotificationEnableSetting(MainActivity.this, null);
-                        }
-                    }).show();
-            return;
-        }
+//        if (!PermissionUtils.hasNotificationEnablePermission(this)) {
+//            if (dialog != null && dialog.isShowing()) {
+//                dialog.dismiss();
+//            }
+//            String permissionNames = getString(R.string.content_permission_notification_enable);
+//            SpannableStringBuilder message = new SpannableStringBuilder(getString(R.string.content_authorized_to_use) + "\n" + permissionNames);
+//            message.setSpan(new ForegroundColorSpan(Color.RED), message.length() - permissionNames.length(), message.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//
+//            dialog = new AlertDialog.Builder(this)
+//                    .setCancelable(true)
+//                    .setTitle(R.string.content_authorized)
+//                    .setMessage(message)
+//                    .setNegativeButton(getString(R.string.content_cancel), null)
+//                    .setPositiveButton(getString(R.string.content_approve), new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            PermissionUtils.startToNotificationEnableSetting(MainActivity.this, null);
+//                        }
+//                    }).show();
+//            return;
+//        }
         //TODO 以下代码还是无法兼容 oppo, 可以说是 不可能兼容...
         //现象是这样的:
         //if(自启动权限已开+通知监听权限已开){

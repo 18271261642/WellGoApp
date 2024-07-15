@@ -80,6 +80,9 @@ public class UserFragment extends BaseFragment<UserPresenterImpl, IUserContract.
     @BindView(R.id.ilDeviceSettingHelp)
     View ilDeviceSettingHelp;
 
+    @BindView(R.id.ilDeviceSettingExit)
+    View ilDeviceSettingExit;
+
     @BindView(R.id.tvUserExitCurrentAccount)
     View tvUserExitCurrentAccount;
 
@@ -99,6 +102,8 @@ public class UserFragment extends BaseFragment<UserPresenterImpl, IUserContract.
     private ItemBannerButton googleFitItem;
     private ItemBannerButton feedbackItem;
     private ItemBannerButton helpItem;
+
+    private ItemBannerButton exitItem;
     private ItemBannerButton stravaItem;
     private ItemBannerButton tmallGenieItem;
     private BadgeHelper badgeHelper;
@@ -157,7 +162,10 @@ public class UserFragment extends BaseFragment<UserPresenterImpl, IUserContract.
 
 
         helpItem = new ItemBannerButton(ilDeviceSettingHelp);
+        exitItem = new ItemBannerButton(ilDeviceSettingExit);
 
+        exitItem.setTitleIcon(R.mipmap.ic_logout_img);
+        exitItem.setTitle("注销账户");
 
         nickNameItem.setContentVisibility(View.GONE);
         nickNameItem.setNoteVisibility(View.GONE);
@@ -308,7 +316,7 @@ public class UserFragment extends BaseFragment<UserPresenterImpl, IUserContract.
             R.id.ilUserPersonalSettings,
             R.id.ilUserFriends,
             R.id.tvUserExitCurrentAccount,
-            R.id.ilDeviceSettingFeedback})
+            R.id.ilDeviceSettingFeedback,R.id.ilDeviceSettingExit})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ilUserFriends:
@@ -339,6 +347,25 @@ public class UserFragment extends BaseFragment<UserPresenterImpl, IUserContract.
                     PageJumpUtil.startConnectGoogleFitActivity(getContext());
 
                 }
+                break;
+            case R.id.ilDeviceSettingExit:
+                CommonDialog.create(getContext(),
+                        getString(R.string.content_are_you_sure),
+                        "是否注销此账号，账号注销后数据将清除，是否确认?",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        },
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                PageJumpUtil.startLoginActivity(getContext(), true);
+                                dialogInterface.dismiss();
+                            }
+                        }
+                ).show();
                 break;
             case R.id.tvUserExitCurrentAccount:
                 CommonDialog.create(getContext(),

@@ -30,8 +30,6 @@ import com.truescend.gofit.views.TitleLayout;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 作者:东芝(2018/11/22).
@@ -47,17 +45,16 @@ public class DietListMealActivity extends BaseActivity<DietListMealPresenterImpl
     private DietListAdapter mDietListAdapter;
 
 
-    @BindView(R.id.lvList)
     SwipeMenuListView lvList;
-    @BindView(R.id.tvAddMeal)
+
     TextView tvAddMeal;
-    @BindView(R.id.rlRefresh)
+
     SmartRefreshLayout rlRefresh;
-    @BindView(R.id.tvCalorieIntake)
+
     TextView tvCalorieIntake;
-    @BindView(R.id.tvCalorieTotal)
+
     TextView tvCalorieTotal;
-    @BindView(R.id.rpbCalorieLimit)
+
     RegionalProgressBar rpbCalorieLimit;
 
 
@@ -91,6 +88,20 @@ public class DietListMealActivity extends BaseActivity<DietListMealPresenterImpl
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        lvList = findViewById(R.id.lvList);
+        tvAddMeal = findViewById(R.id.tvAddMeal);
+         rlRefresh = findViewById(R.id.rlRefresh);
+         tvCalorieIntake = findViewById(R.id.tvCalorieIntake);
+       tvCalorieTotal = findViewById(R.id.tvCalorieTotal);
+       rpbCalorieLimit = findViewById(R.id.rpbCalorieLimit);
+
+        tvAddMeal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PageJumpUtil.startDietAddMealActivity(DietListMealActivity.this);
+            }
+        });
+
         initListItem();
         //刷新&重载
         getPresenter().loadMealList();
@@ -225,13 +236,4 @@ public class DietListMealActivity extends BaseActivity<DietListMealPresenterImpl
     }
 
 
-    @OnClick({R.id.tvAddMeal })
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.tvAddMeal:
-                PageJumpUtil.startDietAddMealActivity(DietListMealActivity.this);
-                break;
-
-        }
-    }
 }

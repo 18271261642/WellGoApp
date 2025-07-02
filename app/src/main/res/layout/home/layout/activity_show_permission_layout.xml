@@ -1,343 +1,349 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
 
 
     <View
         android:id="@+id/commTmpV"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="40dp"/>
+        android:layout_height="40dp"
+        app:layout_constraintTop_toTopOf="parent" />
 
-<androidx.core.widget.NestedScrollView
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    app:layout_constraintBottom_toTopOf="@+id/showPermissionBtn"
-    app:layout_constraintTop_toBottomOf="@+id/commTmpV">
-
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/showPermissionBtn"
+        app:layout_constraintTop_toBottomOf="@+id/commTmpV">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
-  <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:textSize="23sp"
-      android:layout_marginStart="15dp"
-      android:layout_marginTop="15dp"
-      android:textStyle="bold"
-      android:padding="3dp"
-      android:text="@string/string_permiss_title"/>
-
- <TextView
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:padding="3dp"
-     android:layout_marginStart="15dp"
-     android:text="@string/string_permiss_desc"/>
-
-
- <!--蓝牙功能使用-->
-  <androidx.constraintlayout.widget.ConstraintLayout
-      android:id="@+id/permissionBleLayout"
-      style="@style/PermissionCommParentStyle"
-      android:background="@drawable/item_comm_main_layout"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
-
- <ImageView
-     android:id="@+id/permissionBleImg"
-     app:layout_constraintLeft_toLeftOf="parent"
-     app:layout_constraintTop_toTopOf="parent"
-     app:layout_constraintBottom_toBottomOf="parent"
-     style="@style/PermissionCommLeftImgStyle"
-     android:background="@drawable/ic_permission_ble_img"/>
-
-
-      <TextView
-          android:id="@+id/permissionBleTitleTv"
-          app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintLeft_toRightOf="@id/permissionBleImg"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textSize="18sp"
-          android:layout_marginStart="10dp"
-          android:padding="3dp"
-          android:text="@string/string_permiss_ble"/>
-
-      <TextView
-          app:layout_constraintTop_toBottomOf="@id/permissionBleTitleTv"
-          app:layout_constraintLeft_toRightOf="@id/permissionBleImg"
-          style="@style/PermissionCommBotDescStyle"
-          android:text="@string/string_permiss_ble_desc"/>
-
-
-     <ImageView
-         android:id="@+id/permissBleStatusImg"
-         style="@style/PermissionCommRightImgStyle"
-         tools:ignore="MissingConstraints" />
-
-
-
-  </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!--GPS功能使用-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/permissionGPSLayout"
-            style="@style/PermissionCommParentStyle"
-            android:background="@drawable/item_comm_main_layout"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
-
-            <ImageView
-                android:id="@+id/permissionGPSImg"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_margin="5dp"
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_permission_gps_img"/>
-
-
-            <TextView
-                android:id="@+id/permissionGPSTitleTv"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/permissionGPSImg"
-               style="@style/PermissionCommTopTitleStyle"
-                android:text="@string/string_permiss_gps"/>
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:padding="3dp"
+                android:text="@string/string_permiss_title"
+                android:textSize="23sp"
+                android:textStyle="bold" />
 
             <TextView
-                app:layout_constraintTop_toBottomOf="@id/permissionGPSTitleTv"
-                app:layout_constraintLeft_toRightOf="@id/permissionGPSImg"
-                style="@style/PermissionCommBotDescStyle"
-                android:text="@string/string_permiss_gps_desc"/>
-
-
-            <ImageView
-                android:id="@+id/permissGPSStatusImg"
-                style="@style/PermissionCommRightImgStyle"
-                tools:ignore="MissingConstraints" />
-
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <!--位置权限使用-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/permissionLocalLayout"
-            style="@style/PermissionCommParentStyle"
-            android:background="@drawable/item_comm_main_layout"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
-
-            <ImageView
-                android:id="@+id/permissionLocalImg"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_margin="5dp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_permission_local_img"/>
+                android:layout_marginStart="15dp"
+                android:padding="3dp"
+                android:text="@string/string_permiss_desc" />
 
 
-            <TextView
-                android:id="@+id/permissionLocalTitleTv"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/permissionLocalImg"
-                style="@style/PermissionCommTopTitleStyle"
-                android:text="@string/string_permiss_local"/>
+            <!--蓝牙功能使用-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/permissionBleLayout"
+                style="@style/PermissionCommParentStyle"
+                android:background="@drawable/item_comm_main_layout">
 
-            <TextView
-                app:layout_constraintTop_toBottomOf="@id/permissionLocalTitleTv"
-                app:layout_constraintLeft_toRightOf="@id/permissionLocalImg"
-                style="@style/PermissionCommBotDescStyle"
-                android:text="@string/string_permiss_local_desc"/>
-
-
-            <ImageView
-                android:id="@+id/permissLocaStatusImg"
-                style="@style/PermissionCommRightImgStyle"
-                tools:ignore="MissingConstraints" />
+                <ImageView
+                    android:id="@+id/permissionBleImg"
+                    style="@style/PermissionCommLeftImgStyle"
+                    android:background="@drawable/ic_permission_ble_img"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <!--相机权限使用-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/permissionCameraLayout"
-            style="@style/PermissionCommParentStyle"
-            android:background="@drawable/item_comm_main_layout"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
-
-            <ImageView
-                android:id="@+id/permissionCameraImg"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_margin="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_permission_camera_img"/>
-
-
-            <TextView
-                android:id="@+id/permissionCameraTitleTv"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/permissionCameraImg"
-                style="@style/PermissionCommTopTitleStyle"
-                android:text="@string/string_permiss_camera"/>
-
-            <TextView
-                app:layout_constraintTop_toBottomOf="@id/permissionCameraTitleTv"
-                app:layout_constraintLeft_toRightOf="@id/permissionCameraImg"
-                style="@style/PermissionCommBotDescStyle"
-                android:text="@string/string_permiss_camera_desc"/>
-
-
-            <ImageView
-                android:id="@+id/permissCameraStatusImg"
-                style="@style/PermissionCommRightImgStyle"
-                tools:ignore="MissingConstraints" />
+                <TextView
+                    android:id="@+id/permissionBleTitleTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:padding="3dp"
+                    android:text="@string/string_permiss_ble"
+                    android:textSize="18sp"
+                    app:layout_constraintLeft_toRightOf="@id/permissionBleImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/permissBleStatusImg"
+                    style="@style/PermissionCommRightImgStyle"
+                    tools:ignore="MissingConstraints" />
+                <TextView
+                    style="@style/PermissionCommBotDescStyle"
+                    android:text="@string/string_permiss_ble_desc"
+                    app:layout_constraintLeft_toRightOf="@id/permissionBleImg"
+                    app:layout_constraintRight_toLeftOf="@+id/permissBleStatusImg"
+                    app:layout_constraintTop_toBottomOf="@id/permissionBleTitleTv" />
 
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!--读写SD卡权限使用-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/permissionReadWriteLayout"
-            style="@style/PermissionCommParentStyle"
-            android:background="@drawable/item_comm_main_layout"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
-
-            <ImageView
-                android:id="@+id/permissionSDImg"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_margin="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_permission_file_img"/>
 
 
-            <TextView
-                android:id="@+id/permissionSDTitleTv"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/permissionSDImg"
-                style="@style/PermissionCommTopTitleStyle"
-                android:text="@string/string_permiss_file"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                app:layout_constraintTop_toBottomOf="@id/permissionSDTitleTv"
-                app:layout_constraintLeft_toRightOf="@id/permissionSDImg"
-                style="@style/PermissionCommBotDescStyle"
-                android:text="@string/string_permiss_file_desc"/>
+            <!--GPS功能使用-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/permissionGPSLayout"
+                style="@style/PermissionCommParentStyle"
+                android:background="@drawable/item_comm_main_layout">
 
-
-            <ImageView
-                android:id="@+id/permissReadWriteStatusImg"
-                style="@style/PermissionCommRightImgStyle"
-                tools:ignore="MissingConstraints"  />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!--电话权限使用-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/permissionPhoneStatusLayout"
-            style="@style/PermissionCommParentStyle"
-            android:background="@drawable/item_comm_main_layout"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
-
-            <ImageView
-                android:id="@+id/permissionPhoneStatusImg"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_margin="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_permission_phone_img"/>
+                <ImageView
+                    android:id="@+id/permissionGPSImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/ic_permission_gps_img"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-            <TextView
-                android:id="@+id/permissionPhoneStatusTitleTv"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/permissionPhoneStatusImg"
-                style="@style/PermissionCommTopTitleStyle"
-                android:text="@string/string_permiss_phone"/>
+                <TextView
+                    android:id="@+id/permissionGPSTitleTv"
+                    style="@style/PermissionCommTopTitleStyle"
+                    android:text="@string/string_permiss_gps"
+                    app:layout_constraintLeft_toRightOf="@id/permissionGPSImg"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                app:layout_constraintTop_toBottomOf="@id/permissionPhoneStatusTitleTv"
-                app:layout_constraintLeft_toRightOf="@id/permissionPhoneStatusImg"
-                style="@style/PermissionCommBotDescStyle"
-                android:text="@string/string_permiss_phone_desc"/>
+                <ImageView
+                    android:id="@+id/permissGPSStatusImg"
+                    style="@style/PermissionCommRightImgStyle"
+                    tools:ignore="MissingConstraints" />
 
-
-            <ImageView
-                android:id="@+id/permissPhoneImg"
-                style="@style/PermissionCommRightImgStyle"
-                tools:ignore="MissingConstraints"  />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!--联系人通讯录权限使用-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/permissionContactLayout"
-            style="@style/PermissionCommParentStyle"
-            android:background="@drawable/item_comm_main_layout"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
-
-            <ImageView
-                android:id="@+id/permissionContactImg"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_margin="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_permission_contact_img"/>
+                <TextView
+                    style="@style/PermissionCommBotDescStyle"
+                    android:text="@string/string_permiss_gps_desc"
+                    app:layout_constraintLeft_toRightOf="@id/permissionGPSImg"
+                    app:layout_constraintRight_toLeftOf="@+id/permissGPSStatusImg"
+                    app:layout_constraintTop_toBottomOf="@id/permissionGPSTitleTv" />
 
 
-            <TextView
-                android:id="@+id/permissionContactTitleTv"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/permissionContactImg"
-                style="@style/PermissionCommTopTitleStyle"
-                android:text="@string/string_permiss_contact"/>
-
-            <TextView
-                app:layout_constraintTop_toBottomOf="@id/permissionContactTitleTv"
-                app:layout_constraintLeft_toRightOf="@id/permissionContactImg"
-                style="@style/PermissionCommBotDescStyle"
-                android:text="@string/string_permiss_contact_desc"/>
 
 
-            <ImageView
-                android:id="@+id/permissContactStatusImg"
-                style="@style/PermissionCommRightImgStyle"
-                tools:ignore="MissingConstraints" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--位置权限使用-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/permissionLocalLayout"
+                style="@style/PermissionCommParentStyle"
+                android:background="@drawable/item_comm_main_layout">
 
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/permissionLocalImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/ic_permission_local_img"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-</androidx.core.widget.NestedScrollView>
+                <TextView
+                    android:id="@+id/permissionLocalTitleTv"
+                    style="@style/PermissionCommTopTitleStyle"
+                    android:text="@string/string_permiss_local"
+                    app:layout_constraintLeft_toRightOf="@id/permissionLocalImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/permissLocaStatusImg"
+                    style="@style/PermissionCommRightImgStyle"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    style="@style/PermissionCommBotDescStyle"
+                    android:text="@string/string_permiss_local_desc"
+                    app:layout_constraintLeft_toRightOf="@id/permissionLocalImg"
+                    app:layout_constraintRight_toLeftOf="@+id/permissLocaStatusImg"
+                    app:layout_constraintTop_toBottomOf="@id/permissionLocalTitleTv" />
+
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--相机权限使用-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/permissionCameraLayout"
+                style="@style/PermissionCommParentStyle"
+                android:background="@drawable/item_comm_main_layout">
+
+                <ImageView
+                    android:id="@+id/permissionCameraImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/ic_permission_camera_img"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/permissionCameraTitleTv"
+                    style="@style/PermissionCommTopTitleStyle"
+                    android:text="@string/string_permiss_camera"
+                    app:layout_constraintLeft_toRightOf="@id/permissionCameraImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/permissCameraStatusImg"
+                    style="@style/PermissionCommRightImgStyle"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    style="@style/PermissionCommBotDescStyle"
+                    app:layout_constraintRight_toLeftOf="@+id/permissCameraStatusImg"
+                    android:text="@string/string_permiss_camera_desc"
+                    app:layout_constraintLeft_toRightOf="@id/permissionCameraImg"
+                    app:layout_constraintTop_toBottomOf="@id/permissionCameraTitleTv" />
+
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--读写SD卡权限使用-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/permissionReadWriteLayout"
+                style="@style/PermissionCommParentStyle"
+                android:background="@drawable/item_comm_main_layout">
+
+                <ImageView
+                    android:id="@+id/permissionSDImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/ic_permission_file_img"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/permissionSDTitleTv"
+                    style="@style/PermissionCommTopTitleStyle"
+                    android:text="@string/string_permiss_file"
+                    app:layout_constraintLeft_toRightOf="@id/permissionSDImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/permissReadWriteStatusImg"
+                    style="@style/PermissionCommRightImgStyle"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    style="@style/PermissionCommBotDescStyle"
+                    app:layout_constraintRight_toLeftOf="@+id/permissReadWriteStatusImg"
+                    android:text="@string/string_permiss_file_desc"
+                    app:layout_constraintLeft_toRightOf="@id/permissionSDImg"
+                    app:layout_constraintTop_toBottomOf="@id/permissionSDTitleTv" />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--电话权限使用-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/permissionPhoneStatusLayout"
+                style="@style/PermissionCommParentStyle"
+                android:background="@drawable/item_comm_main_layout">
+
+                <ImageView
+                    android:id="@+id/permissionPhoneStatusImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/ic_permission_phone_img"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/permissionPhoneStatusTitleTv"
+                    style="@style/PermissionCommTopTitleStyle"
+                    android:text="@string/string_permiss_phone"
+                    app:layout_constraintLeft_toRightOf="@id/permissionPhoneStatusImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/permissPhoneImg"
+                    style="@style/PermissionCommRightImgStyle"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    style="@style/PermissionCommBotDescStyle"
+                    app:layout_constraintRight_toLeftOf="@+id/permissPhoneImg"
+                    android:text="@string/string_permiss_phone_desc"
+                    app:layout_constraintLeft_toRightOf="@id/permissionPhoneStatusImg"
+                    app:layout_constraintTop_toBottomOf="@id/permissionPhoneStatusTitleTv" />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--联系人通讯录权限使用-->
+            <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/permissionContactLayout"
+                style="@style/PermissionCommParentStyle"
+                android:background="@drawable/item_comm_main_layout">
+
+                <ImageView
+                    android:id="@+id/permissionContactImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/ic_permission_contact_img"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/permissContactStatusImg"
+                    style="@style/PermissionCommRightImgStyle"
+                    tools:ignore="MissingConstraints" />
+                <TextView
+                    android:id="@+id/permissionContactTitleTv"
+                    style="@style/PermissionCommTopTitleStyle"
+                    android:text="@string/string_permiss_contact"
+                    app:layout_constraintLeft_toRightOf="@id/permissionContactImg"
+                    app:layout_constraintRight_toLeftOf="@+id/permissContactStatusImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/PermissionCommBotDescStyle"
+                    app:layout_constraintRight_toLeftOf="@+id/permissContactStatusImg"
+                    android:text="@string/string_permiss_contact_desc"
+                    app:layout_constraintLeft_toRightOf="@id/permissionContactImg"
+                    app:layout_constraintTop_toBottomOf="@id/permissionContactTitleTv" />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
 
     <Button
         android:id="@+id/showPermissionBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/content_confirm"
-        android:stateListAnimator="@null"
+        android:layout_margin="25dp"
         android:background="@drawable/item_comm_main_layout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="25dp"/>
+        android:stateListAnimator="@null"
+        android:text="@string/content_confirm"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

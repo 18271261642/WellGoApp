@@ -16,7 +16,7 @@ import com.truescend.gofit.views.TitleLayout;
 
 import java.util.List;
 
-import butterknife.BindView;
+
 
 /**
  * 功能：历史日程页面
@@ -25,7 +25,7 @@ import butterknife.BindView;
  */
 
 public class HistoryScheduleActivity extends BaseActivity<HistorySchedulePresenterImpl, IHistoryScheduleContract.IView> implements IHistoryScheduleContract.IView {
-    @BindView(R.id.lvHistoryScheduleList)
+
     SwipeMenuListView lvHistoryScheduleList;
 
     private ScheduleItemAdapter adapter;
@@ -42,12 +42,14 @@ public class HistoryScheduleActivity extends BaseActivity<HistorySchedulePresent
 
     @Override
     protected void onCreateTitle(TitleLayout titleLayout) {
+
         super.onCreateTitle(titleLayout);
         titleLayout.setTitle(getString(R.string.title_history_schedule_reminder));
     }
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        lvHistoryScheduleList = findViewById(R.id.lvHistoryScheduleList);
         adapter = new ScheduleItemAdapter(HistoryScheduleActivity.this);
         lvHistoryScheduleList.setAdapter(adapter);
         lvHistoryScheduleList.setMenuCreator(creator);

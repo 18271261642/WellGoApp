@@ -50,8 +50,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Date;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -60,7 +58,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * 东芝:注册适配+用户数据修改功能+公英制体重单位转换 修改注意:单位转换切勿改变原数据,仅仅改变UI显示 ,否则逻辑会越来越乱
  */
 
-public class UserSettingActivity extends BaseActivity<UserSettingPresenterImpl, IUserSettingContract.IView> implements IUserSettingContract.IView {
+public class UserSettingActivity extends BaseActivity<UserSettingPresenterImpl, IUserSettingContract.IView> implements IUserSettingContract.IView, View.OnClickListener {
     public final static String KEY_NEXT_TYPE = "KEY_NEXT_TYPE";
     public final static int TYPE_SAVE_AND_FINISH = 1;
     public final static int TYPE_SAVE_AND_START_MAIN_ACTIVITY = 2;
@@ -78,29 +76,29 @@ public class UserSettingActivity extends BaseActivity<UserSettingPresenterImpl, 
     public @interface NextType {
     }
 
-    @BindView(R.id.civUserSettingHeadPortrait)
+
     CircleImageView civUserSettingHeadPortrait;
-    @BindView(R.id.tvUserSettingNickname)
+
     TextView tvUserSettingNickname;
-    @BindView(R.id.etUserSettingNickname)
+
     EditText etUserSettingNickname;
-    @BindView(R.id.tvUserSettingSign)
+
     TextView tvUserSettingSign;
-    @BindView(R.id.etUserSettingSign)
+
     EditText etUserSettingSign;
-    @BindView(R.id.ilUserSettingGender)
+
     View ilUserSettingGender;
-    @BindView(R.id.ilUserSettingBirthYear)
+
     View ilUserSettingBirthYear;
-    @BindView(R.id.ilUserSettingHeight)
+
     View ilUserSettingHeight;
-    @BindView(R.id.ilUserSettingLastWeight)
+
     View ilUserSettingLastWeight;
-    @BindView(R.id.ilUserSettingBMIIndex)
+
     View ilUserSettingBMIIndex;
-    @BindView(R.id.ilUserSettingTarget)
+
     View ilUserSettingTarget;
-    @BindView(R.id.tvUserSettingSave)
+
     TextView tvUserSettingSave;
 
     private ItemBannerButton genderItem;
@@ -142,6 +140,29 @@ public class UserSettingActivity extends BaseActivity<UserSettingPresenterImpl, 
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        civUserSettingHeadPortrait = findViewById(R.id.civUserSettingHeadPortrait);
+       tvUserSettingNickname = findViewById(R.id.tvUserSettingNickname);
+        etUserSettingNickname= findViewById(R.id.etUserSettingNickname);
+        tvUserSettingSign = findViewById(R.id.tvUserSettingSign);
+         etUserSettingSign = findViewById(R.id.etUserSettingSign);
+         ilUserSettingGender= findViewById(R.id.ilUserSettingGender);
+        ilUserSettingBirthYear = findViewById(R.id.ilUserSettingBirthYear);
+        ilUserSettingHeight= findViewById(R.id.ilUserSettingHeight);
+         ilUserSettingLastWeight = findViewById(R.id.ilUserSettingLastWeight);
+         ilUserSettingBMIIndex= findViewById(R.id.ilUserSettingBMIIndex);
+        ilUserSettingTarget= findViewById(R.id.ilUserSettingTarget);
+        tvUserSettingSave = findViewById(R.id.tvUserSettingSave);
+
+        tvUserSettingSave.setOnClickListener(this);
+        civUserSettingHeadPortrait.setOnClickListener(this);
+        ilUserSettingGender.setOnClickListener(this);
+        ilUserSettingBirthYear.setOnClickListener(this);
+        ilUserSettingHeight.setOnClickListener(this);
+        ilUserSettingLastWeight.setOnClickListener(this);
+        ilUserSettingTarget.setOnClickListener(this);
+
+
+
         mNextType = getIntent().getIntExtra(KEY_NEXT_TYPE, TYPE_SAVE_AND_FINISH);
         initItem();
         switch (mNextType) {
@@ -289,14 +310,8 @@ public class UserSettingActivity extends BaseActivity<UserSettingPresenterImpl, 
     }
 
 
-    @OnClick({
-            R.id.tvUserSettingSave,
-            R.id.civUserSettingHeadPortrait,
-            R.id.ilUserSettingGender,
-            R.id.ilUserSettingBirthYear,
-            R.id.ilUserSettingHeight,
-            R.id.ilUserSettingLastWeight,
-            R.id.ilUserSettingTarget})
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.civUserSettingHeadPortrait:

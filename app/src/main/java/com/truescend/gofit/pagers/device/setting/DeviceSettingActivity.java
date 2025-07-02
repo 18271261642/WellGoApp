@@ -23,33 +23,30 @@ import com.truescend.gofit.pagers.device.bean.ItemDeviceCommon;
 import com.truescend.gofit.utils.PageJumpUtil;
 import com.truescend.gofit.views.TitleLayout;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 /**
  * 功能：设备设置页面
  * Author:Created by 泽鑫 on 2017/12/16 16:53.
  */
 
-public class DeviceSettingActivity extends BaseActivity<DeviceSettingPresenterImpl, IDeviceSettingContract.IView> implements IDeviceSettingContract.IView {
-    @BindView(R.id.tlTitle)
+public class DeviceSettingActivity extends BaseActivity<DeviceSettingPresenterImpl, IDeviceSettingContract.IView> implements IDeviceSettingContract.IView , View.OnClickListener {
+
     TitleLayout tlTitle;
-    @BindView(R.id.ilDeviceSettingBandUpdate)
+
     View ilDeviceSettingBandUpdate;
-    @BindView(R.id.ilDeviceSettingAboutApp)
+
     View ilDeviceSettingAboutApp;
 
-    @BindView(R.id.ilDeviceSettingHeartDetection)
+
     View ilDeviceSettingHeartDetection;
-    @BindView(R.id.ilDeviceSettingLightScreen)
+
     View ilDeviceSettingLightScreen;
-    @BindView(R.id.ilDeviceSettingLostReminder)
+
     View ilDeviceSettingLostReminder;
-    @BindView(R.id.ilDeviceSettingReset)
+
     View ilDeviceSettingReset;
-    @BindView(R.id.ilDeviceSettingClearCache)
+
     View ilDeviceSettingClearCache;
-    @BindView(R.id.ilDeviceSettingUnblockDevice)
+
     View ilDeviceSettingUnblockDevice;
 
     private ItemBannerButton bandUpdateItem;
@@ -79,6 +76,26 @@ public class DeviceSettingActivity extends BaseActivity<DeviceSettingPresenterIm
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+         tlTitle = findViewById(R.id.tlTitle);
+         ilDeviceSettingBandUpdate = findViewById(R.id.ilDeviceSettingBandUpdate);
+         ilDeviceSettingAboutApp = findViewById(R.id.ilDeviceSettingAboutApp);
+
+        ilDeviceSettingHeartDetection = findViewById(R.id.ilDeviceSettingHeartDetection);
+         ilDeviceSettingLightScreen = findViewById(R.id.ilDeviceSettingLightScreen);
+         ilDeviceSettingLostReminder = findViewById(R.id.ilDeviceSettingLostReminder);
+         ilDeviceSettingReset = findViewById(R.id.ilDeviceSettingReset);
+         ilDeviceSettingClearCache = findViewById(R.id.ilDeviceSettingClearCache);
+        ilDeviceSettingUnblockDevice = findViewById(R.id.ilDeviceSettingUnblockDevice);
+
+
+
+        ilDeviceSettingBandUpdate.setOnClickListener(this);
+                ilDeviceSettingAboutApp.setOnClickListener(this);
+                ilDeviceSettingReset.setOnClickListener(this);
+                ilDeviceSettingClearCache.setOnClickListener(this);
+                ilDeviceSettingUnblockDevice.setOnClickListener(this);
+
+
         initTitle();
         initItem();
         getPresenter().requestDeviceConfig();
@@ -192,11 +209,8 @@ public class DeviceSettingActivity extends BaseActivity<DeviceSettingPresenterIm
         }
     }
 
-    @OnClick({R.id.ilDeviceSettingBandUpdate,
-            R.id.ilDeviceSettingAboutApp,
-            R.id.ilDeviceSettingReset,
-            R.id.ilDeviceSettingClearCache,
-            R.id.ilDeviceSettingUnblockDevice})
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ilDeviceSettingBandUpdate:
@@ -238,7 +252,7 @@ public class DeviceSettingActivity extends BaseActivity<DeviceSettingPresenterIm
     /**
      * 设置监听
      */
-    private View.OnClickListener mItemConfigClickListener = new View.OnClickListener() {
+    private final View.OnClickListener mItemConfigClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             View view = (View) v.getParent();

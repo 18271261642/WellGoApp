@@ -16,30 +16,27 @@ import com.truescend.gofit.pagers.base.BaseActivity;
 import com.truescend.gofit.pagers.common.dialog.LoadingDialog;
 import com.truescend.gofit.utils.PageJumpUtil;
 import com.truescend.gofit.utils.ResUtil;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * 作者:东芝(2018/08/15).
  * 功能:用户主页信息
  */
-public class FriendsInfoActivity extends BaseActivity<FriendsInfoPresenterImpl, IFriendsInfoContract.IView> implements IFriendsInfoContract.IView {
+public class FriendsInfoActivity extends BaseActivity<FriendsInfoPresenterImpl, IFriendsInfoContract.IView> implements IFriendsInfoContract.IView, View.OnClickListener {
 
-    @BindView(R.id.civHead)
+
     CircleImageView civHead;
-    @BindView(R.id.ivZan)
+
     ImageView ivZan;
-    @BindView(R.id.ivEncourage)
+
     ImageView ivEncourage;
-    @BindView(R.id.tvRequestAddFriends)
+
     TextView tvRequestAddFriends;
-    @BindView(R.id.tvNickname)
+
     TextView tvNickname;
-    @BindView(R.id.ivGender)
+
     ImageView ivGender;
-    @BindView(R.id.tvIdName)
+
     TextView tvIdName;
     private int user_id;
     private boolean isMyFriends;
@@ -61,6 +58,19 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoPresenterImpl, 
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+         civHead = findViewById(R.id.civHead);
+        ivZan = findViewById(R.id.ivZan);
+       ivEncourage = findViewById(R.id.ivEncourage);
+         tvRequestAddFriends = findViewById(R.id.tvRequestAddFriends);
+        tvNickname = findViewById(R.id.tvNickname);
+        ivGender = findViewById(R.id.ivGender);
+        tvIdName = findViewById(R.id.tvIdName);
+
+        tvRequestAddFriends.setOnClickListener(this);
+        ivZan.setOnClickListener(this);
+        ivEncourage.setOnClickListener(this);
+
+
         setTitle(R.string.content_user_info);
         user_id = getIntent().getIntExtra("user_id", -1);
         if (user_id == -1) {
@@ -129,8 +139,9 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoPresenterImpl, 
 
     }
 
-    @OnClick({R.id.tvRequestAddFriends, R.id.ivZan, R.id.ivEncourage})
-    public void onViewClicked(View view) {
+
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tvRequestAddFriends:
                 if (isMyFriends) {
@@ -147,4 +158,6 @@ public class FriendsInfoActivity extends BaseActivity<FriendsInfoPresenterImpl, 
                 break;
         }
     }
+
+
 }

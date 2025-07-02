@@ -14,7 +14,6 @@ import com.truescend.gofit.pagers.device.health.HealthReminderActivity;
 import com.truescend.gofit.views.TimePicker;
 import com.truescend.gofit.views.TitleLayout;
 
-import butterknife.BindView;
 
 /**
  * 功能：健康提醒子页面
@@ -22,13 +21,13 @@ import butterknife.BindView;
  */
 
 public class ReminderActivity extends BaseActivity<ReminderPresenterImpl, ReminderContract.IView> implements ReminderContract.IView {
-    @BindView(R.id.tpReminderStartTime)
+
     TimePicker tpReminderStartTime;
-    @BindView(R.id.tpReminderEndTime)
+
     TimePicker tpReminderEndTime;
-    @BindView(R.id.ilReminderTimeInterval)
+
     View ilReminderTimeInterval;
-    @BindView(R.id.ilReminderWeek)
+
     View ilReminderWeek;
 
     private ItemTime intervalItem;
@@ -50,6 +49,12 @@ public class ReminderActivity extends BaseActivity<ReminderPresenterImpl, Remind
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        tpReminderStartTime = findViewById(R.id.tpReminderStartTime);
+        tpReminderEndTime = findViewById(R.id.tpReminderEndTime);
+         ilReminderTimeInterval = findViewById(R.id.ilReminderTimeInterval);
+        ilReminderWeek = findViewById(R.id.ilReminderWeek);
+
+
         initItem();
     }
 

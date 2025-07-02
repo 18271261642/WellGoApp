@@ -19,6 +19,7 @@ import com.sn.app.net.data.app.bean.FriendListBean;
 import com.sn.utils.DateUtil;
 import com.sn.utils.SNToast;
 import com.truescend.gofit.R;
+import com.truescend.gofit.ShowPrivacyDialogView;
 import com.truescend.gofit.pagers.base.BaseActivity;
 import com.truescend.gofit.pagers.common.dialog.LoadingDialog;
 import com.truescend.gofit.pagers.ranking.adapter.FriendsRankingAdapter;
@@ -32,8 +33,7 @@ import com.truescend.gofit.views.bean.LabelRange;
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.OnClick;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -43,44 +43,42 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RankingActivity extends BaseActivity<RankingPresenterImpl, IRankingContract.IView> implements IRankingContract.IView, OnRefreshListener {
 
 
-
-    @BindView(R.id.rlRefresh)
     SmartRefreshLayout rlRefresh;
-    @BindView(R.id.rvRankingList)
+
     RecyclerView rvRankingList;
-    @BindView(R.id.rbcStepChart)
+
     RankingBarChartView rbcStepChart;
-    @BindView(R.id.rbcSleepDurationChart)
+
     RankingBarChartView rbcSleepDurationChart;
-    @BindView(R.id.rbcSleepTimeChart)
+
     RankingBarChartView rbcSleepTimeChart;
-    @BindView(R.id.spvSleepDetailsChart)
+
     SleepPercentView spvSleepDetailsChart;
-    @BindView(R.id.rgUnitGroup)
+
     RadioGroup rgUnitGroup;
-    @BindView(R.id.tvDateRange)
+
     TextView tvDateRange;
-    @BindView(R.id.civHead)
+
     CircleImageView civHead;
-    @BindView(R.id.tvDistance)
+
     TextView tvDistance;
-    @BindView(R.id.tvDistanceUnit)
+
     TextView tvDistanceUnit;
-    @BindView(R.id.tvLevelText)
+
     TextView tvLevelText;
-    @BindView(R.id.tvStepTotal)
+
     TextView tvStepTotal;
-    @BindView(R.id.tvSportMoreThanPercent)
+
     TextView tvSportMoreThanPercent;
-    @BindView(R.id.tvSportEncouragePrompt)
+
     TextView tvSportEncouragePrompt;
-    @BindView(R.id.tvSleepDurationMoreThanPercent)
+
     TextView tvSleepDurationMoreThanPercent;
-    @BindView(R.id.tvSleepDurationEncouragePrompt)
+
     TextView tvSleepDurationEncouragePrompt;
-    @BindView(R.id.tvSleepTimeMoreThanPercent)
+
     TextView tvSleepTimeMoreThanPercent;
-    @BindView(R.id.tvSleepTimeEncouragePrompt)
+
     TextView tvSleepTimeEncouragePrompt;
 
 
@@ -102,6 +100,34 @@ public class RankingActivity extends BaseActivity<RankingPresenterImpl, IRanking
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        rlRefresh = findViewById(R.id.rlRefresh);
+       rvRankingList = findViewById(R.id.rvRankingList);
+         rbcStepChart= findViewById(R.id.rbcStepChart);
+         rbcSleepDurationChart= findViewById(R.id.rbcSleepDurationChart);
+       rbcSleepTimeChart = findViewById(R.id.rbcSleepTimeChart);
+         spvSleepDetailsChart = findViewById(R.id.spvSleepDetailsChart);
+         rgUnitGroup = findViewById(R.id.rgUnitGroup);
+      tvDateRange = findViewById(R.id.tvDateRange);
+        civHead = findViewById(R.id.civHead);
+        tvDistance = findViewById(R.id.tvDistance);
+         tvDistanceUnit = findViewById(R.id.tvDistanceUnit);
+       tvLevelText = findViewById(R.id.tvLevelText);
+       tvStepTotal = findViewById(R.id.tvStepTotal);
+         tvSportMoreThanPercent = findViewById(R.id.tvSportMoreThanPercent);
+         tvSportEncouragePrompt = findViewById(R.id.tvSportEncouragePrompt);
+         tvSleepDurationMoreThanPercent = findViewById(R.id.tvSleepDurationMoreThanPercent);
+         tvSleepDurationEncouragePrompt = findViewById(R.id.tvSleepDurationEncouragePrompt);
+         tvSleepTimeMoreThanPercent = findViewById(R.id.tvSleepTimeMoreThanPercent);
+         tvSleepTimeEncouragePrompt = findViewById(R.id.tvSleepTimeEncouragePrompt);
+
+         findViewById(R.id.ivBack).setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 onBackPressed();
+             }
+         });
+
+
         getTitleLayout().setTitleShow(false);
         StatusBarUtil.setRootViewFitsSystemWindows(this, false);
         StatusBarUtil.setStatusBarDarkTheme(this, false);
@@ -301,14 +327,5 @@ public class RankingActivity extends BaseActivity<RankingPresenterImpl, IRanking
         SNToast.toast(str);
     }
 
-
-    @OnClick({R.id.ivBack})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                onBackPressed();
-                break;
-        }
-    }
 
 }

@@ -6,7 +6,6 @@ import android.widget.CompoundButton;
 
 import com.truescend.gofit.R;
 
-import butterknife.BindView;
 
 /**
  * 功能：星期多选按钮布局
@@ -15,23 +14,31 @@ import butterknife.BindView;
  */
 @Deprecated
 public class ItemWeekCycle extends ItemBase{
-    @BindView(R.id.cbWeekCycleSunday)
+
     CheckBox cbWeekCycleSunday;
-    @BindView(R.id.cbWeekCycleMonday)
+
     CheckBox cbWeekCycleMonday;
-    @BindView(R.id.cbWeekCycleTuesday)
+
     CheckBox cbWeekCycleTuesday;
-    @BindView(R.id.cbWeekCycleWednesday)
+
     CheckBox cbWeekCycleWednesday;
-    @BindView(R.id.cbWeekCycleThursday)
+
     CheckBox cbWeekCycleThursday;
-    @BindView(R.id.cbWeekCycleFriday)
+
     CheckBox cbWeekCycleFriday;
-    @BindView(R.id.cbWeekCycleSaturday)
+
     CheckBox cbWeekCycleSaturday;
 
     public ItemWeekCycle(View view) {
         super(view);
+        cbWeekCycleSunday= view.findViewById(R.id.cbWeekCycleSunday);
+         cbWeekCycleMonday = view.findViewById(R.id.cbWeekCycleMonday);
+         cbWeekCycleTuesday = view.findViewById(R.id.cbWeekCycleTuesday);
+         cbWeekCycleWednesday = view.findViewById(R.id.cbWeekCycleWednesday);
+         cbWeekCycleThursday = view.findViewById(R.id.cbWeekCycleThursday);
+         cbWeekCycleFriday = view.findViewById(R.id.cbWeekCycleFriday);
+        cbWeekCycleSaturday = view.findViewById(R.id.cbWeekCycleSaturday);
+
 
     }
 

@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.common.bean.ItemBase;
 
-import butterknife.BindView;
 
 /**
  * 功能：功能选项按钮
@@ -19,13 +18,15 @@ import butterknife.BindView;
 
 public class ItemDeviceIcon extends ItemBase{
 
-    @BindView(R.id.ivDeviceIconImage)
+
     ImageView ivDeviceIconImage;
-    @BindView(R.id.tvDeviceIconTitle)
+
     TextView tvDeviceIconTitle;
 
     public ItemDeviceIcon(View view) {
         super(view);
+        ivDeviceIconImage = view.findViewById(R.id.ivDeviceIconImage);
+        tvDeviceIconTitle = view.findViewById(R.id.tvDeviceIconTitle);
     }
 
     public void setIcon(int resId){

@@ -19,12 +19,11 @@ import com.sn.app.utils.AppUserUtil;
 import com.sn.utils.SNToast;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.base.BaseActivity;
+import com.truescend.gofit.pagers.home.diet.setting.DietTargetSettingActivity;
 import com.truescend.gofit.utils.AppShareUtil;
 import com.truescend.gofit.utils.ResUtil;
 import com.truescend.gofit.utils.StatusBarUtil;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -34,19 +33,19 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MyQRCActivity extends BaseActivity<MyQRCPresenterImpl, IMyQRCContract.IView> implements IMyQRCContract.IView {
 
 
-    @BindView(R.id.ivBackground)
+
     ImageView ivWindowBackground;
-    @BindView(R.id.ivBack)
+
     ImageView ivBack;
-    @BindView(R.id.civUserHeadPortrait)
+
     CircleImageView civUserHeadPortrait;
-    @BindView(R.id.tvNickname)
+
     TextView tvNickname;
-    @BindView(R.id.tvSign)
+
     TextView tvSign;
-    @BindView(R.id.tvIdName)
+
     TextView tvIdName;
-    @BindView(R.id.btnSaveImage)
+
     Button btnSaveImage;
 
     public static void startActivity(Context context) {
@@ -65,6 +64,36 @@ public class MyQRCActivity extends BaseActivity<MyQRCPresenterImpl, IMyQRCContra
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+         ivWindowBackground = findViewById(R.id.ivBackground);
+         ivBack = findViewById(R.id.ivBack);
+        civUserHeadPortrait = findViewById(R.id.civUserHeadPortrait);
+        tvNickname = findViewById(R.id.tvNickname);
+         tvSign = findViewById(R.id.tvSign);
+        tvIdName = findViewById(R.id.tvIdName);
+        btnSaveImage = findViewById(R.id.btnSaveImage);
+
+        findViewById(R.id.ivShare).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppShareUtil.shareCapture(MyQRCActivity.this);
+            }
+        });
+
+        btnSaveImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getPresenter().saveScreenshots();
+            }
+        });
+
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+
         StatusBarUtil.setRootViewFitsSystemWindows(this, false);
         StatusBarUtil.setStatusBarDarkTheme(this, false);
         StatusBarUtil.setStatusBarColor(this, 0x00000000);
@@ -94,20 +123,7 @@ public class MyQRCActivity extends BaseActivity<MyQRCPresenterImpl, IMyQRCContra
     }
 
 
-    @OnClick({R.id.ivBack, R.id.ivShare, R.id.btnSaveImage})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                onBackPressed();
-                break;
-            case R.id.btnSaveImage:
-                getPresenter().saveScreenshots();
-                break;
-            case R.id.ivShare:
-                AppShareUtil.shareCapture(this);
-                break;
-        }
-    }
+
 
     @Override
     public void onSaveScreenshots(String path) {

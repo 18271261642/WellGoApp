@@ -24,7 +24,7 @@ import com.truescend.gofit.views.bean.LabelWeek;
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
+
 
 /**
  * 功能：心率功能界面
@@ -33,23 +33,23 @@ import butterknife.BindView;
  */
 
 public class HeartActivity extends BaseActivity<HeartPresenterImpl, IHeartContract.IView> implements IHeartContract.IView {
-    @BindView(R.id.tlTitle)
+
     TitleLayout tlTitle;
-    @BindView(R.id.ilHeartTitle)
+
     View ilHeartTitle;
-    @BindView(R.id.ilItemCenter)
+
     View ilHeartAverageHeart;
-    @BindView(R.id.ilItemLeft)
+
     View ilHeartHighestHeart;
-    @BindView(R.id.ilItemRight)
+
     View ilHeartMinimumHeart;
-    @BindView(R.id.ilHeartDetails)
+
     View ilHeartDetails;
-    @BindView(R.id.bcvHeartRateChart)
+
     BarChartView bcvHeartRateChart;
-    @BindView(R.id.rvDetails)
+
     RecyclerView rvDetails;
-    @BindView(R.id.tvDate)
+
     TextView tvDate;
 
     private ItemDetailsTitle heartTitle;//标题
@@ -71,6 +71,18 @@ public class HeartActivity extends BaseActivity<HeartPresenterImpl, IHeartContra
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        tlTitle = findViewById(R.id.tlTitle);
+        ilHeartTitle = findViewById(R.id.ilHeartTitle);
+         ilHeartAverageHeart = findViewById(R.id.ilItemCenter);
+        ilHeartHighestHeart = findViewById(R.id.ilItemLeft);
+         ilHeartMinimumHeart = findViewById(R.id.ilItemRight);
+         ilHeartDetails = findViewById(R.id.ilHeartDetails);
+        bcvHeartRateChart = findViewById(R.id.bcvHeartRateChart);
+         rvDetails = findViewById(R.id.rvDetails);
+        tvDate = findViewById(R.id.tvDate);
+
+
+
         initTitle();
         initView();
 

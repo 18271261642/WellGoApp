@@ -30,56 +30,54 @@ import com.truescend.gofit.views.VerticalScrollView;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * 作者:东芝(2018/08/09).
  * 功能:好友数据
  */
-public class FriendsDataActivity extends BaseActivity<FriendsDataPresenterImpl, IFriendsDataContract.IView> implements IFriendsDataContract.IView {
+public class FriendsDataActivity extends BaseActivity<FriendsDataPresenterImpl, IFriendsDataContract.IView> implements IFriendsDataContract.IView , View.OnClickListener {
 
-    @BindView(R.id.mVerticalScrollView)
+
     VerticalScrollView mVerticalScrollView;
-    @BindView(R.id.llTitle)
+
     View llTitle;
 
-    @BindView(R.id.civHead)
+
     CircleImageView civHead;
-    @BindView(R.id.ivZan)
+
     ImageView ivZan;
-    @BindView(R.id.ivEncourage)
+
     ImageView ivEncourage;
-    @BindView(R.id.tvZan)
+
     TextView tvZan;
-    @BindView(R.id.tvEncourage)
+
     TextView tvEncourage;
-    @BindView(R.id.tvNickname)
+
     TextView tvNickname;
-    @BindView(R.id.ivGender)
+
     ImageView ivGender;
-    @BindView(R.id.tvIdName)
+
     TextView tvIdName;
-    @BindView(R.id.ivBack)
+
     ImageView ivBack;
-    @BindView(R.id.ivShare)
+
     ImageView ivShare;
-    @BindView(R.id.ilUserBestRecord)
+
     View ilUserBestRecord;
-    @BindView(R.id.ilUserStandardDay)
+
     View ilUserStandardDay;
-    @BindView(R.id.ilUserBestWeek)
+
     View ilUserBestWeek;
-    @BindView(R.id.ilUserBestMonth)
+
     View ilUserBestMonth;
-    @BindView(R.id.sportPickerLayout)
+
     SportDataPickerItem mSportPickerLayout;
-    @BindView(R.id.sleepPickerLayout)
+
     SleepDataPickerItem mSleepPickerLayout;
-    @BindView(R.id.mHeartRateDataItem)
+
     HeartRateDataItem mHeartRateDataItem;
-    @BindView(R.id.mBloodPressureBloodOxygenDataItem)
+
     BloodPressureBloodOxygenDataItem mBloodPressureBloodOxygenDataItem;
 
     private int user_id;
@@ -113,6 +111,32 @@ public class FriendsDataActivity extends BaseActivity<FriendsDataPresenterImpl, 
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+         mVerticalScrollView = findViewById(R.id.mVerticalScrollView);
+        llTitle = findViewById(R.id.llTitle);
+
+         civHead = findViewById(R.id.civHead);
+        ivZan = findViewById(R.id.ivZan);
+         ivEncourage = findViewById(R.id.ivEncourage);
+        tvZan = findViewById(R.id.tvZan);
+         tvEncourage= findViewById(R.id.tvEncourage);
+        tvNickname= findViewById(R.id.tvNickname);
+         ivGender = findViewById(R.id.ivGender);
+         tvIdName= findViewById(R.id.tvIdName);
+         ivBack= findViewById(R.id.ivBack);
+        ivShare= findViewById(R.id.ivShare);
+       ilUserBestRecord= findViewById(R.id.ilUserBestRecord);
+         ilUserStandardDay = findViewById(R.id.ilUserStandardDay);
+        ilUserBestWeek= findViewById(R.id.ilUserBestWeek);
+        ilUserBestMonth = findViewById(R.id.ilUserBestMonth);
+         mSportPickerLayout= findViewById(R.id.sportPickerLayout);
+         mSleepPickerLayout= findViewById(R.id.sleepPickerLayout);
+        mHeartRateDataItem= findViewById(R.id.mHeartRateDataItem);
+         mBloodPressureBloodOxygenDataItem= findViewById(R.id.mBloodPressureBloodOxygenDataItem);
+        ivZan.setOnClickListener(this);
+        ivEncourage.setOnClickListener(this);
+        ivBack.setOnClickListener(this);
+        ivShare.setOnClickListener(this);
+
         initTheme();
 
         user_id = getIntent().getIntExtra("user_id", -1);
@@ -289,8 +313,9 @@ public class FriendsDataActivity extends BaseActivity<FriendsDataPresenterImpl, 
         }
     }
 
-    @OnClick({R.id.ivZan, R.id.ivEncourage, R.id.ivBack, R.id.ivShare})
-    public void onViewClicked(View view) {
+
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivZan:
                 getPresenter().setFriendsThumbAction(user_id, FriendsInfoPresenterImpl.THUMBACTION_TYPE_ZAN);
@@ -306,5 +331,6 @@ public class FriendsDataActivity extends BaseActivity<FriendsDataPresenterImpl, 
                 break;
         }
     }
+
 
 }

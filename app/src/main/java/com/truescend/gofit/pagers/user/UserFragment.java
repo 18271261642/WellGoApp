@@ -2,6 +2,7 @@ package com.truescend.gofit.pagers.user;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -31,59 +32,52 @@ import com.truescend.gofit.utils.ResUtil;
 import com.truescend.gofit.utils.UnitConversion;
 import com.truescend.gofit.utils.UnreadMessages;
 import com.truescend.gofit.views.BadgeHelper;
+import com.truescend.gofit.views.ShowLocalPermissActivity;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * 功能：用户界面
  * Author:Created by 泽鑫 on 2018/1/24 11:04.
  */
-public class UserFragment extends BaseFragment<UserPresenterImpl, IUserContract.IView> implements IUserContract.IView {
+public class UserFragment extends BaseFragment<UserPresenterImpl, IUserContract.IView> implements IUserContract.IView , View.OnClickListener {
 
-    @BindView(R.id.ivUserShare)
+
     ImageView ivUserShare;
-    @BindView(R.id.civUserHeadPortrait)
+
     CircleImageView civUserHeadPortrait;
-    @BindView(R.id.ilUserNickName)
+
     View ilUserNickName;
-    @BindView(R.id.ilUserWeight)
+
     View ilUserWeight;
-    @BindView(R.id.ilUserDate)
+
     View ilUserDate;
-    @BindView(R.id.ilUserBMI)
+
     View ilUserBMI;
-    @BindView(R.id.ilUserID)
+
     View ilUserID;
-    @BindView(R.id.ilUserBestRecord)
+
     View ilUserBestRecord;
-    @BindView(R.id.ilUserStandardDay)
+
     View ilUserStandardDay;
-    @BindView(R.id.ilUserBestWeek)
+
     View ilUserBestWeek;
-    @BindView(R.id.ilUserBestMonth)
+
     View ilUserBestMonth;
-    @BindView(R.id.ilUserPersonalSettings)
+
     View ilUserPersonalSettings;
-    @BindView(R.id.ilUserFriends)
+
     View ilUserFriends;
-    @BindView(R.id.ilUserGoogleFit)
+
     View ilUserGoogleFit;
-    @BindView(R.id.ilUserStrava)
     View ilUserStrava;
-    @BindView(R.id.ilUserTmallGenie)
     View ilUserTmallGenie;
 
-    @BindView(R.id.ilDeviceSettingFeedback)
     View ilDeviceSettingFeedback;
-    @BindView(R.id.ilDeviceSettingHelp)
     View ilDeviceSettingHelp;
 
-    @BindView(R.id.ilDeviceSettingExit)
     View ilDeviceSettingExit;
 
-    @BindView(R.id.tvUserExitCurrentAccount)
     View tvUserExitCurrentAccount;
 
     private ItemInformation nickNameItem;
@@ -108,9 +102,54 @@ public class UserFragment extends BaseFragment<UserPresenterImpl, IUserContract.
     private ItemBannerButton tmallGenieItem;
     private BadgeHelper badgeHelper;
 
+    private View minPermission;
+    private ItemBannerButton permissionFitItem;
 
     @Override
-    protected void onCreate() {
+    protected void onCreate(View view) {
+        minPermission = view.findViewById(R.id.minPermission);
+        ivUserShare = view.findViewById(R.id.ivUserShare);
+        civUserHeadPortrait = view.findViewById(R.id.civUserHeadPortrait);
+        ilUserNickName = view.findViewById(R.id.ilUserNickName);
+        ilUserWeight = view.findViewById(R.id.ilUserWeight);
+        ilUserDate = view.findViewById(R.id.ilUserDate);
+        ilUserBMI = view.findViewById(R.id.ilUserBMI);
+        ilUserID = view.findViewById(R.id.ilUserID);
+        ilUserBestRecord = view.findViewById(R.id.ilUserBestRecord);
+        ilUserStandardDay = view.findViewById(R.id.ilUserStandardDay);
+        ilUserBestWeek = view.findViewById(R.id.ilUserBestWeek);
+        ilUserBestMonth = view.findViewById(R.id.ilUserBestMonth);
+        ilUserPersonalSettings = view.findViewById(R.id.ilUserPersonalSettings);
+        ilUserFriends = view.findViewById(R.id.ilUserFriends);
+        ilUserGoogleFit = view.findViewById(R.id.ilUserGoogleFit);
+        ilUserStrava = view.findViewById(R.id.ilUserStrava);
+        ilUserTmallGenie = view.findViewById(R.id.ilUserTmallGenie);
+
+        ilDeviceSettingFeedback = view.findViewById(R.id.ilDeviceSettingFeedback);
+        ilDeviceSettingHelp = view.findViewById(R.id.ilDeviceSettingHelp);
+
+        ilDeviceSettingExit = view.findViewById(R.id.ilDeviceSettingExit);
+
+        tvUserExitCurrentAccount = view.findViewById(R.id.tvUserExitCurrentAccount);
+
+        ilUserGoogleFit.setOnClickListener(this);
+
+        ilUserStrava.setOnClickListener(this);
+        ilUserTmallGenie.setOnClickListener(this);
+        ilDeviceSettingHelp.setOnClickListener(this);
+        ivUserShare.setOnClickListener(this);
+        ilUserPersonalSettings.setOnClickListener(this);
+        ilUserFriends.setOnClickListener(this);
+        tvUserExitCurrentAccount.setOnClickListener(this);
+        ilDeviceSettingFeedback.setOnClickListener(this);
+        ilDeviceSettingExit.setOnClickListener(this);
+        minPermission.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(requireActivity(), ShowLocalPermissActivity.class));
+            }
+        });
+
         initItem();
         initBadge();
     }
@@ -164,6 +203,8 @@ public class UserFragment extends BaseFragment<UserPresenterImpl, IUserContract.
         helpItem = new ItemBannerButton(ilDeviceSettingHelp);
         exitItem = new ItemBannerButton(ilDeviceSettingExit);
 
+        permissionFitItem = new ItemBannerButton(minPermission);
+
         exitItem.setTitleIcon(R.mipmap.ic_logout_img);
         exitItem.setTitle("注销账户");
 
@@ -183,6 +224,9 @@ public class UserFragment extends BaseFragment<UserPresenterImpl, IUserContract.
         bestRecordItem.setUnit(R.string.step);
         bestRecordItem.setData("0");
         bestRecordItem.setDate(getString(R.string.content_no_data));
+
+        permissionFitItem.setTitle(getResources().getString(R.string.string_permiss_title));
+        permissionFitItem.setTitleIcon(R.mipmap.ic_per_u);
 
 
         standardDayItem.setTitle(R.string.content_standard_day);
@@ -307,16 +351,6 @@ public class UserFragment extends BaseFragment<UserPresenterImpl, IUserContract.
     }
 
 
-    @OnClick({
-            R.id.ilUserGoogleFit,
-            R.id.ilUserStrava,
-            R.id.ilUserTmallGenie,
-            R.id.ilDeviceSettingHelp,
-            R.id.ivUserShare,
-            R.id.ilUserPersonalSettings,
-            R.id.ilUserFriends,
-            R.id.tvUserExitCurrentAccount,
-            R.id.ilDeviceSettingFeedback,R.id.ilDeviceSettingExit})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ilUserFriends:

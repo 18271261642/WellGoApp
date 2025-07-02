@@ -7,8 +7,6 @@ import android.widget.TextView;
 
 import com.truescend.gofit.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 功能：功能卡片布局
@@ -17,19 +15,23 @@ import butterknife.ButterKnife;
  */
 
 public class ItemUserFile {
-    @BindView(R.id.tvUserFileTitle)
+
     TextView tvUserFileTitle;
-    @BindView(R.id.ivUserFileImage)
+
     ImageView ivUserFileImage;
-    @BindView(R.id.tvUserFileData)
+
     TextView tvUserFileData;
-    @BindView(R.id.tvUserFileUnit)
+
     TextView tvUserFileUnit;
-    @BindView(R.id.tvUserFileDate)
+
     TextView tvUserFileDate;
 
     public ItemUserFile(View view) {
-        ButterKnife.bind(this, view);
+         tvUserFileTitle = view.findViewById(R.id.tvUserFileTitle);
+        ivUserFileImage= view.findViewById(R.id.ivUserFileImage);
+         tvUserFileData= view.findViewById(R.id.tvUserFileData);
+         tvUserFileUnit= view.findViewById(R.id.tvUserFileUnit);
+       tvUserFileDate= view.findViewById(R.id.tvUserFileDate);
     }
 
     public void setTitle(int resId){

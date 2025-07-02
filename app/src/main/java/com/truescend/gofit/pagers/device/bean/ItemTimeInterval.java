@@ -7,7 +7,6 @@ import android.widget.RadioGroup;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.common.bean.ItemBase;
 
-import butterknife.BindView;
 
 /**
  * 功能：时间间隔布局
@@ -16,19 +15,25 @@ import butterknife.BindView;
  */
 
 public class ItemTimeInterval extends ItemBase{
-    @BindView(R.id.rgTimeIntervalGroup)
+
     RadioGroup rgTimeIntervalGroup;
-    @BindView(R.id.rbTimeIntervalHalfHour)
+
     AppCompatRadioButton rbTimeIntervalHalfHour;
-    @BindView(R.id.rbTimeIntervalOneHour)
+
     AppCompatRadioButton rbTimeIntervalOneHour;
-    @BindView(R.id.rbTimeIntervalTwoHour)
+
     AppCompatRadioButton rbTimeIntervalTwoHour;
-    @BindView(R.id.rbTimeIntervalThreeHour)
+
     AppCompatRadioButton rbTimeIntervalThreeHour;
 
     public ItemTimeInterval(View view) {
         super(view);
+        rgTimeIntervalGroup = view.findViewById(R.id.rgTimeIntervalGroup);
+         rbTimeIntervalHalfHour= view.findViewById(R.id.rbTimeIntervalHalfHour);
+        rbTimeIntervalOneHour= view.findViewById(R.id.rbTimeIntervalOneHour);
+         rbTimeIntervalTwoHour= view.findViewById(R.id.rbTimeIntervalTwoHour);
+
+
     }
     
     public void setHalfHourChecked(boolean checked){

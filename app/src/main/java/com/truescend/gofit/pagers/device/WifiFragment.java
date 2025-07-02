@@ -34,7 +34,7 @@ public class WifiFragment extends BaseFragment<WifiPresenterIml,IWifiContract.IV
     }
 
     @Override
-    protected void onCreate() {
+    protected void onCreate(View view) {
         assert getView() != null;
         getView().findViewById(R.id.wifiBtn).setOnClickListener(new View.OnClickListener() {
             @Override

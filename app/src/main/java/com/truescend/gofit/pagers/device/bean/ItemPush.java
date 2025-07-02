@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.common.bean.ItemBase;
 
-import butterknife.BindView;
 
 /**
  * 功能：消息推送按钮布局
@@ -20,15 +19,19 @@ import butterknife.BindView;
  */
 
 public class ItemPush extends ItemBase{
-    @BindView(R.id.ivPushItemIcon)
+
     ImageView ivPushItemIcon;
-    @BindView(R.id.tvPushItemTitle)
+
     TextView tvPushItemTitle;
-    @BindView(R.id.cbPushItemSwitch)
+
     CheckBox cbPushItemSwitch;
 
     public ItemPush(View view) {
         super(view);
+
+        ivPushItemIcon = view.findViewById(R.id.ivPushItemIcon);
+        tvPushItemTitle = view.findViewById(R.id.tvPushItemTitle);
+        cbPushItemSwitch = view.findViewById(R.id.cbPushItemSwitch);
     }
 
     public void setIcon(int resId){

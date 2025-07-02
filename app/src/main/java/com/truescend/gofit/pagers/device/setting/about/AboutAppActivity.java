@@ -20,6 +20,7 @@ import com.truescend.gofit.pagers.common.dialog.LoadingDialog;
 import com.truescend.gofit.pagers.common.dialog.ProgressDialog;
 import com.truescend.gofit.pagers.device.bean.ItemDeviceCommon;
 import com.truescend.gofit.pagers.device.bean.ItemUnit;
+import com.truescend.gofit.pagers.device.setting.DeviceSettingActivity;
 import com.truescend.gofit.utils.AppVersionUpdateHelper;
 import com.truescend.gofit.utils.StatusBarUtil;
 import com.truescend.gofit.utils.UIRefresh;
@@ -27,8 +28,6 @@ import com.truescend.gofit.views.TitleLayout;
 
 import java.io.File;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 功能：关于App界面
@@ -36,27 +35,27 @@ import butterknife.OnClick;
  */
 
 public class AboutAppActivity extends BaseActivity<AboutAppPresenterImpl, IAboutAppContract.IView> implements IAboutAppContract.IView {
-    @BindView(R.id.tlTitle)
+
     TitleLayout tlTitle;
-    @BindView(R.id.tvAboutAppCheckUpdate)
+
     TextView tvAboutAppCheckUpdate;
-    @BindView(R.id.ivAboutAppBack)
+
     ImageView ivAboutAppBack;
-    @BindView(R.id.tvAboutAppTitle)
+
     TextView tvAboutAppTitle;
-    @BindView(R.id.ilAboutAppCurrentVersion)
+
     View ilAboutAppCurrentVersion;
-    @BindView(R.id.ilAboutAppLastVersion)
+
     View ilAboutAppLastVersion;
-    @BindView(R.id.ilAboutAppAutomaticSync)
+
     View ilAboutAppAutomaticSync;
-    @BindView(R.id.ilAboutAppDistanceUnit)
+
     View ilAboutAppDistanceUnit;
-    @BindView(R.id.ilAboutAppTemperatureUnit)
+
     View ilAboutAppTemperatureUnit;
-    @BindView(R.id.ilAboutAppWeightUnit)
+
     View ilAboutAppWeightUnit;
-    @BindView(R.id.ilAboutAppTimeUnit)
+
     View ilAboutAppTimeUnit;
 
     private ItemBannerButton currentVersionItem;
@@ -84,6 +83,34 @@ public class AboutAppActivity extends BaseActivity<AboutAppPresenterImpl, IAbout
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+       tlTitle = findViewById(R.id.tlTitle);
+        tvAboutAppCheckUpdate = findViewById(R.id.tvAboutAppCheckUpdate);
+         ivAboutAppBack = findViewById(R.id.ivAboutAppBack);
+         tvAboutAppTitle = findViewById(R.id.tvAboutAppTitle);
+        ilAboutAppCurrentVersion = findViewById(R.id.ilAboutAppCurrentVersion);
+         ilAboutAppLastVersion = findViewById(R.id.ilAboutAppLastVersion);
+        ilAboutAppAutomaticSync = findViewById(R.id.ilAboutAppAutomaticSync);
+         ilAboutAppDistanceUnit = findViewById(R.id.ilAboutAppDistanceUnit);
+         ilAboutAppTemperatureUnit = findViewById(R.id.ilAboutAppTemperatureUnit);
+        ilAboutAppWeightUnit = findViewById(R.id.ilAboutAppWeightUnit);
+        ilAboutAppTimeUnit = findViewById(R.id.ilAboutAppTimeUnit);
+
+        ivAboutAppBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+        tvAboutAppCheckUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getPresenter().requestCheckVersion();
+            }
+        });
+
+
+
         StatusBarUtil.setRootViewFitsSystemWindows(this,false);
         StatusBarUtil.setStatusBarDarkTheme(this,false);
         StatusBarUtil.setStatusBarColor(this,0x00000000);
@@ -301,18 +328,6 @@ public class AboutAppActivity extends BaseActivity<AboutAppPresenterImpl, IAbout
 
     }
 
-
-    @OnClick({R.id.ivAboutAppBack, R.id.tvAboutAppCheckUpdate})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivAboutAppBack:
-                onBackPressed();
-                break;
-            case R.id.tvAboutAppCheckUpdate:
-                getPresenter().requestCheckVersion();
-                break;
-        }
-    }
 
 
     @Override

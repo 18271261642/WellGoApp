@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Environment;
 
+import com.truescend.gofit.App;
 import com.truescend.gofit.BuildConfig;
 
 import java.io.File;
@@ -67,7 +68,7 @@ public class Constant {
         /**
          * sd卡根目录
          */
-        public static final String SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath();
+        public static final String SDCARD = App.getContext().getExternalFilesDir(null).getPath();//Environment.getExternalStorageDirectory().getAbsolutePath();
         /**
          * 项目根目录
          */

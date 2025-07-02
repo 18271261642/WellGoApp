@@ -28,23 +28,23 @@ import java.util.List;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import butterknife.BindView;
-import butterknife.OnClick;
+
 
 /**
  * 作者:东芝(2018/3/1).
  * 功能:运动轨迹
  */
-public class TrackFragment extends BaseFragment<TrackPresenterImpl, ITrackContract.IView> implements ITrackContract.IView, AdapterView.OnItemClickListener {
-    @BindView(R.id.rvTrackPathMapView)
+public class TrackFragment extends BaseFragment<TrackPresenterImpl, ITrackContract.IView> implements ITrackContract.IView,
+        AdapterView.OnItemClickListener , View.OnClickListener {
+
     EmptyRecyclerView rvTrackPathMapView;
-    @BindView(R.id.vsEmptyContent)
+
     View ivEmptyContent;
-    @BindView(R.id.crbGo)
+
     CircleRippleButton crbGo;
-    @BindView(R.id.mBannerView)
+
     BannerView mBannerView;
-    @BindView(R.id.ivDeviceSetting)
+
     ImageView ivDeviceSetting;
 
     private PathMapAdapter mPathMapAdapter;
@@ -62,7 +62,16 @@ public class TrackFragment extends BaseFragment<TrackPresenterImpl, ITrackContra
     }
 
     @Override
-    protected void onCreate() {
+    protected void onCreate(View view) {
+
+        rvTrackPathMapView = view.findViewById(R.id.rvTrackPathMapView);
+        ivEmptyContent = view.findViewById(R.id.vsEmptyContent);
+        crbGo = view.findViewById(R.id.crbGo);
+        mBannerView = view.findViewById(R.id.mBannerView);
+        ivDeviceSetting = view.findViewById(R.id.ivDeviceSetting);
+        crbGo.setOnClickListener(this);
+        ivDeviceSetting.setOnClickListener(this);
+
         initItems();
         initBanner();
         getPresenter().requestLoadTrackItemData();
@@ -114,7 +123,7 @@ public class TrackFragment extends BaseFragment<TrackPresenterImpl, ITrackContra
         mPathMapAdapter.setOnItemClickListener(this);
     }
 
-    @OnClick({R.id.crbGo,R.id.ivDeviceSetting})
+
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.crbGo:
@@ -147,8 +156,8 @@ public class TrackFragment extends BaseFragment<TrackPresenterImpl, ITrackContra
     }
 
 
-    private void showLocalRequestDesc(MapType.TYPE type){
-        if(localPermissDescView == null)
+    private void showLocalRequestDesc(MapType.TYPE type) {
+        if (localPermissDescView == null)
             localPermissDescView = new LocalPermissDescView(getActivity());
         localPermissDescView.show();
         localPermissDescView.setLocalPermissionListener(new LocalPermissDescView.LocalPermissionListener() {
@@ -156,21 +165,16 @@ public class TrackFragment extends BaseFragment<TrackPresenterImpl, ITrackContra
             public void allowPermiss() {
                 localPermissDescView.dismiss();
                 boolean isLocal = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-                if(isLocal){
+                if (isLocal) {
                     PageJumpUtil.startRunningActivity(TrackFragment.this, type);
-                }else{
-                    ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.ACCESS_FINE_LOCATION},0x00);
+                } else {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0x00);
                 }
 
 
             }
         });
     }
-
-
-
-
-
 
 
     @Override

@@ -16,9 +16,6 @@ import com.truescend.gofit.pagers.common.dialog.LoadingDialog;
 import com.truescend.gofit.utils.PageJumpUtil;
 import com.truescend.gofit.views.HintMultiLineEditText;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 /**
  * 作者:东芝(2018/6/14).
  * 功能:重置密码前的检测器, 检测是否支持密保
@@ -29,11 +26,9 @@ public class ResetPswCheckerActivity extends BaseActivity<ResetPswCheckerPresent
     public static void startActivity(Context context){
         context.startActivity(new Intent(context,ResetPswCheckerActivity.class));
     }
-    
-    @BindView(R.id.etResetPswAccount)
+
     HintMultiLineEditText etResetPswAccount;
-    @BindView(R.id.tvNext)
-    TextView tvNext;
+    private TextView tvNext;
 
     @Override
     protected ResetPswCheckerPresenterImpl initPresenter() {
@@ -47,14 +42,13 @@ public class ResetPswCheckerActivity extends BaseActivity<ResetPswCheckerPresent
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+         etResetPswAccount = findViewById(R.id.etResetPswAccount);
+        tvNext = findViewById(R.id.tvNext);
         setTitle(getString(R.string.title_forget_password));
-    }
 
-
-    @OnClick({R.id.tvNext})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.tvNext:
+        tvNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 String input = etResetPswAccount.getText().toString().trim();
                 if (IF.isEmpty(input)) {
                     setEditTextErrorTips(etResetPswAccount, etResetPswAccount.getHint());
@@ -62,9 +56,10 @@ public class ResetPswCheckerActivity extends BaseActivity<ResetPswCheckerPresent
                 }
 
                 getPresenter().requestHasSetQuestionsStatus(input);
-                break;
-        }
+            }
+        });
     }
+
 
 
     /**

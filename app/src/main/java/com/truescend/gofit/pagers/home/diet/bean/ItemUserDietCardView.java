@@ -7,30 +7,37 @@ import android.widget.TextView;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.common.bean.ItemBase;
 
-import butterknife.BindView;
 
 
 /**
  * 用户饮食卡片布局
  */
 public class ItemUserDietCardView extends ItemBase {
-    @BindView(R.id.llDietStatistics)
+
     View llDietStatistics;
-    @BindView(R.id.llDietListMeal)
+
     View llDietFoodsExtraMeal;
-    @BindView(R.id.rlDietPlanThinBodyStart)
+
     View rlDietPlanThinBodyStart;
-    @BindView(R.id.tvDietPlanThinBodyStart)
+
     TextView tvDietPlanThinBodyStart;
-    @BindView(R.id.llDietTargetSetting)
+
     View llDietTargetSetting;
-    @BindView(R.id.tvCalorieData)
+
     TextView tvCalorieData;
-    @BindView(R.id.tvDietMealDetails)
+
     TextView tvDietMealDetails;
 
     public ItemUserDietCardView(View view) {
         super(view);
+
+       llDietStatistics = view.findViewById(R.id.llDietStatistics);
+        llDietFoodsExtraMeal = view.findViewById(R.id.llDietListMeal);
+         rlDietPlanThinBodyStart = view.findViewById(R.id.rlDietPlanThinBodyStart);
+         tvDietPlanThinBodyStart = view.findViewById(R.id.tvDietPlanThinBodyStart);
+         llDietTargetSetting = view.findViewById(R.id.llDietTargetSetting);
+        tvCalorieData = view.findViewById(R.id.tvCalorieData);
+        tvDietMealDetails = view.findViewById(R.id.tvDietMealDetails);
     }
 
 

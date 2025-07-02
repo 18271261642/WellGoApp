@@ -8,8 +8,6 @@ import android.widget.TextView;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.common.bean.ItemBase;
 
-import butterknife.BindView;
-
 /**
  * 功能：睡眠详情布局
  * 适用于要使用进度条显示信息的页面
@@ -19,17 +17,21 @@ import butterknife.BindView;
 
 public class ItemSleepDetails extends ItemBase{
 
-    @BindView(R.id.tvSleepDetailsTitle)
+
     TextView tvSleepDetailsTitle;
-    @BindView(R.id.pbSleepDetails)
+
     ProgressBar pbSleepDetails;
-    @BindView(R.id.tvSleepDetailsPercent)
+
     TextView tvSleepDetailsPercent;
-    @BindView(R.id.tvSleepDetailsTime)
+
     TextView tvSleepDetailsTime;
 
     public ItemSleepDetails(View view) {
         super(view);
+      tvSleepDetailsTitle= view.findViewById(R.id.tvSleepDetailsTitle);
+         pbSleepDetails= view.findViewById(R.id.pbSleepDetails);
+         tvSleepDetailsPercent = view.findViewById(R.id.tvSleepDetailsPercent);
+         tvSleepDetailsTime = view.findViewById(R.id.tvSleepDetailsTime);
     }
 
 

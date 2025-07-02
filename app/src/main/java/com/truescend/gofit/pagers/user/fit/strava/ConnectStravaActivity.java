@@ -17,20 +17,18 @@ import com.truescend.gofit.views.TitleLayout;
 
 import java.io.File;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 作者:东芝(2018/7/20).
  * 功能:Strava 授权与关联
  */
 
-public class ConnectStravaActivity extends BaseActivity<ConnectStravaPresenterImpl, ConnectStravaContract.IView> implements ConnectStravaContract.IView {
+public class ConnectStravaActivity extends BaseActivity<ConnectStravaPresenterImpl, ConnectStravaContract.IView> implements ConnectStravaContract.IView, View.OnClickListener {
 
     public static final File FILE = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "/test.gpx");
-    @BindView(R.id.btCancelConnected)
+
     Button btCancelConnected;
-    @BindView(R.id.btConnect)
+
     StravaLoginButton btConnect;
 
     static {
@@ -49,6 +47,12 @@ public class ConnectStravaActivity extends BaseActivity<ConnectStravaPresenterIm
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        btCancelConnected= findViewById(R.id.btCancelConnected);
+     btConnect = findViewById(R.id.btConnect);
+
+        btCancelConnected.setOnClickListener(this);
+        btConnect.setOnClickListener(this);
+
 
         if (StravaTool.isAuthorized()) {
             btCancelConnected.setVisibility(View.VISIBLE);
@@ -79,7 +83,7 @@ public class ConnectStravaActivity extends BaseActivity<ConnectStravaPresenterIm
         LoadingDialog.dismiss();
     }
 
-    @OnClick({R.id.btCancelConnected, R.id.btConnect})
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btCancelConnected:

@@ -1,13 +1,14 @@
 package com.truescend.gofit.pagers.device;
 
+import android.view.View;
+
 import com.google.android.material.tabs.TabLayout;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.base.BaseFragment;
 import com.truescend.gofit.pagers.base.BasePresenter;
 import com.truescend.gofit.pagers.base.adapter.BaseFragmentStatePagerAdapter;
 import com.truescend.gofit.utils.StatusBarUtil;
-import com.truescend.gofit.utils.TabLayoutManager;
-import com.truescend.gofit.views.QuickViewPager;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,7 @@ public class DeviceManagerFragment extends BaseFragment<DeviceManagerPresenterIm
     }
 
     @Override
-    protected void onCreate() {
+    protected void onCreate(View view) {
         StatusBarUtil.setRootViewFitsSystemWindows(getActivity(), false);
         //设置状态栏白底黑字
         if (!StatusBarUtil.setStatusBarDarkTheme(getActivity(), true)) {

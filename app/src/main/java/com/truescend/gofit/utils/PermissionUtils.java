@@ -33,6 +33,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.ArraySet;
+import android.util.Log;
 
 import com.sn.utils.SNLog;
 import com.truescend.gofit.BuildConfig;
@@ -371,6 +372,9 @@ public class PermissionUtils {
     private static void shouldShowRequestPermissionRationaleTips(final Activity activity, final List<String> permissions) {
         String permissionNames = Arrays.toString(transformText(activity, permissions).toArray());
 
+        for(String st : permissions){
+            Log.e("权限","------权限="+st);
+        }
         SpannableStringBuilder message = new SpannableStringBuilder(ResUtil.getString(R.string.content_permission_need) + "\n" + permissionNames);
         message.setSpan(new ForegroundColorSpan(Color.RED), message.length() - permissionNames.length(), message.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -1211,14 +1215,14 @@ public class PermissionUtils {
                     }
                     break;
                 }
-//                case Manifest.permission.ACCESS_FINE_LOCATION:
-//                case Manifest.permission.ACCESS_COARSE_LOCATION: {
-//                    String message = context.getString(R.string.content_location);
-//                    if (!textList.contains(message)) {
-//                        textList.add(message);
-//                    }
-//                    break;
-//                }
+                case Manifest.permission.ACCESS_FINE_LOCATION:
+                case Manifest.permission.ACCESS_COARSE_LOCATION: {
+                    String message = context.getString(R.string.content_location);
+                    if (!textList.contains(message)) {
+                        textList.add(message);
+                    }
+                    break;
+                }
                 case Manifest.permission.RECORD_AUDIO: {
                     String message = context.getString(R.string.content_microphone);
                     if (!textList.contains(message)) {

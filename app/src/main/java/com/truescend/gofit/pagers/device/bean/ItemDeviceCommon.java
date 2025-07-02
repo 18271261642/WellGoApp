@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.common.bean.ItemBase;
 
-import butterknife.BindView;
+
 
 /**
  * 功能：设置通用横条布局
@@ -20,19 +20,26 @@ import butterknife.BindView;
  */
 
 public class ItemDeviceCommon extends ItemBase {
-    @BindView(R.id.tvDeviceCommonTitle)
+
     TextView tvDeviceCommonTitle;
-    @BindView(R.id.tvDeviceCommonTime)
+
     TextView tvDeviceCommonTime;
-    @BindView(R.id.tvDeviceCommonIntervalTime)
+
     TextView tvDeviceCommonIntervalTime;
-    @BindView(R.id.ivDeviceCommonSetting)
+
     ImageView ivDeviceCommonSetting;
-    @BindView(R.id.cbDeviceCommonSwitch)
+
     CheckBox cbDeviceCommonSwitch;
 
     public ItemDeviceCommon(View view) {
         super(view);
+         tvDeviceCommonTitle = view.findViewById(R.id.tvDeviceCommonTitle);
+         tvDeviceCommonTime = view.findViewById(R.id.tvDeviceCommonTime);
+        tvDeviceCommonIntervalTime = view.findViewById(R.id.tvDeviceCommonIntervalTime);
+         ivDeviceCommonSetting= view.findViewById(R.id.ivDeviceCommonSetting);
+        cbDeviceCommonSwitch = view.findViewById(R.id.cbDeviceCommonSwitch);
+
+
     }
 
     public void setTitle(int resId) {

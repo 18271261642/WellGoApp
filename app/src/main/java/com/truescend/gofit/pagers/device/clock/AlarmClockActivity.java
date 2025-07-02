@@ -19,7 +19,6 @@ import com.truescend.gofit.views.TitleLayout;
 
 import java.util.List;
 
-import butterknife.BindView;
 
 /**
  * 功能:闹钟页面
@@ -28,7 +27,7 @@ import butterknife.BindView;
 public class AlarmClockActivity extends BaseActivity<AlarmClockPresenterImpl, IAlarmClockContract.IView> implements IAlarmClockContract.IView, AlarmItemAdapter.CheckChangeListener {
     public final static String ALARM_CLOCK_TYPE = "alarmClockId";
     public final static int ALARM_CLOCK_ADD = -1;
-    @BindView(R.id.smAlarmClock)
+
     SwipeMenuListView smAlarmClock;
 
     AlarmItemAdapter adapter;
@@ -45,6 +44,7 @@ public class AlarmClockActivity extends BaseActivity<AlarmClockPresenterImpl, IA
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        smAlarmClock = findViewById(R.id.smAlarmClock);
         adapter = new AlarmItemAdapter(AlarmClockActivity.this, this);
         smAlarmClock.setAdapter(adapter);
         smAlarmClock.setMenuCreator(creator);

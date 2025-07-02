@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.common.bean.ItemBase;
 
-import butterknife.BindView;
 
 /**
  * 功能：卡片布局
@@ -18,17 +17,22 @@ import butterknife.BindView;
  * 东芝:全改,简化使用
  */
 public class ItemCardView extends ItemBase {
-    @BindView(R.id.ivHomeCardPicture)
+
     ImageView ivHomeCardPicture;
-    @BindView(R.id.tvHomeCardTitle)
+
     TextView tvHomeCardTitle;
-    @BindView(R.id.tvHomeCardType)
+
     TextView tvHomeCardType;
-    @BindView(R.id.tvHomeCardSubTitle)
+
     TextView tvHomeCardSubTitle;
 
     public ItemCardView(View view) {
         super(view);
+
+        ivHomeCardPicture = view.findViewById(R.id.ivHomeCardPicture);
+         tvHomeCardTitle = view.findViewById(R.id.tvHomeCardTitle);
+         tvHomeCardType= view.findViewById(R.id.tvHomeCardType);
+         tvHomeCardSubTitle= view.findViewById(R.id.tvHomeCardSubTitle);
     }
 
     public void setPicture(int resId) {

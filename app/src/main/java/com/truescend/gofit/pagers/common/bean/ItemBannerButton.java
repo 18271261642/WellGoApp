@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.truescend.gofit.R;
 
-import butterknife.BindView;
 
 /**
  * 功能：横条按钮布局
@@ -19,19 +18,23 @@ import butterknife.BindView;
  */
 
 public class ItemBannerButton extends ItemBase {
-    @BindView(R.id.tvBannerButtonTitle)
+
     TextView tvBannerButtonTitle;
-    @BindView(R.id.tvBannerButtonContent)
+
     TextView tvBannerButtonContent;
-    @BindView(R.id.ivBannerButtonIcon)
+
     ImageView ivBannerButtonIcon;
-    @BindView(R.id.ivBannerButtonTitleIcon)
+
     ImageView ivBannerButtonTitleIcon;
     private View view;
 
     public ItemBannerButton(View view) {
         super(view);
         this.view = view;
+      tvBannerButtonTitle = view.findViewById(R.id.tvBannerButtonTitle);
+         tvBannerButtonContent = view.findViewById(R.id.tvBannerButtonContent);
+        ivBannerButtonIcon = view.findViewById(R.id.ivBannerButtonIcon);
+         ivBannerButtonTitleIcon = view.findViewById(R.id.ivBannerButtonTitleIcon);
     }
 
     public void setBackgroundColor(@ColorRes int colorResId){

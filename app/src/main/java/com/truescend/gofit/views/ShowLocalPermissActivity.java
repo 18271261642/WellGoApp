@@ -156,7 +156,7 @@ public class ShowLocalPermissActivity extends AppCompatActivity implements View.
                     openGPS();
                 break;
             case R.id.permissionLocalLayout:
-                requestPermiss(new String[]{Manifest.permission.ACCESS_FINE_LOCATION});
+                requestPermiss(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION});
                 break;
             case R.id.permissionCameraLayout:
                 requestPermiss(new String[]{Manifest.permission.CAMERA});
@@ -202,6 +202,12 @@ public class ShowLocalPermissActivity extends AppCompatActivity implements View.
 
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        handler.sendEmptyMessage(0x00);
+    }
 
     private boolean isOpenBle(){
         BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);

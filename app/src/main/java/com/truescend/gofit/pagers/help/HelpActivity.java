@@ -8,7 +8,6 @@ import android.webkit.WebView;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.base.BaseActivity;
 
-import butterknife.BindView;
 
 /**
  * 作者:东芝(2019/01/08).
@@ -16,7 +15,7 @@ import butterknife.BindView;
  */
 public class HelpActivity extends BaseActivity<HelpPresenterImpl, IHelpContract.IView> implements IHelpContract.IView {
 
-    @BindView(R.id.mWebView)
+
     WebView mWebView;
 
     public static void startActivity(Context context) {
@@ -35,6 +34,7 @@ public class HelpActivity extends BaseActivity<HelpPresenterImpl, IHelpContract.
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        mWebView = findViewById(R.id.mWebView);
         mWebView.loadUrl("file:///android_asset/wellgo_privacy_agreement.html");
     }
 

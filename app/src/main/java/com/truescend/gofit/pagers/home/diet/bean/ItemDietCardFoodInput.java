@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import butterknife.BindView;
 
 /**
  * 作者:东芝(2018/11/23).
@@ -41,15 +40,15 @@ import butterknife.BindView;
 public class ItemDietCardFoodInput extends ItemBase implements AdapterView.OnItemClickListener {
 
     private final ArrayAdapter<String> keywordListAdapter;
-    @BindView(R.id.tvSerialNumber)
+
     TextView tvSerialNumber;
-    @BindView(R.id.autoTipsInputFood)
+
     AppCompatAutoCompleteTextView autoTipsInputFood;
-    @BindView(R.id.etAmount)
+
     EditText etAmount;
-    @BindView(R.id.spUnit)
+
     AppCompatMultiLineSpinner spUnit;
-    @BindView(R.id.etCalories)
+
     EditText etCalories;
     private InputTextWatcher inputTextWatcher;
     private List<SearchFoodResultBean.DataBean> foodResults;
@@ -60,6 +59,14 @@ public class ItemDietCardFoodInput extends ItemBase implements AdapterView.OnIte
 
     public ItemDietCardFoodInput(View view) {
         super(view);
+
+      tvSerialNumber = view.findViewById(R.id.tvSerialNumber);
+       autoTipsInputFood = view.findViewById(R.id.autoTipsInputFood);
+         etAmount = view.findViewById(R.id.etAmount);
+         spUnit = view.findViewById(R.id.spUnit);
+       etCalories = view.findViewById(R.id.etCalories);
+
+
         keywordListAdapter = new ArrayAdapter<>(view.getContext(), R.layout.simple_spinner_dropdown_item, android.R.id.text1);
         autoTipsInputFood.setAdapter(keywordListAdapter);
         autoTipsInputFood.setThreshold(1);

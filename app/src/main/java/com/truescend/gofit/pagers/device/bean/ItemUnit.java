@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.common.bean.ItemBase;
 
-import butterknife.BindView;
 
 /**
  * 功能：单位切换布局
@@ -19,14 +18,14 @@ import butterknife.BindView;
 
 public class ItemUnit extends ItemBase implements RadioGroup.OnCheckedChangeListener {
 
-    @BindView(R.id.tvUnitTitle)
+
     TextView tvUnitTitle;
-    @BindView(R.id.rbUnitLeft)
+
     AppCompatRadioButton rbUnitLeft;
-    @BindView(R.id.rbUnitRight)
+
     AppCompatRadioButton rbUnitRight;
 
-    @BindView(R.id.rgUnitGroup)
+
     RadioGroup rgUnitGroup;
     private OnCheckedChangeListener listener;
     private View view;
@@ -34,6 +33,11 @@ public class ItemUnit extends ItemBase implements RadioGroup.OnCheckedChangeList
     public ItemUnit(View view) {
         super(view);
         this.view = view;
+        tvUnitTitle= view.findViewById(R.id.tvUnitTitle);
+        rbUnitLeft= view.findViewById(R.id.rbUnitLeft);
+       rbUnitRight= view.findViewById(R.id.rbUnitRight);
+
+      rgUnitGroup= view.findViewById(R.id.rgUnitGroup);
     }
 
 

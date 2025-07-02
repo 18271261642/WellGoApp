@@ -13,8 +13,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+
 
 /**
  * 作者:东芝(2017/11/17).
@@ -25,7 +24,7 @@ public abstract class BaseFragment<P extends BasePresenter, V> extends Fragment 
     protected P mPresenter;
     protected Context mContext;//activity的上下文对象
     protected Bundle mBundle;
-    protected Unbinder unBinder;
+
     private View inflate;
     protected boolean isVisible;
 
@@ -105,8 +104,7 @@ public abstract class BaseFragment<P extends BasePresenter, V> extends Fragment 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         inflate = inflater.inflate(initLayout(), null, false);
-        unBinder = ButterKnife.bind(this, inflate);
-        onCreate();
+        onCreate(inflate);
         updateVisibleStatus();
         return inflate;
     }
@@ -139,8 +137,7 @@ public abstract class BaseFragment<P extends BasePresenter, V> extends Fragment 
             mPresenter.setUIEnable(false);
         }
         super.onDestroyView();
-        //s
-        unBinder.unbind();
+
     }
 
     @Override
@@ -230,7 +227,7 @@ public abstract class BaseFragment<P extends BasePresenter, V> extends Fragment 
 
     protected abstract int initLayout();
 
-    protected abstract void onCreate();
+    protected abstract void onCreate(View view);
 
     @NonNull
     @Override

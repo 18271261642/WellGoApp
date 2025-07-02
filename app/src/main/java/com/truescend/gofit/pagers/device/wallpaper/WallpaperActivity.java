@@ -33,8 +33,6 @@ import com.truescend.gofit.views.WallpaperPreviewView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 
 /**
@@ -42,27 +40,27 @@ import butterknife.OnClick;
  * 功能:手环壁纸功能
  */
 
-public class WallpaperActivity extends BaseActivity<WallpaperPresenterImpl, IWallpaperContract.IView> implements IWallpaperContract.IView {
+public class WallpaperActivity extends BaseActivity<WallpaperPresenterImpl, IWallpaperContract.IView> implements IWallpaperContract.IView , View.OnClickListener {
 
-    @BindView(R.id.tvWallpaperTextColor)
+
     TextView tvWallpaperTextColor;
     //    @BindView(R.id.tvWallpaperTextSize)
 //    TextView tvWallpaperTextSize;
 //    @BindView(R.id.sbWallpaperTextSize)
 //    AppCompatSeekBar sbWallpaperTextSize;
-    @BindView(R.id.tvWallpaperTakePhoto)
+
     TextView tvWallpaperTakePhoto;
-    @BindView(R.id.tvWallpaperChoosePhoto)
+
     TextView tvWallpaperChoosePhoto;
-    @BindView(R.id.itemScreenSwitch)
+
     View itemScreenSwitch;
-    @BindView(R.id.itemStepSwitch)
+
     View itemStepSwitch;
-    @BindView(R.id.cpvColorPicker)
+
     ColorPickerView cpvColorPicker;
-    @BindView(R.id.llWallpaperLayout)
+
     View llWallpaperLayout;
-    @BindView(R.id.wpv)
+
     WallpaperPreviewView wpv;
 
     private ItemWallpaperSetting itemWallpaperSetting;
@@ -88,6 +86,18 @@ public class WallpaperActivity extends BaseActivity<WallpaperPresenterImpl, IWal
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        tvWallpaperTextColor = findViewById(R.id.tvWallpaperTextColor);
+
+        tvWallpaperTakePhoto = findViewById(R.id.tvWallpaperTakePhoto);
+       tvWallpaperChoosePhoto = findViewById(R.id.tvWallpaperChoosePhoto);
+         itemScreenSwitch = findViewById(R.id.itemScreenSwitch);
+        itemStepSwitch = findViewById(R.id.itemStepSwitch);
+       cpvColorPicker = findViewById(R.id.cpvColorPicker);
+       llWallpaperLayout= findViewById(R.id.llWallpaperLayout);
+      wpv = findViewById(R.id.wpv);
+
+        tvWallpaperTakePhoto.setOnClickListener(this);
+        tvWallpaperChoosePhoto.setOnClickListener(this);
 
         initViews();
 
@@ -241,28 +251,8 @@ public class WallpaperActivity extends BaseActivity<WallpaperPresenterImpl, IWal
         }
     }
 
-    @OnClick({R.id.tvWallpaperTakePhoto, R.id.tvWallpaperChoosePhoto})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.tvWallpaperTakePhoto:
 
-                PermissionUtils.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, new PermissionUtils.OnPermissionGrantedListener() {
-                    @Override
-                    public void onGranted() {
-                        WallpaperPickerUtil.fromCamera(WallpaperActivity.this);
-                    }
 
-                    @Override
-                    public void onDenied() {
-
-                    }
-                });
-                break;
-            case R.id.tvWallpaperChoosePhoto:
-                WallpaperPickerUtil.fromPhotoFile(this);
-                break;
-        }
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -378,4 +368,26 @@ public class WallpaperActivity extends BaseActivity<WallpaperPresenterImpl, IWal
         SNToast.toast(msg);
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tvWallpaperTakePhoto:
+
+                PermissionUtils.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, new PermissionUtils.OnPermissionGrantedListener() {
+                    @Override
+                    public void onGranted() {
+                        WallpaperPickerUtil.fromCamera(WallpaperActivity.this);
+                    }
+
+                    @Override
+                    public void onDenied() {
+
+                    }
+                });
+                break;
+            case R.id.tvWallpaperChoosePhoto:
+                WallpaperPickerUtil.fromPhotoFile(this);
+                break;
+        }
+    }
 }

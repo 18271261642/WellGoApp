@@ -24,7 +24,6 @@ import com.truescend.gofit.views.bean.LabelWeek;
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
 
 /**
  * 功能：血压功能界面
@@ -32,21 +31,21 @@ import butterknife.BindView;
  */
 
 public class BloodPressureActivity extends BaseActivity<BloodPressurePresenterImpl, IBloodPressureContract.IView> implements IBloodPressureContract.IView {
-    @BindView(R.id.tlTitle)
+
     TitleLayout tlTitle;
-    @BindView(R.id.ilBloodPressureTitle)
+
     View ilBloodPressureTitle;
-    @BindView(R.id.ilBloodPressureAverageDiastolic)
+
     View ilBloodPressureAverageDiastolic;
-    @BindView(R.id.ilBloodPressureAverageSystolic)
+
     View ilBloodPressureAverageSystolic;
-    @BindView(R.id.ilBloodPressureDetails)
+
     View ilBloodPressureDetails;
-    @BindView(R.id.bcvBloodPressureChart)
+
     BloodPressureChartView bcvBloodPressureChart;
-    @BindView(R.id.rvDetails)
+
     RecyclerView rvDetails;
-    @BindView(R.id.tvDate)
+
     TextView tvDate;
 
     private ItemDetailsTitle bloodPressureTitle;
@@ -67,6 +66,17 @@ public class BloodPressureActivity extends BaseActivity<BloodPressurePresenterIm
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        tlTitle= findViewById(R.id.tlTitle);
+       ilBloodPressureTitle = findViewById(R.id.ilBloodPressureTitle);
+        ilBloodPressureAverageDiastolic = findViewById(R.id.ilBloodPressureAverageDiastolic);
+       ilBloodPressureAverageSystolic = findViewById(R.id.ilBloodPressureAverageSystolic);
+        ilBloodPressureDetails = findViewById(R.id.ilBloodPressureDetails);
+         bcvBloodPressureChart= findViewById(R.id.bcvBloodPressureChart);
+        rvDetails = findViewById(R.id.rvDetails);
+        tvDate = findViewById(R.id.tvDate);
+
+
+
         initTitle();
         initView();
         initBloodOxygenChart();

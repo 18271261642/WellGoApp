@@ -59,8 +59,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import butterknife.BindView;
-
 /**
  * 功能：主页，统筹四大Fragment
  * Modify by 泽鑫 on 2018/03/03 10:29.
@@ -68,9 +66,9 @@ import butterknife.BindView;
  */
 public class MainActivity extends BaseActivity<MainPresenterImpl, IMainContract.IMainView> implements IMainContract.IMainView, BluetoothStatusListener {
 
-    @BindView(R.id.vpMainContainer)
+
     QuickViewPager vpMainContainer;
-    @BindView(R.id.tlMainBottomTabs)
+
     TabLayout tlMainBottomTabs;
 
     public BaseFragmentStatePagerAdapter pagerAdapter;
@@ -172,6 +170,12 @@ public class MainActivity extends BaseActivity<MainPresenterImpl, IMainContract.
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+
+
+        vpMainContainer= findViewById(R.id.vpMainContainer);
+
+        tlMainBottomTabs = findViewById(R.id.tlMainBottomTabs);
+
         StatusBarUtil.setRootViewFitsSystemWindows(this, false);
         initNavigationTab();
         getPresenter().requestDeviceDataNetworkSync();
@@ -182,6 +186,8 @@ public class MainActivity extends BaseActivity<MainPresenterImpl, IMainContract.
             SNToast.toast("您在使用 " + BuildConfig.VERSION_NAME + " 版本", Toast.LENGTH_LONG);
             //PageJumpUtil.startRemoteCameraActivity(this);
         }
+
+
 
     }
 

@@ -23,20 +23,18 @@ import com.truescend.gofit.utils.PageJumpUtil;
 import com.truescend.gofit.utils.PermissionUtils;
 import com.truescend.gofit.views.LargeImageWebView;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 作者:东芝(2019/6/18).
  * 功能:天猫精灵授权
  */
-public class TmallGenieAuthActivity extends BaseActivity<TmallGenieAuthPresenterImpl, ITmallGenieAuthContract.IView> implements ITmallGenieAuthContract.IView {
+public class TmallGenieAuthActivity extends BaseActivity<TmallGenieAuthPresenterImpl, ITmallGenieAuthContract.IView> implements ITmallGenieAuthContract.IView, View.OnClickListener {
 
-    @BindView(R.id.largeImageWebView)
+
     LargeImageWebView largeImageWebView;
-    @BindView(R.id.tvUserCode)
+
     TextView tvUserCode;
-    @BindView(R.id.llUserCodeLayout)
+
     LinearLayout llUserCodeLayout;
     private ClipboardManager clipboardManager;
     private String code;
@@ -58,6 +56,13 @@ public class TmallGenieAuthActivity extends BaseActivity<TmallGenieAuthPresenter
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+         largeImageWebView = findViewById(R.id.largeImageWebView);
+        tvUserCode = findViewById(R.id.tvUserCode);
+        llUserCodeLayout = findViewById(R.id.llUserCodeLayout);
+
+        tvUserCode.setOnClickListener(this);
+        findViewById(R.id.tvCopy).setOnClickListener(this);
+
         setTitle("如何关联天猫精灵与GetFitPro?");
         largeImageWebView.loadUrl("file:///android_asset/web/h5_tmall_genie_auth_help.html");
         largeImageWebView.setWebViewClient(webViewClient);
@@ -97,8 +102,8 @@ public class TmallGenieAuthActivity extends BaseActivity<TmallGenieAuthPresenter
     }
 
 
-    @OnClick({R.id.tvUserCode, R.id.tvCopy})
-    public void onViewClicked(View view) {
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tvUserCode:
             case R.id.tvCopy:
@@ -117,6 +122,7 @@ public class TmallGenieAuthActivity extends BaseActivity<TmallGenieAuthPresenter
                 break;
         }
     }
+
 
 
 }

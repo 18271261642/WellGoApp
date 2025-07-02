@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.recyclerview.widget.DiffUtil;
 
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.truescend.gofit.App;
@@ -22,14 +24,10 @@ import com.truescend.gofit.utils.RecycleViewUtil;
 import com.truescend.gofit.views.PieChartView;
 import com.truescend.gofit.views.TitleLayout;
 import com.truescend.gofit.views.overscroll.OverScrollDecoratorHelper;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.OnClick;
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 /**
@@ -38,15 +36,20 @@ import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
  */
 public class SportModeActivity extends BaseActivity<SportModePresenterImpl, ISportModeContract.IView> implements ISportModeContract.IView, View.OnClickListener, PieChartView.OnChartValueSelectedListener {
 
-    @BindView(R.id.ivShowLastTimeChart)
+
+    private RadioButton rbDetailsTitleThird;
+    private RadioButton rbDetailsTitleFirst;
+    private ImageView ivDetailsTitleLeftIcon;
+    private ImageView ivDetailsTitleRightIcon;
+    private RadioButton rbDetailsTitleSecond;
     ImageView ivShowLastTimeChart;
-    @BindView(R.id.tvDate)
+
     TextView tvDate;
-    @BindView(R.id.mPieChartView)
+
     PieChartView mPieChartView;
-    @BindView(R.id.ilSportTitle)
+
     View ilSportTitle;
-    @BindView(R.id.rvSportModeList)
+
     RecyclerView rvSportModeList;
     private SportModeAdapter mSportModeAdapter;
     private List<SportModeDetailItem> items = new ArrayList<>();
@@ -73,6 +76,25 @@ public class SportModeActivity extends BaseActivity<SportModePresenterImpl, ISpo
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        rbDetailsTitleThird = findViewById(R.id.rbDetailsTitleThird);
+        ivDetailsTitleLeftIcon = findViewById(R.id.ivDetailsTitleLeftIcon);
+        ivDetailsTitleRightIcon = findViewById(R.id.ivDetailsTitleRightIcon);
+        rbDetailsTitleSecond = findViewById(R.id.rbDetailsTitleSecond);
+        rbDetailsTitleFirst = findViewById(R.id.rbDetailsTitleFirst);
+       ivShowLastTimeChart = findViewById(R.id.ivShowLastTimeChart);
+         tvDate= findViewById(R.id.tvDate);
+        mPieChartView= findViewById(R.id.mPieChartView);
+        ilSportTitle= findViewById(R.id.ilSportTitle);
+        rvSportModeList = findViewById(R.id.rvSportModeList);
+
+        rbDetailsTitleSecond.setOnClickListener(this);
+        ivShowLastTimeChart.setOnClickListener(this);
+        ivDetailsTitleRightIcon.setOnClickListener(this);
+        ivDetailsTitleLeftIcon.setOnClickListener(this);
+        rbDetailsTitleFirst.setOnClickListener(this);
+        rbDetailsTitleThird.setOnClickListener(this);
+
+
         initTitle();
         setUpList();
         setUpPieChart();
@@ -109,7 +131,7 @@ public class SportModeActivity extends BaseActivity<SportModePresenterImpl, ISpo
         sportDetailsTitle.setRightIconVisibility(View.INVISIBLE);
     }
 
-    @OnClick({R.id.ivShowLastTimeChart})
+
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivDetailsTitleLeftIcon:

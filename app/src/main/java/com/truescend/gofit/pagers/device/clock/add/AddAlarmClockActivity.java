@@ -20,7 +20,6 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
-import butterknife.BindView;
 
 /**
  * 功能：添加闹钟或编辑页面
@@ -28,11 +27,11 @@ import butterknife.BindView;
  */
 
 public class AddAlarmClockActivity extends BaseActivity<AddAlarmClockPresenterImpl, IAddAlarmClockContract.IView> implements IAddAlarmClockContract.IView {
-    @BindView(R.id.tpAddAlarmClockTime)
+
     TimePicker tpAddAlarmClockTime;
-    @BindView(R.id.tvAddAlarmClockRepetitionPeriod)
+
     TextView tvAddAlarmClockRepetitionPeriod;
-    @BindView(R.id.ilAddAlarmClockWeekCycle)
+
     View ilAddAlarmClockWeekCycle;
 
     private ItemWeek weekItem;
@@ -51,6 +50,11 @@ public class AddAlarmClockActivity extends BaseActivity<AddAlarmClockPresenterIm
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        tpAddAlarmClockTime= findViewById(R.id.tpAddAlarmClockTime);
+         tvAddAlarmClockRepetitionPeriod= findViewById(R.id.tvAddAlarmClockRepetitionPeriod);
+       ilAddAlarmClockWeekCycle= findViewById(R.id.ilAddAlarmClockWeekCycle);
+
+
         initItem();
         initData();
     }

@@ -24,42 +24,40 @@ import com.truescend.gofit.views.HintMultiLineEditText;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 作者:东芝(2018/6/14).
  * 功能:通过密保找回密码
  */
-public class ResetPswActivity extends BaseActivity<ResetPswPresenterImpl, IResetPswContract.IView> implements IResetPswContract.IView, AdapterView.OnItemSelectedListener,NestedScrollView.OnScrollChangeListener {
+public class ResetPswActivity extends BaseActivity<ResetPswPresenterImpl, IResetPswContract.IView> implements IResetPswContract.IView, AdapterView.OnItemSelectedListener,NestedScrollView.OnScrollChangeListener, View.OnClickListener {
 
-    @BindView(R.id.etAnswer1)
+
     HintMultiLineEditText etAnswer1;
-    @BindView(R.id.etAnswer2)
+
     HintMultiLineEditText etAnswer2;
-    @BindView(R.id.etResetFirstPasswords)
+
     HintMultiLineEditText etResetFirstPasswords;
-    @BindView(R.id.etResetConfirmPasswords)
+
     HintMultiLineEditText etResetConfirmPasswords;
-    @BindView(R.id.etAuthCode)
+
     HintMultiLineEditText etAuthCode;
-    @BindView(R.id.tvNext)
+
     TextView tvNext;
-    @BindView(R.id.tvQuestion1)
+
     TextView tvQuestion1;
-    @BindView(R.id.tvQuestion2)
+
     TextView tvQuestion2;
-    @BindView(R.id.llTypeAuthCode)
+
     View llTypeAuthCode;
-    @BindView(R.id.llTypeQuestion)
+
     View llTypeQuestion;
-    @BindView(R.id.spRetrieveType)
+
     AppCompatSpinner spRetrieveType;
-    @BindView(R.id.btnObtainAuthCode)
+
     AppCompatButton btnObtainAuthCode;
-    @BindView(R.id.scrollView)
+
     NestedScrollView scrollView;
-    @BindView(R.id.tvResetHelp)
+
     TextView tvResetHelp;
 
 
@@ -81,6 +79,26 @@ public class ResetPswActivity extends BaseActivity<ResetPswPresenterImpl, IReset
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        etAnswer1 = findViewById(R.id.etAnswer1);
+
+       etAnswer2 = findViewById(R.id.etAnswer2);
+       etResetFirstPasswords = findViewById(R.id.etResetFirstPasswords);
+
+       etResetConfirmPasswords = findViewById(R.id.etResetConfirmPasswords);
+        etAuthCode = findViewById(R.id.etAuthCode);
+        tvNext = findViewById(R.id.tvNext);
+       tvQuestion1 = findViewById(R.id.tvQuestion1);
+         tvQuestion2 = findViewById(R.id.tvQuestion2);
+        llTypeAuthCode = findViewById(R.id.llTypeAuthCode);
+         llTypeQuestion = findViewById(R.id.llTypeQuestion);
+         spRetrieveType = findViewById(R.id.spRetrieveType);
+    btnObtainAuthCode = findViewById(R.id.btnObtainAuthCode);
+        scrollView = findViewById(R.id.scrollView);
+       tvResetHelp = findViewById(R.id.tvResetHelp);
+
+        tvNext.setOnClickListener(this);
+        btnObtainAuthCode.setOnClickListener(this);
+
         setTitle(R.string.title_forget_password);
         Intent intent = getIntent();
         if (intent == null) {
@@ -169,57 +187,6 @@ public class ResetPswActivity extends BaseActivity<ResetPswPresenterImpl, IReset
     }
 
 
-    @OnClick({R.id.tvNext, R.id.btnObtainAuthCode})
-    public void onViewClicked(View v) {
-        switch (v.getId()) {
-            case R.id.tvNext:
-                String psw = etResetFirstPasswords.getText().toString().trim();
-                String pswAgain = etResetConfirmPasswords.getText().toString().trim();
-                String authCode = etAuthCode.getText().toString().trim();
-                String answer1 = etAnswer1.getText().toString().trim();
-                String answer2 = etAnswer2.getText().toString().trim();
-
-                //密保方式 需要校验回答的内容
-                if (isHasSetQuestion) {
-                    if (IF.isEmpty(answer1)) {
-                        setEditTextErrorTips(etAnswer1, getString(R.string.content_answer));
-                        return;
-                    }
-                    if (IF.isEmpty(answer2)) {
-                        setEditTextErrorTips(etAnswer2, getString(R.string.content_answer));
-                        return;
-                    }
-                } else {
-                    //验证码方式 需要填写验证码
-                    if (IF.isEmpty(authCode)) {
-                        setEditTextErrorTips(etAuthCode, getString(R.string.content_input_verification_code));
-                        return;
-                    }
-                }
-                if (IF.isEmpty(psw)) {
-                    setEditTextErrorTips(etResetFirstPasswords, getString(R.string.content_input_password));
-                    return;
-                }
-                if (psw.length() < 6 || psw.length() > 14) {
-                    setEditTextErrorTips(etResetFirstPasswords, getString(R.string.content_password_length));
-                    return;
-                }
-                if (!psw.equals(pswAgain)) {
-                    setEditTextErrorTips(etResetConfirmPasswords, getString(R.string.content_valid_input));
-                    return;
-                }
-                if (isHasSetQuestion) {
-                    getPresenter().requestReset(email, answer1, answer2, indexFromQuestion1, indexFromQuestion2, psw);
-                } else {
-                    getPresenter().requestReset(email, authCode, psw);
-                }
-                break;
-            case R.id.btnObtainAuthCode:
-                btnObtainAuthCode.setClickable(false);
-                getPresenter().requestAuthCode(email);
-                break;
-        }
-    }
 
 
     private CountDownTimer countdown = new CountDownTimer(60 * 1000, 1000) {
@@ -289,5 +256,57 @@ public class ResetPswActivity extends BaseActivity<ResetPswPresenterImpl, IReset
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tvNext:
+                String psw = etResetFirstPasswords.getText().toString().trim();
+                String pswAgain = etResetConfirmPasswords.getText().toString().trim();
+                String authCode = etAuthCode.getText().toString().trim();
+                String answer1 = etAnswer1.getText().toString().trim();
+                String answer2 = etAnswer2.getText().toString().trim();
+
+                //密保方式 需要校验回答的内容
+                if (isHasSetQuestion) {
+                    if (IF.isEmpty(answer1)) {
+                        setEditTextErrorTips(etAnswer1, getString(R.string.content_answer));
+                        return;
+                    }
+                    if (IF.isEmpty(answer2)) {
+                        setEditTextErrorTips(etAnswer2, getString(R.string.content_answer));
+                        return;
+                    }
+                } else {
+                    //验证码方式 需要填写验证码
+                    if (IF.isEmpty(authCode)) {
+                        setEditTextErrorTips(etAuthCode, getString(R.string.content_input_verification_code));
+                        return;
+                    }
+                }
+                if (IF.isEmpty(psw)) {
+                    setEditTextErrorTips(etResetFirstPasswords, getString(R.string.content_input_password));
+                    return;
+                }
+                if (psw.length() < 6 || psw.length() > 14) {
+                    setEditTextErrorTips(etResetFirstPasswords, getString(R.string.content_password_length));
+                    return;
+                }
+                if (!psw.equals(pswAgain)) {
+                    setEditTextErrorTips(etResetConfirmPasswords, getString(R.string.content_valid_input));
+                    return;
+                }
+                if (isHasSetQuestion) {
+                    getPresenter().requestReset(email, answer1, answer2, indexFromQuestion1, indexFromQuestion2, psw);
+                } else {
+                    getPresenter().requestReset(email, authCode, psw);
+                }
+                break;
+            case R.id.btnObtainAuthCode:
+                btnObtainAuthCode.setClickable(false);
+                getPresenter().requestAuthCode(email);
+                break;
+        }
     }
 }

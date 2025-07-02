@@ -46,17 +46,16 @@ import java.util.Comparator;
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.OnClick;
+
 
 /**
  * 作者:东芝(2017/11/17).
  * 功能:主页(运动图表/睡眠+心率+血氧+血压 item )界面
  */
 public class HomeFragment extends BaseFragment<HomePresenterImpl, IHomeContract.IView> implements IHomeContract.IView {
-    @BindView(R.id.tlTitle)
+
     TitleLayout tlTitle;
-    @BindView(R.id.vpHead)
+
     InfiniteViewPager vpHead;
 //    @BindView(R.id.cvHomeSleep)
 //    View cvHomeSleep;
@@ -69,27 +68,26 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, IHomeContract.
 //    @BindView(R.id.cvHomeBloodOxygen)
 //    View cvHomeBloodOxygen;
 
-    @BindView(R.id.cvHomeUserDiet)
     View cvHomeUserDiet;
 
-    @BindView(R.id.ivWeatherIcon)
+
     ImageView ivWeatherIcon;
 
-    @BindView(R.id.tvWeatherTemperature)
+
     TextView tvWeatherTemperature;
-    @BindView(R.id.tvWeatherTypeName)
+
     TextView tvWeatherTypeName;
 
-    @BindView(R.id.rlRefresh)
+
     SmartRefreshLayout rlRefresh;
 
-    @BindView(R.id.mGridRecyclerView)
+
     RecyclerView mGridRecyclerView;
 
-    @BindView(R.id.mNestedScrollView)
+
     VerticalScrollView mNestedScrollView;
 
-    @BindView(R.id.tvEditMode)
+
     TextView tvEditMode;
 
     //    @BindView(R.id.mGridLayout)
@@ -122,7 +120,38 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, IHomeContract.
     }
 
     @Override
-    protected void onCreate() {
+    protected void onCreate(View view) {
+
+       tlTitle = view.findViewById(R.id.tlTitle);
+       vpHead = view.findViewById(R.id.vpHead);
+
+       cvHomeUserDiet = view.findViewById(R.id.cvHomeUserDiet);
+
+       ivWeatherIcon = view.findViewById(R.id.ivWeatherIcon);
+
+      tvWeatherTemperature = view.findViewById(R.id.tvWeatherTemperature);
+       tvWeatherTypeName= view.findViewById(R.id.tvWeatherTypeName);
+
+       rlRefresh = view.findViewById(R.id.rlRefresh);
+
+        mGridRecyclerView = view.findViewById(R.id.mGridRecyclerView);
+
+        mNestedScrollView= view.findViewById(R.id.mNestedScrollView);
+
+        tvEditMode = view.findViewById(R.id.tvEditMode);
+
+        tvEditMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                toEditClick();
+
+            }
+        });
+
+
+
+
         initTitle();
         initCalendarSelector();
         initItems();
@@ -270,7 +299,7 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, IHomeContract.
         mItemHelper.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                onClick(tvEditMode);
+               toEditClick();
                 return false;
             }
         });
@@ -313,45 +342,6 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, IHomeContract.
         });
     }
 
-    @OnClick({R.id.tvEditMode})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tvEditMode:
-                List<ItemObject> curItems = itemAdapter.getList();
-
-
-                if (itemAdapter.isEditMode()) {
-                    List<ItemObject> itemClose = new ArrayList<>();
-                    List<Integer> itemTypeClose = new ArrayList<>();
-                    //记录已关闭的Item
-                    for (ItemObject itemObject : curItems) {
-                        if (!itemObject.isOpen()) {
-                            itemClose.add(itemObject);
-                            itemTypeClose.add(itemObject.getItemType());
-                        }
-                    }
-                    //移除掉已关闭的item 不在界面显示
-                    curItems.removeAll(itemClose);
-                    UserStorage.setHomeItemClose(itemTypeClose);
-
-                    //退出编辑模式
-                    itemAdapter.setEditMode(false);
-                    //保存排序
-                    UserStorage.setHomeItemOrder(itemAdapter.getItemTypeOrder());
-                } else {
-                    List<ItemObject> historyItemClose = getHistoryItemClose();
-                    //把已关闭的item 恢复回来, 以便编辑
-                    if (!historyItemClose.isEmpty()) {
-                        curItems.addAll(historyItemClose);
-                    }
-
-                    //进入编辑模式
-                    itemAdapter.setEditMode(true);
-                }
-
-                break;
-        }
-    }
 
 
     /**
@@ -723,6 +713,41 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, IHomeContract.
         if (requestCode == PageJumpUtil.REQUEST_CODE_RESULT && resultCode == Activity.RESULT_OK) {
             //检测到变化, 重新获取刷新今天的进餐数据
             getPresenter().requestLoadNetworkDietStatisticsItemData(App.getSelectedCalendar());
+        }
+    }
+
+
+    private void toEditClick(){
+        List<ItemObject> curItems = itemAdapter.getList();
+
+
+        if (itemAdapter.isEditMode()) {
+            List<ItemObject> itemClose = new ArrayList<>();
+            List<Integer> itemTypeClose = new ArrayList<>();
+            //记录已关闭的Item
+            for (ItemObject itemObject : curItems) {
+                if (!itemObject.isOpen()) {
+                    itemClose.add(itemObject);
+                    itemTypeClose.add(itemObject.getItemType());
+                }
+            }
+            //移除掉已关闭的item 不在界面显示
+            curItems.removeAll(itemClose);
+            UserStorage.setHomeItemClose(itemTypeClose);
+
+            //退出编辑模式
+            itemAdapter.setEditMode(false);
+            //保存排序
+            UserStorage.setHomeItemOrder(itemAdapter.getItemTypeOrder());
+        } else {
+            List<ItemObject> historyItemClose = getHistoryItemClose();
+            //把已关闭的item 恢复回来, 以便编辑
+            if (!historyItemClose.isEmpty()) {
+                curItems.addAll(historyItemClose);
+            }
+
+            //进入编辑模式
+            itemAdapter.setEditMode(true);
         }
     }
 }

@@ -32,22 +32,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 作者:东芝(2019/8/13).
  * 功能:远程相机pro
  */
 
-public class RemoteCameraProActivity extends BaseActivity<RemoteCameraPresenterImpl, IRemoteCameraContract.IView> implements IRemoteCameraContract.IView {
-    @BindView(R.id.camera)
+public class RemoteCameraProActivity extends BaseActivity<RemoteCameraPresenterImpl, IRemoteCameraContract.IView> implements
+        IRemoteCameraContract.IView , View.OnClickListener {
+
     CameraView camera;
-    @BindView(R.id.clpCameraTakePhoto)
+
     ContentLoadingProgressBar clpCameraTakePhoto;
-    @BindView(R.id.ivRemoteCameraPhotoPreview)
+
     ImageView ivRemoteCameraPhotoPreview;
-    @BindView(R.id.ivRemoteCameraFlash)
+
     ImageView ivRemoteCameraFlash;
 
 
@@ -85,6 +84,19 @@ public class RemoteCameraProActivity extends BaseActivity<RemoteCameraPresenterI
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        camera = findViewById(R.id.camera);
+        clpCameraTakePhoto = findViewById(R.id.clpCameraTakePhoto);
+       ivRemoteCameraPhotoPreview = findViewById(R.id.ivRemoteCameraPhotoPreview);
+        ivRemoteCameraFlash = findViewById(R.id.ivRemoteCameraFlash);
+
+        findViewById(R.id.ivRemoteCameraBack).setOnClickListener(this);
+        findViewById(R.id.ivCameraTakePhoto).setOnClickListener(this);
+        ivRemoteCameraFlash.setOnClickListener(this);
+        findViewById(R.id.ivRemoteCameraTransfer).setOnClickListener(this);
+        ivRemoteCameraPhotoPreview.setOnClickListener(this);
+
+
+
         StatusBarUtil.setRootViewFitsSystemWindows(this, false);
         StatusBarUtil.setStatusBarDarkTheme(this, false);
         StatusBarUtil.setStatusBarColor(this, 0xFF010101);
@@ -125,7 +137,7 @@ public class RemoteCameraProActivity extends BaseActivity<RemoteCameraPresenterI
     }
 
 
-    @OnClick({R.id.ivRemoteCameraBack, R.id.ivCameraTakePhoto, R.id.ivRemoteCameraFlash, R.id.ivRemoteCameraTransfer, R.id.ivRemoteCameraPhotoPreview})
+   @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivRemoteCameraBack:

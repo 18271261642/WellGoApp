@@ -15,7 +15,6 @@ import com.truescend.gofit.pagers.track.bean.ItemRunSetting;
 import com.truescend.gofit.views.CompoundGroup;
 import com.truescend.gofit.views.TitleLayout;
 
-import butterknife.BindView;
 
 /**
  * 功能：运动设置界面
@@ -23,25 +22,25 @@ import butterknife.BindView;
  */
 
 public class RunSettingActivity extends BaseActivity<RunSettingPresenterImpl, IRunSettingContract.IView> implements IRunSettingContract.IView {
-    @BindView(R.id.tlTitle)
+
     TitleLayout tlTitle;
-    @BindView(R.id.ilRunSettingScreenAlwaysOn)
+
     View ilRunSettingScreenAlwaysOn;
-    @BindView(R.id.ilRunSettingShakeBandStart)
+
     View ilRunSettingShakeBandStart;
-    @BindView(R.id.ilRunSettingShakeBandEnd)
+
     View ilRunSettingShakeBandEnd;
-    @BindView(R.id.ilRunSettingShowWeatherCurrentCity)
+
     View ilRunSettingShowWeatherCurrentCity;
 
-    @BindView(R.id.ilMapSettingAuto)
+
     View ilMapSettingAuto;
-    @BindView(R.id.ilMapSettingGaodeMap)
+
     View ilMapSettingGaodeMap;
-    @BindView(R.id.ilMapSettingGoogleMap)
+
     View ilMapSettingGoogleMap;
 
-    @BindView(R.id.cgMapTypeSelector)
+
     CompoundGroup cgMapTypeSelector;
 
     private ItemRunSetting itemScreenAlwaysOn;
@@ -65,6 +64,19 @@ public class RunSettingActivity extends BaseActivity<RunSettingPresenterImpl, IR
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+
+         tlTitle = findViewById(R.id.tlTitle);
+         ilRunSettingScreenAlwaysOn= findViewById(R.id.ilRunSettingScreenAlwaysOn);
+        ilRunSettingShakeBandStart= findViewById(R.id.ilRunSettingShakeBandStart);
+        ilRunSettingShakeBandEnd= findViewById(R.id.ilRunSettingShakeBandEnd);
+       ilRunSettingShowWeatherCurrentCity= findViewById(R.id.ilRunSettingShowWeatherCurrentCity);
+
+        ilMapSettingAuto= findViewById(R.id.ilMapSettingAuto);
+         ilMapSettingGaodeMap= findViewById(R.id.ilMapSettingGaodeMap);
+        ilMapSettingGoogleMap= findViewById(R.id.ilMapSettingGoogleMap);
+
+      cgMapTypeSelector= findViewById(R.id.cgMapTypeSelector);
+
         initTitle();
         initItem();
         initMapTypeSelector();

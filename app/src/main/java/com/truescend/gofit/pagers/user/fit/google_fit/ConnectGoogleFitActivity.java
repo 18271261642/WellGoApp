@@ -13,18 +13,17 @@ import com.truescend.gofit.utils.GoogleFitTool;
 import com.truescend.gofit.utils.UploadGoogleFitHelper;
 import com.truescend.gofit.views.TitleLayout;
 
-import butterknife.BindView;
-import butterknife.OnClick;
+
 
 /**
  * 由于该页面只提供关联和取消关联GoogleFit
  * Author Created by 泽鑫 on 2018/6/1.
  */
-public class ConnectGoogleFitActivity extends BaseActivity<ConnectGoogleFitPresenterImpl, ConnectGoogleFitContract.IView> implements ConnectGoogleFitContract.IView {
+public class ConnectGoogleFitActivity extends BaseActivity<ConnectGoogleFitPresenterImpl, ConnectGoogleFitContract.IView> implements ConnectGoogleFitContract.IView, View.OnClickListener {
 
-    @BindView(R.id.btCancelConnected)
+
     Button btGoogleFitCancelConnected;
-    @BindView(R.id.btUpload)
+
     Button btGoogleFitUpload;
     private UploadGoogleFitHelper helper;
 
@@ -40,6 +39,12 @@ public class ConnectGoogleFitActivity extends BaseActivity<ConnectGoogleFitPrese
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        btGoogleFitCancelConnected = findViewById(R.id.btCancelConnected);
+         btGoogleFitUpload = findViewById(R.id.btUpload);
+
+         findViewById(R.id.btCancelConnected).setOnClickListener(this);
+         findViewById(R.id.btUpload).setOnClickListener(this);
+
         initView();
         initGoogleFit();
     }
@@ -83,7 +88,7 @@ public class ConnectGoogleFitActivity extends BaseActivity<ConnectGoogleFitPrese
         LoadingDialog.dismiss();
     }
 
-    @OnClick({R.id.btCancelConnected, R.id.btUpload})
+    @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btCancelConnected:

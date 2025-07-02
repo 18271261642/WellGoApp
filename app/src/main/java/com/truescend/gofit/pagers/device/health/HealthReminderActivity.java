@@ -12,7 +12,6 @@ import com.truescend.gofit.utils.PageJumpUtil;
 import com.truescend.gofit.utils.ResUtil;
 import com.truescend.gofit.views.TitleLayout;
 
-import butterknife.BindView;
 
 /**
  * 功能：健康提醒页面
@@ -21,9 +20,9 @@ import butterknife.BindView;
 
 public class HealthReminderActivity extends BaseActivity<HealthReminderPresenterImpl, IHealthReminderContract.IView> implements IHealthReminderContract.IView {
     public final static String DRINK_OR_SCHEDULE = "drinkOrSchedule";
-    @BindView(R.id.ilDeviceHealthReminderSedentary)
+
     View ilDeviceHealthReminderSedentary;
-    @BindView(R.id.ilDeviceHealthReminderDrink)
+
     View ilDeviceHealthReminderDrink;
 
     private ItemDeviceCommon sedentaryItem;
@@ -41,6 +40,8 @@ public class HealthReminderActivity extends BaseActivity<HealthReminderPresenter
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        ilDeviceHealthReminderSedentary = findViewById(R.id.ilDeviceHealthReminderSedentary);
+        ilDeviceHealthReminderDrink = findViewById(R.id.ilDeviceHealthReminderDrink);
         initItem();
     }
 

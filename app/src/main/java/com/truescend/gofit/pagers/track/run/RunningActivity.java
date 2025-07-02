@@ -34,61 +34,59 @@ import com.truescend.gofit.utils.StatusBarUtil;
 import com.truescend.gofit.views.CircleRippleButton;
 import com.truescend.gofit.views.TitleLayout;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 作者:东芝(2018/2/24).
  * 功能:运动轨迹界面/功能与动画
  */
-public class RunningActivity extends BaseActivity<RunningPresenterImpl, IRunningContract.IView> implements IRunningContract.IView {
+public class RunningActivity extends BaseActivity<RunningPresenterImpl, IRunningContract.IView> implements IRunningContract.IView , View.OnClickListener {
 
     public static final String KEY_MAP_TYPE = "mapType";
-    @BindView(R.id.tlTitle)
+
     TitleLayout tlTitle;
-    @BindView(R.id.ivRunningTitleBack)
+
     ImageView ivRunningTitleBack;
-    @BindView(R.id.ivRunningTitleWeather)
+
     ImageView ivRunningTitleWeather;
-    @BindView(R.id.tvRunningTitleTemperature)
+
     TextView tvRunningTitleTemperature;
-    @BindView(R.id.rlRunningTitleWeather)
+
     View rlRunningTitleWeather;
-    @BindView(R.id.tvRunningTitleAirQuality)
+
     TextView tvRunningTitleAirQuality;
-    @BindView(R.id.tvRunningTitleQuality)
+
     TextView tvRunningTitleQuality;
-    @BindView(R.id.ivRunningTitleSetting)
+
     ImageView ivRunningTitleSetting;
-    @BindView(R.id.crbRunningReadyCountdown)
+
     ImageView crbRunningReadyCountdown;
-    @BindView(R.id.ivRunningTitleShare)
+
     ImageView ivRunningTitleShare;
-    @BindView(R.id.ivRunningGPS)
+
     ImageView ivRunningGPS;
-    @BindView(R.id.ivRunningCurLocation)
+
     ImageView ivRunningCurLocation;
-    @BindView(R.id.llRunningGPS)
+
     View llRunningGPS;
-    @BindView(R.id.crbRunningReady)
+
     CircleRippleButton crbRunningReady;
-    @BindView(R.id.tvRunningPace)
+
     TextView tvRunningPace;
-    @BindView(R.id.ilRunningBottom)
+
     View ilRunningBottom;
-    @BindView(R.id.mMapContent)
+
     FrameLayout mMapContent;
-    @BindView(R.id.mMapControl)
+
     RelativeLayout mMapControl;
-    @BindView(R.id.tvRunningDistances)
+
     TextView tvRunningDistances;
-    @BindView(R.id.tvRunningCalories)
+
     TextView tvRunningCalories;
-    @BindView(R.id.tvRunningHourSpeed)
+
     TextView tvRunningHourSpeed;
-    @BindView(R.id.tvRunningSpendTime)
+
     TextView tvRunningSpendTime;
-    @BindView(R.id.ilRunningTitle)
+
     View ilRunningTitle;
 
     private SNMapHelper mapHelper;
@@ -107,6 +105,38 @@ public class RunningActivity extends BaseActivity<RunningPresenterImpl, IRunning
 
     @Override
     protected void onCreateActivity(final Bundle savedInstanceState) {
+         tlTitle= findViewById(R.id.tlTitle);
+         ivRunningTitleBack= findViewById(R.id.ivRunningTitleBack);
+         ivRunningTitleWeather= findViewById(R.id.ivRunningTitleWeather);
+         tvRunningTitleTemperature= findViewById(R.id.tvRunningTitleTemperature);
+         rlRunningTitleWeather= findViewById(R.id.rlRunningTitleWeather);
+         tvRunningTitleAirQuality= findViewById(R.id.tvRunningTitleAirQuality);
+        tvRunningTitleQuality= findViewById(R.id.tvRunningTitleQuality);
+         ivRunningTitleSetting= findViewById(R.id.ivRunningTitleSetting);
+         crbRunningReadyCountdown= findViewById(R.id.crbRunningReadyCountdown);
+         ivRunningTitleShare= findViewById(R.id.ivRunningTitleShare);
+         ivRunningGPS= findViewById(R.id.ivRunningGPS);
+         ivRunningCurLocation= findViewById(R.id.ivRunningCurLocation);
+       llRunningGPS= findViewById(R.id.llRunningGPS);
+        crbRunningReady= findViewById(R.id.crbRunningReady);
+         tvRunningPace= findViewById(R.id.tvRunningPace);
+        ilRunningBottom= findViewById(R.id.ilRunningBottom);
+         mMapContent= findViewById(R.id.mMapContent);
+        mMapControl= findViewById(R.id.mMapControl);
+        tvRunningDistances= findViewById(R.id.tvRunningDistances);
+        tvRunningCalories= findViewById(R.id.tvRunningCalories);
+        tvRunningHourSpeed= findViewById(R.id.tvRunningHourSpeed);
+         tvRunningSpendTime= findViewById(R.id.tvRunningSpendTime);
+       ilRunningTitle = findViewById(R.id.ilRunningTitle);
+
+
+        ivRunningTitleBack.setOnClickListener(this);
+        ivRunningTitleSetting.setOnClickListener(this);
+        ivRunningTitleShare.setOnClickListener(this);
+        crbRunningReady.setOnClickListener(this);
+        ivRunningCurLocation.setOnClickListener(this);
+
+
         StatusBarUtil.setRootViewFitsSystemWindows(this,false);
         StatusBarUtil.setStatusBarDarkTheme(this,false);
         StatusBarUtil.setStatusBarColor(this,0x00000000);
@@ -280,7 +310,7 @@ public class RunningActivity extends BaseActivity<RunningPresenterImpl, IRunning
 
     }
 
-    @OnClick({R.id.ivRunningTitleBack, R.id.ivRunningTitleSetting, R.id.ivRunningTitleShare, R.id.crbRunningReady, R.id.ivRunningCurLocation})
+   @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivRunningTitleBack:

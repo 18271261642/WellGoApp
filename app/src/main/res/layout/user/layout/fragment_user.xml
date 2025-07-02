@@ -190,6 +190,11 @@
                 android:id="@+id/ilDeviceSettingHelp"
                 layout="@layout/item_banner_button" />
 
+
+            <include
+                android:id="@+id/minPermission"
+                layout="@layout/item_banner_button" />
+
             <include
                 android:id="@+id/ilDeviceSettingExit"
                 layout="@layout/item_banner_button" />

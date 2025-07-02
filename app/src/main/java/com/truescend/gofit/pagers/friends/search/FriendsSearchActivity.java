@@ -23,8 +23,6 @@ import com.truescend.gofit.pagers.friends.info.FriendsInfoPresenterImpl;
 import com.truescend.gofit.utils.ResUtil;
 import com.truescend.gofit.views.TitleLayout;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -36,21 +34,21 @@ public class FriendsSearchActivity extends BaseActivity<FriendsSearchPresenterIm
     private static final int DISPLAYED_DEF = 0;
     private static final int DISPLAYED_NOTHING = 1;
     private static final int DISPLAYED_RESULT = 2;
-    @BindView(R.id.vaResultSwitcher)
+
     ViewAnimator vaResultSwitcher;
-    @BindView(R.id.civHead)
+
     CircleImageView civHead;
-    @BindView(R.id.ivZan)
+
     ImageView ivZan;
-    @BindView(R.id.ivEncourage)
+
     ImageView ivEncourage;
-    @BindView(R.id.tvRequestAddFriends)
+
     TextView tvRequestAddFriends;
-    @BindView(R.id.tvNickname)
+
     TextView tvNickname;
-    @BindView(R.id.ivGender)
+
     ImageView ivGender;
-    @BindView(R.id.tvIdName)
+
     TextView tvIdName;
 
 
@@ -106,6 +104,37 @@ public class FriendsSearchActivity extends BaseActivity<FriendsSearchPresenterIm
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+       vaResultSwitcher = findViewById(R.id.vaResultSwitcher);
+         civHead = findViewById(R.id.civHead);
+        ivZan = findViewById(R.id.ivZan);
+         ivEncourage = findViewById(R.id.ivEncourage);
+         tvRequestAddFriends = findViewById(R.id.tvRequestAddFriends);
+         tvNickname = findViewById(R.id.tvNickname);
+         ivGender = findViewById(R.id.ivGender);
+         tvIdName= findViewById(R.id.tvIdName);
+
+         ivEncourage.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 getPresenter().setFriendsThumbAction(FriendsInfoPresenterImpl.THUMBACTION_TYPE_ENCOURAGE);
+             }
+         });
+
+         ivZan.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 getPresenter().setFriendsThumbAction(FriendsInfoPresenterImpl.THUMBACTION_TYPE_ZAN);
+             }
+         });
+
+         tvRequestAddFriends.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 getPresenter().requestAddFriends();
+             }
+         });
+
+
         vaResultSwitcher.setDisplayedChild(DISPLAYED_DEF);
 
     }
@@ -175,21 +204,6 @@ public class FriendsSearchActivity extends BaseActivity<FriendsSearchPresenterIm
         }
     }
 
-
-    @OnClick({R.id.tvRequestAddFriends, R.id.ivZan, R.id.ivEncourage})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.tvRequestAddFriends:
-                getPresenter().requestAddFriends();
-                break;
-            case R.id.ivZan:
-                getPresenter().setFriendsThumbAction(FriendsInfoPresenterImpl.THUMBACTION_TYPE_ZAN);
-                break;
-            case R.id.ivEncourage:
-                getPresenter().setFriendsThumbAction(FriendsInfoPresenterImpl.THUMBACTION_TYPE_ENCOURAGE);
-                break;
-        }
-    }
 
 
 }

@@ -1,20 +1,16 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.2'
+    compileSdkVersion 33
 
     defaultConfig {
-        minSdkVersion 18
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion 19
+        targetSdkVersion 33
     }
 
 
     buildTypes {
         release {
-            debuggable true
             minifyEnabled false
 
             manifestPlaceholders = [
@@ -25,7 +21,6 @@ android {
         }
 
         debug {
-            debuggable true
             manifestPlaceholders = [
                     "apiKeyGaodeMap": rootProject.ext.mapApiKey.apiKeyGaodeMap,
                     "apiKeyGoogleMap": rootProject.ext.mapApiKey.apiKeyGoogleMap

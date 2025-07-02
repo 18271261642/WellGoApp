@@ -7,7 +7,6 @@ import android.widget.TextView;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.common.bean.ItemBase;
 
-import butterknife.BindView;
 
 /**
  * 功能：状态布局
@@ -19,16 +18,19 @@ import butterknife.BindView;
 
 public class ItemStatus extends ItemBase {
 
-    @BindView(R.id.tvItemStatusTitle)
+
     TextView tvItemStatusTitle;
 
 
-    @BindView(R.id.tvItemStatusSubTitle)
+
     TextView tvItemStatusSubTitle;
 
 
     public ItemStatus(View view) {
         super(view);
+       tvItemStatusTitle= view.findViewById(R.id.tvItemStatusTitle);
+
+        tvItemStatusSubTitle = view.findViewById(R.id.tvItemStatusSubTitle);
     }
 
     public void setTitle(CharSequence title) {

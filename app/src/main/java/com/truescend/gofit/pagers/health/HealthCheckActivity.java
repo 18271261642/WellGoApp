@@ -23,8 +23,6 @@ import com.truescend.gofit.utils.TabLayoutUtils;
 import com.truescend.gofit.views.ScrollingImageView;
 import com.truescend.gofit.views.TitleLayout;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 作者:东芝(2018/1/31).
@@ -42,17 +40,17 @@ public class HealthCheckActivity extends BaseActivity<HealthCheckPresenterImpl, 
      */
     private static final int DISPLAYED_PAGE_SELECTED = 1;
 
-    @BindView(R.id.tabHealthCheckType)
+
     TabLayout tabHealthCheckType;
-    @BindView(R.id.sivHealthCheckScrollAnim)
+
     ScrollingImageView sivHealthCheckScrollAnim;
-    @BindView(R.id.vsHealthCheckStatusSwitcher)
+
     ViewSwitcher vsHealthCheckStatusSwitcher;
-    @BindView(R.id.tvHealthCheckValue)
+
     TextView tvHealthCheckValue;
-    @BindView(R.id.tvHealthCheckUnit)
+
     TextView tvHealthCheckUnit;
-    @BindView(R.id.ivHealthCheckRunning)
+
     ImageView ivHealthCheckRunning;
 
     private SparseArray<Object[]> item = null;
@@ -77,6 +75,37 @@ public class HealthCheckActivity extends BaseActivity<HealthCheckPresenterImpl, 
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        tabHealthCheckType = findViewById(R.id.tabHealthCheckType);
+        sivHealthCheckScrollAnim = findViewById(R.id.sivHealthCheckScrollAnim);
+         vsHealthCheckStatusSwitcher = findViewById(R.id.vsHealthCheckStatusSwitcher);
+        tvHealthCheckValue = findViewById(R.id.tvHealthCheckValue);
+         tvHealthCheckUnit = findViewById(R.id.tvHealthCheckUnit);
+         ivHealthCheckRunning = findViewById(R.id.ivHealthCheckRunning);
+
+        vsHealthCheckStatusSwitcher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!SNBLEHelper.isConnected()) {
+                    SNToast.toast(R.string.toast_band_is_disconnect);
+                    return;
+                }
+                int selectedTabPosition = tabHealthCheckType.getSelectedTabPosition();
+                if (selectedTabPosition==-1) {
+                    return;
+                }
+                switch (vsHealthCheckStatusSwitcher.getCurrentView().getId()) {
+                    case R.id.ivHealthCheckNormal:
+                        tvHealthCheckValue.setText("--");
+                        getPresenter().requestStartHealthCheck(item.keyAt(selectedTabPosition), true, false);
+                        break;
+                    case R.id.ivHealthCheckRunning:
+                        getPresenter().requestStartHealthCheck(item.keyAt(selectedTabPosition), false, false);
+                        break;
+                }
+
+            }
+        });
+
         initTabItemData();
         initTabLayout();
     }
@@ -111,31 +140,6 @@ public class HealthCheckActivity extends BaseActivity<HealthCheckPresenterImpl, 
     }
 
 
-    @OnClick({R.id.vsHealthCheckStatusSwitcher})
-    public void onClick(View view) {
-        if (!SNBLEHelper.isConnected()) {
-            SNToast.toast(R.string.toast_band_is_disconnect);
-            return;
-        }
-        switch (view.getId()) {
-            case R.id.vsHealthCheckStatusSwitcher:
-                int selectedTabPosition = tabHealthCheckType.getSelectedTabPosition();
-                if (selectedTabPosition==-1) {
-                    return;
-                }
-                switch (vsHealthCheckStatusSwitcher.getCurrentView().getId()) {
-                    case R.id.ivHealthCheckNormal:
-                        tvHealthCheckValue.setText("--");
-                        getPresenter().requestStartHealthCheck(item.keyAt(selectedTabPosition), true, false);
-                        break;
-                    case R.id.ivHealthCheckRunning:
-                        getPresenter().requestStartHealthCheck(item.keyAt(selectedTabPosition), false, false);
-                        break;
-                }
-
-                break;
-        }
-    }
 
     @Override
     public void onUpdateHealthCheckHeartRate(String heartRate) {

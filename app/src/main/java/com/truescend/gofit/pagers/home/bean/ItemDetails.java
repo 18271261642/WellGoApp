@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.common.bean.ItemBase;
 
-import butterknife.BindView;
 
 /**
  * 功能：详情横条布局
@@ -21,17 +20,17 @@ public class ItemDetails extends ItemBase implements View.OnClickListener {
     public static final int ITEM_TEXT_LOW = 0;
     public static final int ITEM_TEXT_HEIGHT = 1;
 
-    @BindView(R.id.ivDetailsIconTitle)
+
     ImageView ivDetailsIconTitle;
-    @BindView(R.id.tvDetailsTitle)
+
     TextView tvDetailsTitle;
-    @BindView(R.id.ivDetailsIconRed)
+
     ImageView ivDetailsIconRed;
-    @BindView(R.id.tvDetailsTextHeight)
+
     TextView tvDetailsTextHeight;
-    @BindView(R.id.ivDetailsIconYellow)
+
     ImageView ivDetailsIconYellow;
-    @BindView(R.id.tvDetailsTextLow)
+
     TextView tvDetailsTextLow;
 
     private OnTextClickListener textClickListener;
@@ -42,6 +41,14 @@ public class ItemDetails extends ItemBase implements View.OnClickListener {
      */
     public ItemDetails(View view) {
         super(view);
+
+         ivDetailsIconTitle= view.findViewById(R.id.ivDetailsIconTitle);
+         tvDetailsTitle = view.findViewById(R.id.tvDetailsTitle);
+         ivDetailsIconRed = view.findViewById(R.id.ivDetailsIconRed);
+         tvDetailsTextHeight= view.findViewById(R.id.tvDetailsTextHeight);
+         ivDetailsIconYellow = view.findViewById(R.id.ivDetailsIconYellow);
+        tvDetailsTextLow = view.findViewById(R.id.tvDetailsTextLow);
+
         tvDetailsTextLow.setOnClickListener(this);
         tvDetailsTextHeight.setOnClickListener(this);
     }

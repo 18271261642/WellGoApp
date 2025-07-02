@@ -31,35 +31,34 @@ import com.truescend.gofit.views.RulerView;
 
 import java.util.Calendar;
 
-import butterknife.BindView;
-import butterknife.OnClick;
+
 
 /**
  * 作者:东芝(2018/11/21).
  * 功能:我的理想体重/用户饮食减肥计划目标参数设置
  */
-public class DietTargetSettingActivity extends BaseActivity<DietTargetSettingPresenterImpl, IDietTargetSettingContract.IView> implements IDietTargetSettingContract.IView {
-    @BindView(R.id.ilUserSettingTarget)
+public class DietTargetSettingActivity extends BaseActivity<DietTargetSettingPresenterImpl, IDietTargetSettingContract.IView> implements IDietTargetSettingContract.IView, View.OnClickListener {
+
     View ilUserSettingTarget;
-    @BindView(R.id.ilUserSettingIntakeCalories)
+
     View ilUserSettingIntakeCalories;
-    @BindView(R.id.tvCurWeight)
+
     TextView tvCurWeight;
-    @BindView(R.id.rvCurWeight)
+
     RulerView rvCurWeight;
-    @BindView(R.id.tvTargetWeight)
+
     TextView tvTargetWeight;
-    @BindView(R.id.rvTargetWeight)
+
     RulerView rvTargetWeight;
-    @BindView(R.id.tvTargetBMI)
+
     TextView tvTargetBMI;
-    @BindView(R.id.tvUserSettingSave)
+
     TextView tvUserSettingSave;
-    @BindView(R.id.tvCardInfo)
+
     TextView tvCardInfo;
-    @BindView(R.id.tvDietHelp)
+
     TextView tvDietHelp;
-    @BindView(R.id.rgUnitGroup)
+
     RadioGroup rgUnitGroup;
 
     private ItemBannerButton settingSportTargetItem;
@@ -89,6 +88,28 @@ public class DietTargetSettingActivity extends BaseActivity<DietTargetSettingPre
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        ilUserSettingTarget = findViewById(R.id.ilUserSettingTarget);
+        ilUserSettingIntakeCalories = findViewById(R.id.ilUserSettingIntakeCalories);
+         tvCurWeight = findViewById(R.id.tvCurWeight);
+         rvCurWeight = findViewById(R.id.rvCurWeight);
+         tvTargetWeight = findViewById(R.id.tvTargetWeight);
+         rvTargetWeight = findViewById(R.id.rvTargetWeight);
+         tvTargetBMI = findViewById(R.id.tvTargetBMI);
+         tvUserSettingSave= findViewById(R.id.tvUserSettingSave);
+         tvCardInfo = findViewById(R.id.tvCardInfo);
+         tvDietHelp = findViewById(R.id.tvDietHelp);
+         rgUnitGroup = findViewById(R.id.rgUnitGroup);
+
+        tvDietHelp.setOnClickListener(this);
+        ilUserSettingTarget.setOnClickListener(this);
+        ilUserSettingIntakeCalories.setOnClickListener(this);
+        tvUserSettingSave.setOnClickListener(this);
+
+
+
+
+
+
         setTitle(R.string.content_my_ideal_weight);
         initUser();
         initItem();
@@ -251,7 +272,7 @@ public class DietTargetSettingActivity extends BaseActivity<DietTargetSettingPre
     }
 
 
-    @OnClick({R.id.tvDietHelp, R.id.ilUserSettingTarget, R.id.ilUserSettingIntakeCalories, R.id.tvUserSettingSave})
+
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ilUserSettingTarget:

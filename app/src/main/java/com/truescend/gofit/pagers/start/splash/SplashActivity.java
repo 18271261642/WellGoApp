@@ -32,8 +32,6 @@ import com.sn.utils.task.SNAsyncTask;
 import com.sn.utils.task.SNVTaskCallBack;
 import com.truescend.gofit.R;
 import com.truescend.gofit.ShowPrivacyDialogView;
-import com.truescend.gofit.pagers.main.MainActivity;
-import com.truescend.gofit.utils.AppShareUtil;
 import com.truescend.gofit.utils.Constant;
 import com.truescend.gofit.utils.PageJumpUtil;
 import com.truescend.gofit.utils.PermissionUtils;
@@ -204,17 +202,19 @@ public class SplashActivity extends Activity {
                 permissions.add(Manifest.permission.READ_CALL_LOG);
             }
         }
-        PermissionUtils.requestPermissions(this, permissions, new PermissionUtils.OnPermissionGrantedListener() {
-            @Override
-            public void onGranted() {
-                next2();
-            }
+//        PermissionUtils.requestPermissions(this, permissions, new PermissionUtils.OnPermissionGrantedListener() {
+//            @Override
+//            public void onGranted() {
+//                next2();
+//            }
+//
+//            @Override
+//            public void onDenied() {
+//                finish();
+//            }
+//        });
 
-            @Override
-            public void onDenied() {
-                finish();
-            }
-        });
+        next2();
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -229,7 +229,7 @@ public class SplashActivity extends Activity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        PermissionUtils.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        //PermissionUtils.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 
     private void next2() {

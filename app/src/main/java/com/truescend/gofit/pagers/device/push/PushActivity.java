@@ -29,8 +29,6 @@ import com.truescend.gofit.views.TitleLayout;
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 功能：消息推送页面
@@ -39,21 +37,21 @@ import butterknife.OnClick;
 
 public class PushActivity extends BaseActivity<PushPresenterImpl, IPushContract.IView> implements IPushContract.IView {
 
-    @BindView(R.id.ilPushDoNotDisturb)
+
     View ilPushDoNotDisturb;
-    @BindView(R.id.ilPushOtherApps)
+
     View ilPushOtherApps;
-    @BindView(R.id.ilPushCallReminder)
+
     View ilPushCallReminder;
-    @BindView(R.id.ilPushMessageReminder)
+
     View ilPushMessageReminder;
-    @BindView(R.id.ilPushTip)
+
     View ilPushTip;
 
-    @BindView(R.id.llPushApp)
+
     LinearLayout llPushApp;
 
-    @BindView(R.id.rvOtherApps)
+
     RecyclerView rvOtherApps;
 
 
@@ -75,12 +73,30 @@ public class PushActivity extends BaseActivity<PushPresenterImpl, IPushContract.
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+
+        ilPushTip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PermissionUtils.openAccessibility(PushActivity.this);
+            }
+        });
+
+
         initItem();
         getPresenter().requestDeviceConfig();
     }
 
     @Override
     protected void onCreateTitle(TitleLayout titleLayout) {
+        ilPushDoNotDisturb = findViewById(R.id.ilPushDoNotDisturb);
+        ilPushOtherApps = findViewById(R.id.ilPushOtherApps);
+        ilPushCallReminder = findViewById(R.id.ilPushCallReminder);
+        ilPushMessageReminder = findViewById(R.id.ilPushMessageReminder);
+        ilPushTip = findViewById(R.id.ilPushTip);
+
+        llPushApp = findViewById(R.id.llPushApp);
+
+        rvOtherApps = findViewById(R.id.rvOtherApps);
         titleLayout.setTitle(getString(R.string.title_message_push));
         titleLayout.setLeftIconFinishActivity(this);
         mAppItemsAdapter = new AppItemsAdapter(this);
@@ -127,14 +143,7 @@ public class PushActivity extends BaseActivity<PushPresenterImpl, IPushContract.
 
     }
 
-    @OnClick(R.id.ilPushTip)
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ilPushTip:
-                PermissionUtils.openAccessibility(this);
-                break;
-        }
-    }
+
 
     @Override
     public void onUpdateDeviceConfig(final DeviceConfigBean bean) {

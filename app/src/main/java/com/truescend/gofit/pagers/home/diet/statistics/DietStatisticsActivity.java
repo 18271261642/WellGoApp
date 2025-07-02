@@ -21,7 +21,6 @@ import com.truescend.gofit.views.bean.LabelYear;
 
 import java.util.List;
 
-import butterknife.BindView;
 
 /**
  * 作者:东芝(2018/11/22).
@@ -29,23 +28,23 @@ import butterknife.BindView;
  */
 public class DietStatisticsActivity extends BaseActivity<DietStatisticsPresenterImpl, IDietStatisticsContract.IView> implements IDietStatisticsContract.IView {
 
-    @BindView(R.id.dcvCaloryChart)
+
     DietChartView dcvCaloryChart;
-    @BindView(R.id.ilDietStatisticsTitle)
+
     View ilDietStatisticsTitle;
-    @BindView(R.id.tvDate)
+
     TextView tvDate;
-    @BindView(R.id.ilDeficitAverageCalorie)
+
     View ilDeficitAverageCalorie;
-    @BindView(R.id.ilDietStandardDays)
+
     View ilDietStandardDays;
-    @BindView(R.id.ilQualifiedDays)
+
     View ilQualifiedDays;
-    @BindView(R.id.ilInCalorieAverage)
+
     View ilInCalorieAverage;
-    @BindView(R.id.ilInCalorieMax)
+
     View ilInCalorieMax;
-    @BindView(R.id.ilInvalidDays)
+
     View ilInvalidDays;
 
     private ItemDetailsTitle dietStatisticsTitle;
@@ -74,6 +73,18 @@ public class DietStatisticsActivity extends BaseActivity<DietStatisticsPresenter
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+         dcvCaloryChart = findViewById(R.id.dcvCaloryChart);
+         ilDietStatisticsTitle = findViewById(R.id.ilDietStatisticsTitle);
+         tvDate = findViewById(R.id.tvDate);
+         ilDeficitAverageCalorie = findViewById(R.id.ilDeficitAverageCalorie);
+         ilDietStandardDays = findViewById(R.id.ilDietStandardDays);
+        ilQualifiedDays = findViewById(R.id.ilQualifiedDays);
+         ilInCalorieAverage = findViewById(R.id.ilInCalorieAverage);
+        ilInCalorieMax = findViewById(R.id.ilInCalorieMax);
+      ilInvalidDays = findViewById(R.id.ilInvalidDays);
+
+
+
         initTitle();
         initCaloryChart();
         initItems();

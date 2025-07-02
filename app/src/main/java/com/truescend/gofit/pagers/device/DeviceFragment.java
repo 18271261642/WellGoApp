@@ -17,54 +17,51 @@ import com.truescend.gofit.utils.PageJumpUtil;
 import com.truescend.gofit.views.BadgeHelper;
 import com.truescend.gofit.views.BatteryView;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 功能:设备管理界面;
  * Author:Created by 泽鑫 on 2017/11/20 09:36.
  */
-public class DeviceFragment extends BaseFragment<DevicePresenterImpl, IDeviceContract.IView> implements IDeviceContract.IView {
+public class DeviceFragment extends BaseFragment<DevicePresenterImpl, IDeviceContract.IView> implements IDeviceContract.IView , View.OnClickListener {
 
 
-    @BindView(R.id.vsDeviceSwitch)
     ViewSwitcher vsDeviceSwitch;
-    @BindView(R.id.tvDeviceBandName)
+
     TextView tvDeviceBandName;
-    @BindView(R.id.ivDeviceSetting)
+
     ImageView ivDeviceSetting;
 
-    @BindView(R.id.ivDeviceElectric)
+
     BatteryView ivDeviceElectric;
 
-    @BindView(R.id.tvDeviceMac)
+
     TextView tvDeviceMac;
 
-    @BindView(R.id.ilDeviceWallpaper)
+
     View ilDeviceWallpaper;
-    @BindView(R.id.ilDeviceWallpaperTempLeft)
+
     View ilDeviceWallpaperTempLeft;
-    @BindView(R.id.ilDeviceWallpaperTempRight)
+
     View ilDeviceWallpaperTempRight;
-    @BindView(R.id.ilDeviceRemoteCamera)
+
     View ilDeviceRemoteCamera;
-    @BindView(R.id.ilDeviceSearchBand)
+
     View ilDeviceSearchBand;
-    @BindView(R.id.ilDeviceHealthReminder)
+
     View ilDeviceHealthReminder;
-    @BindView(R.id.ilDeviceScheduleReminder)
+
     View ilDeviceScheduleReminder;
-    @BindView(R.id.ilDeviceAlarmClock)
+
     View ilDeviceAlarmClock;
-    @BindView(R.id.ilDevicePush)
+
     View ilDevicePush;
-    @BindView(R.id.llTitle)
+
     View llTitle;
-    @BindView(R.id.btDeviceDialogButton)
+
     Button btDeviceDialogButton;
-    @BindView(R.id.pbDeviceDialogLoading)
+
     ProgressBar pbDeviceDialogLoading;
-    @BindView(R.id.tvDeviceDialogTitle)
+
     TextView tvDeviceDialogTitle;
 
     private ItemDeviceIcon wallpaperItem;
@@ -88,7 +85,42 @@ public class DeviceFragment extends BaseFragment<DevicePresenterImpl, IDeviceCon
     }
 
     @Override
-    protected void onCreate() {
+    protected void onCreate(View view) {
+
+         vsDeviceSwitch = view.findViewById(R.id.vsDeviceSwitch);
+        tvDeviceBandName = view.findViewById(R.id.tvDeviceBandName);
+         ivDeviceSetting = view.findViewById(R.id.ivDeviceSetting);
+
+         ivDeviceElectric = view.findViewById(R.id.ivDeviceElectric);
+
+         tvDeviceMac = view.findViewById(R.id.tvDeviceMac);
+
+         ilDeviceWallpaper = view.findViewById(R.id.ilDeviceWallpaper);
+         ilDeviceWallpaperTempLeft = view.findViewById(R.id.ilDeviceWallpaperTempLeft);
+         ilDeviceWallpaperTempRight= view.findViewById(R.id.ilDeviceWallpaperTempRight);
+         ilDeviceRemoteCamera = view.findViewById(R.id.ilDeviceRemoteCamera);
+         ilDeviceSearchBand= view.findViewById(R.id.ilDeviceSearchBand);
+        ilDeviceHealthReminder = view.findViewById(R.id.ilDeviceHealthReminder);
+         ilDeviceScheduleReminder = view.findViewById(R.id.ilDeviceScheduleReminder);
+         ilDeviceAlarmClock= view.findViewById(R.id.ilDeviceAlarmClock);
+        ilDevicePush = view.findViewById(R.id.ilDevicePush);
+         llTitle = view.findViewById(R.id.llTitle);
+       btDeviceDialogButton = view.findViewById(R.id.btDeviceDialogButton);
+         pbDeviceDialogLoading = view.findViewById(R.id.pbDeviceDialogLoading);
+         tvDeviceDialogTitle = view.findViewById(R.id.tvDeviceDialogTitle);
+
+        btDeviceDialogButton.setOnClickListener(this);
+        ivDeviceSetting.setOnClickListener(this);
+        ilDeviceRemoteCamera.setOnClickListener(this);
+        ilDeviceSearchBand.setOnClickListener(this);
+        ilDeviceHealthReminder.setOnClickListener(this);
+        ilDeviceScheduleReminder.setOnClickListener(this);
+        ilDeviceAlarmClock.setOnClickListener(this);
+        ilDeviceWallpaper.setOnClickListener(this);
+        ilDevicePush.setOnClickListener(this);
+
+
+
         initItem();
     }
 
@@ -145,16 +177,8 @@ public class DeviceFragment extends BaseFragment<DevicePresenterImpl, IDeviceCon
         getPresenter().requestGetElectric();
     }
 
-    @OnClick({
-            R.id.ivDeviceSetting,
-            R.id.btDeviceDialogButton,
-            R.id.ilDeviceRemoteCamera,
-            R.id.ilDeviceSearchBand,
-            R.id.ilDeviceHealthReminder,
-            R.id.ilDeviceScheduleReminder,
-            R.id.ilDeviceAlarmClock,
-            R.id.ilDeviceWallpaper,
-            R.id.ilDevicePush})
+
+
     public void onClick(View view) {
         if (!SNBLEHelper.isConnected()) {
             PageJumpUtil.startScanningAndBindActivity(getContext());

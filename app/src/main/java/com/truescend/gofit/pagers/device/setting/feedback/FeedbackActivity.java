@@ -11,12 +11,11 @@ import com.sn.utils.view.ViewCompat;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.base.BaseActivity;
 import com.truescend.gofit.pagers.common.dialog.LoadingDialog;
+import com.truescend.gofit.pagers.device.setting.DeviceSettingActivity;
 import com.truescend.gofit.utils.Constant;
 import com.truescend.gofit.utils.ResUtil;
 import com.truescend.gofit.views.TitleLayout;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 import static com.truescend.gofit.utils.ResUtil.getString;
 
@@ -27,19 +26,19 @@ import static com.truescend.gofit.utils.ResUtil.getString;
  * 描述:反馈
  */
 public class FeedbackActivity extends BaseActivity<FeedbackPresenter, IFeedbackContract.IView> implements IFeedbackContract.IView {
-    @BindView(R.id.tlTitle)
+
     TitleLayout tlTitle;
-    @BindView(R.id.etFeedBackInput)
+
     EditText etFeedBackInput;
-    @BindView(R.id.etFeedBackEmail)
+
     EditText etFeedBackEmail;
-    @BindView(R.id.etFeedBackBand)
+
     EditText etFeedBackBand;
-    @BindView(R.id.tvFeedBackPhone)
+
     TextView tvFeedBackPhone;
-    @BindView(R.id.tvFeedBackSubmit)
+
     TextView tvFeedBackSubmit;
-    @BindView(R.id.tvFeedBackHelp)
+
     TextView tvFeedBackHelp;
 
     @Override
@@ -54,6 +53,25 @@ public class FeedbackActivity extends BaseActivity<FeedbackPresenter, IFeedbackC
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+         tlTitle = findViewById(R.id.tlTitle);
+         etFeedBackInput = findViewById(R.id.etFeedBackInput);
+         etFeedBackEmail = findViewById(R.id.etFeedBackEmail);
+        etFeedBackBand = findViewById(R.id.etFeedBackBand);
+        tvFeedBackPhone = findViewById(R.id.tvFeedBackPhone);
+        tvFeedBackSubmit = findViewById(R.id.tvFeedBackSubmit);
+        tvFeedBackHelp = findViewById(R.id.tvFeedBackHelp);
+
+        tvFeedBackSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String msg = ViewCompat.getText(etFeedBackInput);
+                String email = ViewCompat.getText(etFeedBackEmail);
+                String deviceName = ViewCompat.getText(etFeedBackBand);
+                getPresenter().requestSendFeedbackMessage(FeedbackActivity.this, email, deviceName, msg);
+            }
+        });
+
+
         initTitle();
         initView();
     }
@@ -81,13 +99,6 @@ public class FeedbackActivity extends BaseActivity<FeedbackPresenter, IFeedbackC
     }
 
 
-    @OnClick({R.id.tvFeedBackSubmit})
-    public void onClick(View view) {
-        String msg = ViewCompat.getText(etFeedBackInput);
-        String email = ViewCompat.getText(etFeedBackEmail);
-        String deviceName = ViewCompat.getText(etFeedBackBand);
-        getPresenter().requestSendFeedbackMessage(this, email, deviceName, msg);
-    }
 
     @Override
     public void onInputEmailError(String msg) {

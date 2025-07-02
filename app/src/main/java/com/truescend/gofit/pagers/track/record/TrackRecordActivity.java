@@ -16,7 +16,6 @@ import com.truescend.gofit.utils.AppShareUtil;
 import com.truescend.gofit.utils.PageJumpUtil;
 import com.truescend.gofit.views.TitleLayout;
 
-import butterknife.BindView;
 
 /**
  * 作者:东芝(20178/01/06).
@@ -26,19 +25,19 @@ public class TrackRecordActivity extends BaseActivity<TrackRecordPresenterImpl, 
 
 
     public static final String KEY_PATH_MAP_ITEM = "KEY_PATH_MAP_ITEM";
-    @BindView(R.id.ivTrackRecordDistanceTotal)
+
     TextView ivTrackRecordDistanceTotal;
-    @BindView(R.id.ivTrackRecordSpendTime)
+
     TextView ivTrackRecordSpendTime;
-    @BindView(R.id.ivTrackRecordAvgSpeed)
+
     TextView ivTrackRecordAvgSpeed;
-    @BindView(R.id.ivTrackRecordMaxSpeed)
+
     TextView ivTrackRecordMaxSpeed;
-    @BindView(R.id.ivTrackRecordAvgPace)
+
     TextView ivTrackRecordAvgPace;
-    @BindView(R.id.ivTrackRecordCalories)
+
     TextView ivTrackRecordCalories;
-    @BindView(R.id.ivTrackRecordMapImage)
+
     ImageView ivTrackRecordMapImage;
 
     private PathMapItem data;
@@ -67,6 +66,15 @@ public class TrackRecordActivity extends BaseActivity<TrackRecordPresenterImpl, 
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        ivTrackRecordDistanceTotal = findViewById(R.id.ivTrackRecordDistanceTotal);
+        ivTrackRecordSpendTime = findViewById(R.id.ivTrackRecordSpendTime);
+         ivTrackRecordAvgSpeed= findViewById(R.id.ivTrackRecordAvgSpeed);
+         ivTrackRecordMaxSpeed= findViewById(R.id.ivTrackRecordMaxSpeed);
+         ivTrackRecordAvgPace= findViewById(R.id.ivTrackRecordAvgPace);
+        ivTrackRecordCalories= findViewById(R.id.ivTrackRecordCalories);
+         ivTrackRecordMapImage = findViewById(R.id.ivTrackRecordMapImage);
+
+
         data = (PathMapItem) getIntent().getSerializableExtra(KEY_PATH_MAP_ITEM);
         if (data == null) {
             finish();

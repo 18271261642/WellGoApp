@@ -8,7 +8,6 @@ import android.widget.RadioButton;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.common.bean.ItemBase;
 
-import butterknife.BindView;
 
 /**
  * 功能：详情界面标题布局
@@ -19,19 +18,26 @@ import butterknife.BindView;
 
 public class ItemDetailsTitle extends ItemBase{
 
-    @BindView(R.id.ivDetailsTitleLeftIcon)
+
     ImageView ivDetailsTitleLeftIcon;
-    @BindView(R.id.rbDetailsTitleFirst)
+
     RadioButton rbDetailsTitleFirst;
-    @BindView(R.id.rbDetailsTitleSecond)
+
     RadioButton rbDetailsTitleSecond;
-    @BindView(R.id.rbDetailsTitleThird)
+
     RadioButton rbDetailsTitleThird;
-    @BindView(R.id.ivDetailsTitleRightIcon)
+
     ImageView ivDetailsTitleRightIcon;
 
     public ItemDetailsTitle(View view) {
         super(view);
+        ivDetailsTitleLeftIcon= view.findViewById(R.id.ivDetailsTitleLeftIcon);
+         rbDetailsTitleFirst= view.findViewById(R.id.rbDetailsTitleFirst);
+         rbDetailsTitleSecond= view.findViewById(R.id.rbDetailsTitleSecond);
+        rbDetailsTitleThird= view.findViewById(R.id.rbDetailsTitleThird);
+        ivDetailsTitleRightIcon = view.findViewById(R.id.ivDetailsTitleRightIcon);
+
+
     }
 
     public void setLeftIcon(int resId){

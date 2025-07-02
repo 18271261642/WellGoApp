@@ -16,30 +16,29 @@ import com.truescend.gofit.views.TitleLayout;
 
 import java.util.List;
 
-import butterknife.BindView;
 
 /**
  * 功能：睡眠数据页面
  * Author:Created by 泽鑫 on 2017/12/01 10:04.
  */
 public class SleepActivity extends BaseActivity<SleepPresenterImpl, ISleepContract.IView> implements ISleepContract.IView {
-    @BindView(R.id.tlTitle)
+
     TitleLayout tlTitle;
-    @BindView(R.id.ilSleepDetailsTotalTime)
+
     View ilSleepDetailsTotalTime;
-    @BindView(R.id.ilSleepDetailsValidTime)
+
     View ilSleepDetailsValidTime;
-    @BindView(R.id.ilSleepDetailsSleepQuality)
+
     View ilSleepDetailsSleepQuality;
-    @BindView(R.id.ilSleepDetails)
+
     View ilSleepDetails;
-    @BindView(R.id.ilSleepDeepSleep)
+
     View ilSleepDeepSleep;
-    @BindView(R.id.ilSleepLightSleep)
+
     View ilSleepLightSleep;
-    @BindView(R.id.ilSleepAwake)
+
     View ilSleepAwake;
-    @BindView(R.id.scvSleepChartView)
+
     SleepChartView scvSleepChartView;
 
     private ItemStatus totalTimeStatus;//总睡眠情况
@@ -62,6 +61,17 @@ public class SleepActivity extends BaseActivity<SleepPresenterImpl, ISleepContra
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        tlTitle = findViewById(R.id.tlTitle);
+      ilSleepDetailsTotalTime = findViewById(R.id.ilSleepDetailsTotalTime);
+        ilSleepDetailsValidTime = findViewById(R.id.ilSleepDetailsValidTime);
+        ilSleepDetailsSleepQuality = findViewById(R.id.ilSleepDetailsSleepQuality);
+         ilSleepDetails = findViewById(R.id.ilSleepDetails);
+         ilSleepDeepSleep = findViewById(R.id.ilSleepDeepSleep);
+         ilSleepLightSleep = findViewById(R.id.ilSleepLightSleep);
+       ilSleepAwake = findViewById(R.id.ilSleepAwake);
+        scvSleepChartView = findViewById(R.id.scvSleepChartView);
+
+
         initTitle();
         initView();
         reLoadData();

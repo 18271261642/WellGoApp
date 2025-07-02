@@ -22,9 +22,8 @@ import com.truescend.gofit.views.bean.LabelMonth;
 import com.truescend.gofit.views.bean.LabelWeek;
 
 import java.util.List;
-
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
+
 
 /**
  * 功能：血氧功能界面
@@ -32,23 +31,23 @@ import butterknife.BindView;
  */
 
 public class BloodOxygenActivity extends BaseActivity<BloodOxygenPresenterImpl, IBloodOxygenContract.IPresenter> implements IBloodOxygenContract.IView {
-    @BindView(R.id.tlTitle)
+
     TitleLayout tlTitle;
-    @BindView(R.id.ilBloodOxygenTitle)
+
     View ilBloodOxygenTitle;
-    @BindView(R.id.ilBloodOxygenMaximum)
+
     View ilBloodOxygenMaximum;
-    @BindView(R.id.ilBloodOxygenAverage)
+
     View ilBloodOxygenAverage;
-    @BindView(R.id.ilBloodOxygenMinimum)
+
     View ilBloodOxygenMinimum;
-    @BindView(R.id.ilBloodOxygenDetails)
+
     View ilBloodOxygenDetails;
-    @BindView(R.id.bcvBloodOxygenChart)
+
     BarChartView bcvBloodOxygenChart;
-    @BindView(R.id.rvDetails)
+
     RecyclerView rvDetails;
-    @BindView(R.id.tvDate)
+
     TextView tvDate;
 
     private ItemDetailsTitle bloodOxygenTitle;
@@ -70,6 +69,18 @@ public class BloodOxygenActivity extends BaseActivity<BloodOxygenPresenterImpl, 
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+
+        tlTitle = findViewById(R.id.tlTitle);
+        ilBloodOxygenTitle = findViewById(R.id.ilBloodOxygenTitle);
+        ilBloodOxygenMaximum = findViewById(R.id.ilBloodOxygenMaximum);
+        ilBloodOxygenAverage = findViewById(R.id.ilBloodOxygenAverage);
+         ilBloodOxygenMinimum = findViewById(R.id.ilBloodOxygenMinimum);
+      ilBloodOxygenDetails = findViewById(R.id.ilBloodOxygenDetails);
+        bcvBloodOxygenChart = findViewById(R.id.bcvBloodOxygenChart);
+         rvDetails = findViewById(R.id.rvDetails);
+         tvDate = findViewById(R.id.tvDate);
+
+
         initTitle();
         initView();
         initBloodOxygenChart();

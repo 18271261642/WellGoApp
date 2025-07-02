@@ -16,10 +16,8 @@ import com.truescend.gofit.views.TitleLayout;
 import com.truescend.gofit.views.bean.LabelMonth;
 import com.truescend.gofit.views.bean.LabelWeek;
 import com.truescend.gofit.views.bean.LabelYear;
-
 import java.util.List;
 
-import butterknife.BindView;
 
 /**
  * 功能：睡眠详情界面
@@ -27,25 +25,25 @@ import butterknife.BindView;
  */
 
 public class SleepDetailsActivity extends BaseActivity<SleepDetailsPresenterImpl, ISleepDetailsContract.IView> implements ISleepDetailsContract.IView {
-    @BindView(R.id.tlTitle)
+
     TitleLayout ilTitle;
-    @BindView(R.id.ilSleepDetailsTitle)
+
     View ilSleepDetailsTitle;
-    @BindView(R.id.ilSleepDetailsStandardDays)
+
     View ilSleepDetailsStandardDays;
-    @BindView(R.id.ilSleepDetailsDailySteps)
+
     View ilSleepDetailsDailySteps;
-    @BindView(R.id.ilSleepDetailsDailyConsume)
+
     View ilSleepDetailsDailyConsume;
-    @BindView(R.id.ilSleepDetailsTotalDistance)
+
     View ilSleepDetailsTotalDistance;
-    @BindView(R.id.ilSleepDetailsDailyDistance)
+
     View ilSleepDetailsDailyDistance;
-    @BindView(R.id.ilSleepDetailsTargetSteps)
+
     View ilSleepDetailsTargetSteps;
-    @BindView(R.id.bcvSleepChart)
+
     BarChartView bcvSleepChart;
-    @BindView(R.id.tvDate)
+
     TextView tvDate;
 
 
@@ -70,6 +68,19 @@ public class SleepDetailsActivity extends BaseActivity<SleepDetailsPresenterImpl
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+      ilTitle = findViewById(R.id.tlTitle);
+         ilSleepDetailsTitle = findViewById(R.id.ilSleepDetailsTitle);
+        ilSleepDetailsStandardDays= findViewById(R.id.ilSleepDetailsStandardDays);
+         ilSleepDetailsDailySteps= findViewById(R.id.ilSleepDetailsDailySteps);
+         ilSleepDetailsDailyConsume= findViewById(R.id.ilSleepDetailsDailyConsume);
+        ilSleepDetailsTotalDistance= findViewById(R.id.ilSleepDetailsTotalDistance);
+         ilSleepDetailsDailyDistance = findViewById(R.id.ilSleepDetailsDailyDistance);
+         ilSleepDetailsTargetSteps = findViewById(R.id.ilSleepDetailsTargetSteps);
+         bcvSleepChart = findViewById(R.id.bcvSleepChart);
+         tvDate = findViewById(R.id.tvDate);
+
+
+
         initTitle();
         initView();
         simulationData();

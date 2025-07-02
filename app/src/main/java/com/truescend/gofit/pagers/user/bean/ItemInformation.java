@@ -5,8 +5,6 @@ import android.widget.TextView;
 
 import com.truescend.gofit.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 功能：信息布局
@@ -15,15 +13,17 @@ import butterknife.ButterKnife;
  */
 
 public class ItemInformation {
-    @BindView(R.id.tvInformationTitle)
+
     TextView tvInformationTitle;
-    @BindView(R.id.tvInformationContent)
+
     TextView tvInformationContent;
-    @BindView(R.id.tvInformationNote)
+
     TextView tvInformationNote;
 
     public ItemInformation(View view) {
-        ButterKnife.bind(this, view);
+         tvInformationTitle = view.findViewById(R.id.tvInformationTitle);
+       tvInformationContent = view.findViewById(R.id.tvInformationContent);
+       tvInformationNote= view.findViewById(R.id.tvInformationNote);
     }
 
     public void setTitle(int resId){

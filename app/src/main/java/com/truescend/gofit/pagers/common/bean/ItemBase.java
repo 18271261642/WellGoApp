@@ -4,8 +4,6 @@ import android.view.View;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * 功能:所有Item的父类
@@ -13,21 +11,15 @@ import butterknife.Unbinder;
  */
 @Deprecated
 public class ItemBase {
-    private Unbinder unbinder;
+
 
 
     public ItemBase(View view) {
-        unbinder = ButterKnife.bind(this, view);
+
     }
 
     public void unBind() {
-        if (unbinder != null) {
-            try {
-                unbinder.unbind();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+
     }
 
     public static void unBindAll(ItemBase... items) {

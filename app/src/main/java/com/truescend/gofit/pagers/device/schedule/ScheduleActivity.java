@@ -20,7 +20,6 @@ import com.truescend.gofit.views.TitleLayout;
 
 import java.util.List;
 
-import butterknife.BindView;
 
 /**
  * 功能：日程管理页面
@@ -31,9 +30,9 @@ public class ScheduleActivity extends BaseActivity<SchedulePresenterImpl, ISched
     public static final String SCHEDULE_TYPE = "scheduleId";
     public static final int SCHEDULE_ADD = -1;
 
-    @BindView(R.id.llHistoryScheduleItem)
+
     LinearLayout llHistoryScheduleItem;
-    @BindView(R.id.lvScheduleList)
+
     SwipeMenuListView lvScheduleList;
 
 
@@ -51,7 +50,13 @@ public class ScheduleActivity extends BaseActivity<SchedulePresenterImpl, ISched
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
-       initItem();
+
+        llHistoryScheduleItem = findViewById(R.id.llHistoryScheduleItem);
+        lvScheduleList = findViewById(R.id.lvScheduleList);
+
+
+
+        initItem();
     }
 
     @Override

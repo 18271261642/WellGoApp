@@ -14,8 +14,7 @@ import com.truescend.gofit.utils.StatusBarUtil;
 import com.truescend.gofit.views.TitleLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+
 
 /**
  * 作者:东芝(2017/11/16).
@@ -26,7 +25,7 @@ public abstract class BaseActivity<P extends BasePresenter, V> extends AppCompat
     private P mPresenter;
     private View view;
     private TitleLayout tlTitle;
-    private Unbinder bind;
+
 
 
     @Override
@@ -43,7 +42,6 @@ public abstract class BaseActivity<P extends BasePresenter, V> extends AppCompat
         }
 
 
-        bind = ButterKnife.bind(this);
         mPresenter = initPresenter();
         mPresenter.attachView((V) this);
         if (mPresenter != null) {
@@ -96,9 +94,7 @@ public abstract class BaseActivity<P extends BasePresenter, V> extends AppCompat
             mPresenter.setUIEnable(false);
             mPresenter.onDetach();
         }
-        if (bind != null) {
-            bind.unbind();
-        }
+
         super.onDestroy();
     }
 

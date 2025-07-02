@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
-
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
@@ -16,10 +15,8 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.sn.app.storage.UserStorage;
 import com.sn.login.LoginSDK;
-
 import androidx.core.app.ActivityCompat;
 import login.utils.LoginUtil;
 import com.sn.utils.IF;
@@ -34,56 +31,49 @@ import com.truescend.gofit.ShowPrivacyDialogView;
 import com.truescend.gofit.pagers.base.BaseActivity;
 import com.truescend.gofit.pagers.common.dialog.CommonDialog;
 import com.truescend.gofit.pagers.common.dialog.LoadingDialog;
-import com.truescend.gofit.pagers.common.dialog.TermsOfServiceDialog;
 import com.truescend.gofit.pagers.user.setting.UserSettingActivity;
 import com.truescend.gofit.utils.PageJumpUtil;
 import com.truescend.gofit.utils.PermissionUtils;
 import com.truescend.gofit.views.CustomVideoView;
 import com.truescend.gofit.views.HintMultiLineEditText;
 import com.truescend.gofit.views.TitleLayout;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.OnCheckedChanged;
-import butterknife.OnClick;
 
 /**
  * 作者:东芝(2018/2/28).
  * 功能:登录页+视频引导
  */
 
-public class LoginActivity extends BaseActivity<LoginPresenterImpl, ILoginContract.IView> implements ILoginContract.IView {
+public class LoginActivity extends BaseActivity<LoginPresenterImpl, ILoginContract.IView> implements ILoginContract.IView, View.OnClickListener {
 
-    @BindView(R.id.cvvVideoView)
+
     CustomVideoView cvvVideoView;
-    @BindView(R.id.vFloatingLayerView)
+
     View vFloatingLayerView;
-    @BindView(R.id.btnVideoGuideGuestLoginIn)
+
     Button btnVideoGuideGuestLoginIn;
-    @BindView(R.id.btnVideoGuideUserLoginIn)
+
     Button btnVideoGuideUserLoginIn;
-    @BindView(R.id.btnVideoGuideUserRegister)
+
     TextView btnVideoGuideUserRegister;
-    @BindView(R.id.llBottomLayout)
+
     View llBottomLayout;
-    @BindView(R.id.etVideoGuideAccount)
+
     HintMultiLineEditText etVideoGuideAccount;
-    @BindView(R.id.etVideoGuidePassword)
+
     HintMultiLineEditText etVideoGuidePassword;
-    @BindView(R.id.tvVideoGuideForgetPwd)
+
     TextView tvVideoGuideForgetPwd;
 
-    @BindView(R.id.ivLoginQQSignIn)
     ImageView ivLoginQQSignIn;
-    @BindView(R.id.ivLoginWeChatSignIn)
+
     ImageView ivLoginWeChatSignIn;
-    @BindView(R.id.ivLoginTwitterSignIn)
+
     ImageView ivLoginTwitterSignIn;
-    @BindView(R.id.tvLoginTerms)
+
     CheckBox tvLoginTerms;
-    @BindView(R.id.tvVideoGuideFeedback)
+
     TextView tvVideoGuideFeedback;
     private String[] qqPackages = {"com.tencent.mobileqq", "com.tencent.tim", "com.tencent.minihd.qq", "com.tencent.qqlite", "com.tencent.mobileqqi", "com.tencent.qq.kddi", "com.tencent.eim"};
 
@@ -106,6 +96,43 @@ public class LoginActivity extends BaseActivity<LoginPresenterImpl, ILoginContra
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        cvvVideoView = findViewById(R.id.cvvVideoView);
+        vFloatingLayerView = findViewById(R.id.vFloatingLayerView);
+       btnVideoGuideGuestLoginIn = findViewById(R.id.btnVideoGuideGuestLoginIn);
+        btnVideoGuideUserLoginIn = findViewById(R.id.btnVideoGuideUserLoginIn);
+       btnVideoGuideUserRegister= findViewById(R.id.btnVideoGuideUserRegister);
+       llBottomLayout = findViewById(R.id.llBottomLayout);
+        etVideoGuideAccount = findViewById(R.id.etVideoGuideAccount);
+        etVideoGuidePassword= findViewById(R.id.etVideoGuidePassword);
+       tvVideoGuideForgetPwd = findViewById(R.id.tvVideoGuideForgetPwd);
+
+        ivLoginQQSignIn = findViewById(R.id.ivLoginQQSignIn);
+        ivLoginWeChatSignIn = findViewById(R.id.ivLoginWeChatSignIn);
+        ivLoginTwitterSignIn = findViewById(R.id.ivLoginTwitterSignIn);
+       tvLoginTerms = findViewById(R.id.tvLoginTerms);
+        tvVideoGuideFeedback= findViewById(R.id.tvVideoGuideFeedback);
+
+
+        btnVideoGuideGuestLoginIn.setOnClickListener(this);
+        btnVideoGuideUserLoginIn.setOnClickListener(this);
+        btnVideoGuideUserRegister.setOnClickListener(this);
+        tvVideoGuideForgetPwd.setOnClickListener(this);
+        ivLoginQQSignIn.setOnClickListener(this);
+        ivLoginWeChatSignIn.setOnClickListener(this);
+        ivLoginTwitterSignIn.setOnClickListener(this);
+        tvVideoGuideFeedback.setOnClickListener(this);
+
+        tvLoginTerms.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    LoginSDK.init(LoginActivity.this);
+                }
+            }
+        });
+
+
+
         if (savedInstanceState != null) {
             stopPosition = savedInstanceState.getInt("position");
         }
@@ -205,19 +232,6 @@ public class LoginActivity extends BaseActivity<LoginPresenterImpl, ILoginContra
         outState.putInt("position", stopPosition);
     }
 
-    @OnCheckedChanged({R.id.tvLoginTerms})
-    void OnCheckedChanged(CompoundButton buttonView, boolean isChecked){
-        switch (buttonView.getId()) {
-            case R.id.tvLoginTerms:
-                if(isChecked) {
-
-                    LoginSDK.init(this);
-                }
-//                if(buttonView.isPressed()){
-//                    showPrivacyDialog();
-//                }
-        }
-    }
 
     private ShowPrivacyDialogView showPrivacyDialogView;
     private void showPrivacyDialog(){
@@ -246,29 +260,107 @@ public class LoginActivity extends BaseActivity<LoginPresenterImpl, ILoginContra
 
 
 
-    @OnClick({//R.id.tvLoginTerms,
-            R.id.btnVideoGuideGuestLoginIn,
-            R.id.btnVideoGuideUserLoginIn,
-            R.id.btnVideoGuideUserRegister,
-            R.id.tvVideoGuideForgetPwd,
-            R.id.ivLoginQQSignIn,
-            R.id.ivLoginWeChatSignIn,
-            R.id.ivLoginTwitterSignIn,
-            R.id.tvVideoGuideFeedback
-    })
 
 
 
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-//            case R.id.tvLoginTerms:
-//                TermsOfServiceDialog.create(this).show();
-//                //用户登录后
-//                //第三方登录
-//                if(tvLoginTerms.isChecked()) {
-//                    LoginSDK.init(this);
-//                }
-//                break;
+
+
+    /**
+     * 用户登录
+     */
+    private void login() {
+        String account = etVideoGuideAccount.getText().toString().trim();
+        String password = etVideoGuidePassword.getText().toString().trim();
+        if (IF.isEmpty(account)) {
+            setEditTextErrorTips(etVideoGuideAccount, getString(R.string.content_input_email));
+            return;
+        }
+        if (account.contains("@")) {
+            if (!RegexUtil.isEmail(account)) {
+                setEditTextErrorTips(etVideoGuideAccount, getString(R.string.content_input_correct_email));
+                return;
+            }
+        } else {
+            if (!RegexUtil.isPhoneNumber(account)) {
+                setEditTextErrorTips(etVideoGuideAccount, getString(R.string.content_input_correct_phone));
+                return;
+            }
+        }
+
+        if (IF.isEmpty(password)) {
+            setEditTextErrorTips(etVideoGuidePassword, getString(R.string.content_input_password));
+            return;
+        }
+        if (password.length() < 6 || password.length() > 14) {
+            setEditTextErrorTips(etVideoGuidePassword, getString(R.string.content_password_length));
+            return;
+        }
+        LoadingDialog.loading(this);
+        getPresenter().requestLogin(account, password);
+    }
+
+    /**
+     * 设置编辑框错误提示信息
+     *
+     * @param et    编辑框控件
+     * @param error 错误信息
+     */
+    private void setEditTextErrorTips(final HintMultiLineEditText et, CharSequence error) {
+        et.setFocusable(true);
+        et.setFocusableInTouchMode(true);
+        et.requestFocus();
+        et.setError(error);
+    }
+
+    /**
+     * 请求第三方登录授权监听
+     */
+    private LoginUtil.RequestOtherSignInCallback requestOtherSignInCallback = new LoginUtil.RequestOtherSignInCallback() {
+        @Override
+        public void authorizedSuccess(String platform, String userId) {
+            LoadingDialog.dismiss();
+//            if (platform.equals(LoginUtil.PLATFORM_QQ)) {
+//                getPresenter().requestLoginOther(userId, "qq");
+//            } else if (platform.equals(LoginUtil.PLATFORM_WECHAT)) {
+//                getPresenter().requestLoginOther(userId, "weixin");
+//            } else if (platform.equals(LoginUtil.PLATFORM_TWITTER)) {
+//                getPresenter().requestLoginOther(userId, "twitter");
+//            }
+        }
+
+        @Override
+        public void authorizedFailed(String errorMsg) {
+            LoadingDialog.dismiss();
+        }
+    };
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        PermissionUtils.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onLoginFailed(String errMsg) {
+        LoadingDialog.dismiss();
+        SNToast.toast(errMsg);
+    }
+
+    @Override
+    public void onLoginSuccess(boolean isNewUser) {
+        LoadingDialog.dismiss();
+        if (isNewUser) {
+            PageJumpUtil.startUserSettingActivity(this, UserSettingActivity.TYPE_SAVE_AND_START_MAIN_ACTIVITY);
+        } else {
+            PageJumpUtil.startMainActivity(this);
+            finish();
+        }
+
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
             case R.id.btnVideoGuideUserRegister:
                 PageJumpUtil.startRegisterActivity(this);
                 break;
@@ -377,11 +469,11 @@ public class LoginActivity extends BaseActivity<LoginPresenterImpl, ILoginContra
                 break;
             case R.id.ivLoginWeChatSignIn:
                 LoadingDialog.loading(this).setCancelable(true);
-               // LoginUtil.authorize(LoginUtil.PLATFORM_WECHAT, requestOtherSignInCallback);
+                // LoginUtil.authorize(LoginUtil.PLATFORM_WECHAT, requestOtherSignInCallback);
                 break;
             case R.id.ivLoginTwitterSignIn:
                 LoadingDialog.loading(this).setCancelable(true);
-               // LoginUtil.authorize(LoginUtil.PLATFORM_TWITTER, requestOtherSignInCallback);
+                // LoginUtil.authorize(LoginUtil.PLATFORM_TWITTER, requestOtherSignInCallback);
                 break;
             case R.id.tvVideoGuideFeedback:
                 PageJumpUtil.startFeedbackActivity(this);
@@ -389,98 +481,4 @@ public class LoginActivity extends BaseActivity<LoginPresenterImpl, ILoginContra
 
         }
     }
-
-    /**
-     * 用户登录
-     */
-    private void login() {
-        String account = etVideoGuideAccount.getText().toString().trim();
-        String password = etVideoGuidePassword.getText().toString().trim();
-        if (IF.isEmpty(account)) {
-            setEditTextErrorTips(etVideoGuideAccount, getString(R.string.content_input_email));
-            return;
-        }
-        if (account.contains("@")) {
-            if (!RegexUtil.isEmail(account)) {
-                setEditTextErrorTips(etVideoGuideAccount, getString(R.string.content_input_correct_email));
-                return;
-            }
-        } else {
-            if (!RegexUtil.isPhoneNumber(account)) {
-                setEditTextErrorTips(etVideoGuideAccount, getString(R.string.content_input_correct_phone));
-                return;
-            }
-        }
-
-        if (IF.isEmpty(password)) {
-            setEditTextErrorTips(etVideoGuidePassword, getString(R.string.content_input_password));
-            return;
-        }
-        if (password.length() < 6 || password.length() > 14) {
-            setEditTextErrorTips(etVideoGuidePassword, getString(R.string.content_password_length));
-            return;
-        }
-        LoadingDialog.loading(this);
-        getPresenter().requestLogin(account, password);
-    }
-
-    /**
-     * 设置编辑框错误提示信息
-     *
-     * @param et    编辑框控件
-     * @param error 错误信息
-     */
-    private void setEditTextErrorTips(final HintMultiLineEditText et, CharSequence error) {
-        et.setFocusable(true);
-        et.setFocusableInTouchMode(true);
-        et.requestFocus();
-        et.setError(error);
-    }
-
-    /**
-     * 请求第三方登录授权监听
-     */
-    private LoginUtil.RequestOtherSignInCallback requestOtherSignInCallback = new LoginUtil.RequestOtherSignInCallback() {
-        @Override
-        public void authorizedSuccess(String platform, String userId) {
-            LoadingDialog.dismiss();
-//            if (platform.equals(LoginUtil.PLATFORM_QQ)) {
-//                getPresenter().requestLoginOther(userId, "qq");
-//            } else if (platform.equals(LoginUtil.PLATFORM_WECHAT)) {
-//                getPresenter().requestLoginOther(userId, "weixin");
-//            } else if (platform.equals(LoginUtil.PLATFORM_TWITTER)) {
-//                getPresenter().requestLoginOther(userId, "twitter");
-//            }
-        }
-
-        @Override
-        public void authorizedFailed(String errorMsg) {
-            LoadingDialog.dismiss();
-        }
-    };
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        PermissionUtils.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-    }
-
-    @Override
-    public void onLoginFailed(String errMsg) {
-        LoadingDialog.dismiss();
-        SNToast.toast(errMsg);
-    }
-
-    @Override
-    public void onLoginSuccess(boolean isNewUser) {
-        LoadingDialog.dismiss();
-        if (isNewUser) {
-            PageJumpUtil.startUserSettingActivity(this, UserSettingActivity.TYPE_SAVE_AND_START_MAIN_ACTIVITY);
-        } else {
-            PageJumpUtil.startMainActivity(this);
-            finish();
-        }
-
-    }
-
-
 }

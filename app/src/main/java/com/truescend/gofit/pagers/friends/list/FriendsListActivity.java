@@ -37,8 +37,6 @@ import com.truescend.gofit.views.TitleLayout;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 作者:东芝(2018/08/08).
@@ -49,11 +47,11 @@ public class FriendsListActivity extends BaseActivity<FriendsListPresenterImpl, 
     private static final int ITEM_TYPE_SYS_MSG_LIST = 0;
     private static final int ITEM_TYPE_FRIENDS_REQ_LIST = 1;
     private static final int ITEM_TYPE_FRIENDS_LIST = 2;
-    @BindView(R.id.tlTopTabs)
+
     TabLayout tlTopTabs;
-    @BindView(R.id.lvList)
+
     SwipeMenuListView lvList;
-    @BindView(R.id.rlRefresh)
+
     SmartRefreshLayout rlRefresh;
 
     private FriendsRequestAdapter requestAddFriendsAdapter;
@@ -106,11 +104,20 @@ public class FriendsListActivity extends BaseActivity<FriendsListPresenterImpl, 
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+         tlTopTabs = findViewById(R.id.tlTopTabs);
+        lvList = findViewById(R.id.lvList);
+         rlRefresh = findViewById(R.id.rlRefresh);
         tlTopTabs.addOnTabSelectedListener(this);
         friendsListAdapter = new FriendsListAdapter(this);
         requestAddFriendsAdapter = new FriendsRequestAdapter(this);
         messageListAdapter = new MessageListAdapter(this);
         requestAddFriendsAdapter.setOnButtonClickListener(this);
+        findViewById(R.id.tvInvitationFriends).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PageJumpUtil.startMyQRCActivity(FriendsListActivity.this);
+            }
+        });
 
         lvList.setOnMenuItemClickListener(this);
         lvList.setOnItemClickListener(this);
@@ -344,13 +351,4 @@ public class FriendsListActivity extends BaseActivity<FriendsListPresenterImpl, 
         }).show();
     }
 
-
-    @OnClick({R.id.tvInvitationFriends})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.tvInvitationFriends:
-                PageJumpUtil.startMyQRCActivity(this);
-                break;
-        }
-    }
 }

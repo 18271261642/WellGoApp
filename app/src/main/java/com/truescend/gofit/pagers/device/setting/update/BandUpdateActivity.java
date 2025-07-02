@@ -22,29 +22,27 @@ import com.truescend.gofit.utils.ResUtil;
 import com.truescend.gofit.utils.StatusBarUtil;
 import com.truescend.gofit.views.TitleLayout;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 功能：固件升级界面
  * 兼容SYD/nRF/Dialog的固件升级功能
  */
-public class BandUpdateActivity extends BaseActivity<BandUpdatePresenterImpl, IBandUpdateContract.IView> implements IBandUpdateContract.IView {
+public class BandUpdateActivity extends BaseActivity<BandUpdatePresenterImpl, IBandUpdateContract.IView> implements IBandUpdateContract.IView , View.OnClickListener {
 
     public static final String KEY_IS_FIX_BAND = "isFixBand";
     public static final String KEY_INFO = "info";
     public static final String KEY_MAC = "mac";
     public static final String KEY_UPGRADEID = "upgradeid";
 
-    @BindView(R.id.tlTitle)
+
     TitleLayout tlTitle;
-    @BindView(R.id.ivBandUpdateBackIcon)
+
     ImageView ivBandUpdateBackIcon;
-    @BindView(R.id.tvBandUpdateCurrentVersion)
+
     TextView tvBandUpdateCurrentVersion;
-    @BindView(R.id.tvBandUpdateLastVersion)
+
     TextView tvBandUpdateLastVersion;
-    @BindView(R.id.tvBandUpdate)
+
     TextView tvBandUpdate;
     private ProgressDialog progressDialog;
     private boolean isFixBand;
@@ -62,6 +60,15 @@ public class BandUpdateActivity extends BaseActivity<BandUpdatePresenterImpl, IB
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+         tlTitle= findViewById(R.id.tlTitle);
+        ivBandUpdateBackIcon = findViewById(R.id.ivBandUpdateBackIcon);
+         tvBandUpdateCurrentVersion = findViewById(R.id.tvBandUpdateCurrentVersion);
+       tvBandUpdateLastVersion = findViewById(R.id.tvBandUpdateLastVersion);
+         tvBandUpdate = findViewById(R.id.tvBandUpdate);
+        ivBandUpdateBackIcon.setOnClickListener(this);
+        tvBandUpdate.setOnClickListener(this);
+
+
         StatusBarUtil.setRootViewFitsSystemWindows(this,false);
         StatusBarUtil.setStatusBarDarkTheme(this,false);
         StatusBarUtil.setStatusBarColor(this,0x00000000);
@@ -98,7 +105,7 @@ public class BandUpdateActivity extends BaseActivity<BandUpdatePresenterImpl, IB
         tlTitle.setTitleShow(false);
     }
 
-    @OnClick({R.id.ivBandUpdateBackIcon, R.id.tvBandUpdate})
+   @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivBandUpdateBackIcon:

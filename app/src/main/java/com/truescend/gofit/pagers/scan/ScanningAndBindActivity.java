@@ -61,14 +61,11 @@ import com.truescend.gofit.utils.PermissionUtils;
 import com.truescend.gofit.utils.RecycleViewUtil;
 import com.truescend.gofit.views.EmptyRecyclerView;
 import com.truescend.gofit.views.TitleLayout;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import androidx.core.app.ActivityCompat;
-import butterknife.BindView;
-import butterknife.OnClick;
+
 
 /**
  * 功能：蓝牙扫描绑定界面
@@ -78,13 +75,13 @@ import butterknife.OnClick;
 public class ScanningAndBindActivity extends BaseActivity<ScanningAndBindPresenterImpl, IScanningAndBindContract.IView> implements IScanningAndBindContract.IView, OnScanBleListener<SNBLEDevice>, AdapterView.OnItemClickListener, BluetoothStatusListener {
     private static final int VIEW_TIMEOUT_TEXT_TIPS = 1;
     private static final int VIEW_PROGRESS_BAR_TIPS = 0;
-    @BindView(R.id.tlTitle)
+
     TitleLayout tlTitle;
-    @BindView(R.id.rvScanningDevicesList)
+
     EmptyRecyclerView rvScanningDevicesList;
-    @BindView(R.id.tvScanningDevices)
+
     TextView tvScanningDevices;
-    @BindView(R.id.vsEmptyContent)
+
     ViewSwitcher vsEmptyContent;
     private String filter;
     private int mErrorRetryCount;
@@ -122,7 +119,24 @@ public class ScanningAndBindActivity extends BaseActivity<ScanningAndBindPresent
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+       tlTitle = findViewById(R.id.tlTitle);
+         rvScanningDevicesList = findViewById(R.id.rvScanningDevicesList);
+        tvScanningDevices=findViewById(R.id.tvScanningDevices);
+        vsEmptyContent = findViewById(R.id.vsEmptyContent);
 
+
+        tvScanningDevices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkBLEPermission()) return;
+
+                if (SNBLEScanner.isScanning()) {
+                    return;
+                }
+                vsEmptyContent.setDisplayedChild(VIEW_PROGRESS_BAR_TIPS);
+                SNBLEScanner.startScan(ScanningAndBindActivity.this);
+            }
+        });
 
         initTitle();
         initScanListView();
@@ -131,7 +145,6 @@ public class ScanningAndBindActivity extends BaseActivity<ScanningAndBindPresent
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.BLUETOOTH_CONNECT,Manifest.permission.BLUETOOTH_SCAN,Manifest.permission.BLUETOOTH_ADMIN},0x00);
 
         }
-
 
 
 
@@ -283,23 +296,6 @@ public class ScanningAndBindActivity extends BaseActivity<ScanningAndBindPresent
 
     }
 
-
-    @OnClick({R.id.tvScanningDevices, R.id.llScanningTimeout})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.llScanningTimeout:
-            case R.id.tvScanningDevices:
-
-                if (checkBLEPermission()) return;
-
-                if (SNBLEScanner.isScanning()) {
-                    return;
-                }
-                vsEmptyContent.setDisplayedChild(VIEW_PROGRESS_BAR_TIPS);
-                SNBLEScanner.startScan(this);
-                break;
-        }
-    }
 
     @Override
     public void onScanStart() {

@@ -25,21 +25,20 @@ import com.truescend.gofit.views.TouchImageView;
 
 import java.io.File;
 
-import butterknife.BindView;
-import butterknife.OnClick;
+
 
 /**
  * 作者:东芝(2019/8/13).
  * 功能:远程相机pro
  */
 
-public class ImageViewerActivity extends BaseActivity<ImageViewerPresenterImpl, IImageViewerContract.IView> implements IImageViewerContract.IView {
+public class ImageViewerActivity extends BaseActivity<ImageViewerPresenterImpl, IImageViewerContract.IView> implements IImageViewerContract.IView, View.OnClickListener {
 
-    @BindView(R.id.ivImageViewer)
+
     TouchImageView ivImageViewer;
-    @BindView(R.id.clpLoading)
+
     ContentLoadingProgressBar clpLoading;
-    @BindView(R.id.ivImageViewerGoToGallery)
+
     ImageView ivImageViewerGoToGallery;
     private File imageFile;
     private Intent intentGalleryApp;
@@ -61,6 +60,13 @@ public class ImageViewerActivity extends BaseActivity<ImageViewerPresenterImpl, 
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+        ivImageViewer = findViewById(R.id.ivImageViewer);
+        clpLoading= findViewById(R.id.clpLoading);
+       ivImageViewerGoToGallery = findViewById(R.id.ivImageViewerGoToGallery);
+
+        ivImageViewerGoToGallery.setOnClickListener(this);
+        findViewById(R.id.ivImageViewerBack).setOnClickListener(this);
+
         getTitleLayout().setTitleShow(false);
         StatusBarUtil.setRootViewFitsSystemWindows(this, false);
         StatusBarUtil.setStatusBarDarkTheme(this, false);
@@ -121,8 +127,9 @@ public class ImageViewerActivity extends BaseActivity<ImageViewerPresenterImpl, 
     }
 
 
-    @OnClick({R.id.ivImageViewerBack, R.id.ivImageViewerGoToGallery})
-    public void onViewClicked(View view) {
+
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivImageViewerBack:
                 onBackPressed();

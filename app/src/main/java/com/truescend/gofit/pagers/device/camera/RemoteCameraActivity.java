@@ -34,20 +34,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import butterknife.BindView;
-import butterknife.OnClick;
+
+
 
 /**
  * 功能：远程拍照页面
  * Author:Created by 泽鑫 on 2017/12/15 14:47.
  */
 
-public class RemoteCameraActivity extends BaseActivity<RemoteCameraPresenterImpl, IRemoteCameraContract.IView> implements IRemoteCameraContract.IView {
-    @BindView(R.id.flCameraPreview)
+public class RemoteCameraActivity extends BaseActivity<RemoteCameraPresenterImpl, IRemoteCameraContract.IView> implements IRemoteCameraContract.IView , View.OnClickListener {
+
     FrameLayout flCameraPreview;
-    @BindView(R.id.ivCameraTakePhoto)
+
     ImageView ivCameraTakePhoto;
-    @BindView(R.id.ivRemoteCameraBack)
+
     ImageView ivRemoteCameraBack;
 
     /**
@@ -70,6 +70,14 @@ public class RemoteCameraActivity extends BaseActivity<RemoteCameraPresenterImpl
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+       flCameraPreview = findViewById(R.id.flCameraPreview);
+        ivCameraTakePhoto = findViewById(R.id.ivCameraTakePhoto);
+         ivRemoteCameraBack = findViewById(R.id.ivRemoteCameraBack);
+
+        ivRemoteCameraBack.setOnClickListener(this);
+        ivCameraTakePhoto.setOnClickListener(this);
+
+
         soundUtil = new SoundUtil(this);
         SNEventBus.register(this);
         PermissionUtils.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, new PermissionUtils.OnPermissionGrantedListener() {
@@ -108,7 +116,7 @@ public class RemoteCameraActivity extends BaseActivity<RemoteCameraPresenterImpl
 
 
 
-    @OnClick({R.id.ivRemoteCameraBack,R.id.ivCameraTakePhoto})
+    @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.ivRemoteCameraBack:

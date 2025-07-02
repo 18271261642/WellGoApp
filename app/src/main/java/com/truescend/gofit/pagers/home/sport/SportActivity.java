@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.truescend.gofit.App;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.base.BaseActivity;
+import com.truescend.gofit.pagers.device.setting.DeviceSettingActivity;
 import com.truescend.gofit.pagers.home.bean.ItemDetailsTitle;
 import com.truescend.gofit.pagers.home.bean.ItemStatus;
 import com.truescend.gofit.utils.AppShareUtil;
@@ -18,7 +19,6 @@ import com.truescend.gofit.views.bean.LabelYear;
 
 import java.util.List;
 
-import butterknife.BindView;
 
 /**
  * 功能：运动步数详情页面
@@ -26,25 +26,25 @@ import butterknife.BindView;
  */
 
 public class SportActivity extends BaseActivity<SportPresenterImpl, ISportContract.IView> implements ISportContract.IView {
-    @BindView(R.id.bcvStepChart)
+
     BarChartView bcvStepChart;
-    @BindView(R.id.tlTitle)
+
     TitleLayout ilTitle;
-    @BindView(R.id.ilSportTitle)
+
     View ilSportTitle;
-    @BindView(R.id.ilSportStandardDays)
+
     View ilSportStandardDays;
-    @BindView(R.id.ilSportDailySteps)
+
     View ilSportDailySteps;
-    @BindView(R.id.ilSportDailyConsume)
+
     View ilSportDailyConsume;
-    @BindView(R.id.ilSportTotalDistance)
+
     View ilSportTotalDistance;
-    @BindView(R.id.ilSportDailyDistance)
+
     View ilSportDailyDistance;
-    @BindView(R.id.ilSportTotalSteps)
+
     View ilSportTotalSteps;
-    @BindView(R.id.tvDate)
+
     TextView tvDate;
 
     private ItemDetailsTitle sportDetailsTitle;//界面标题
@@ -69,7 +69,26 @@ public class SportActivity extends BaseActivity<SportPresenterImpl, ISportContra
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+         bcvStepChart = findViewById(R.id.bcvStepChart);
+         ilTitle = findViewById(R.id.tlTitle);
+        ilSportTitle = findViewById(R.id.ilSportTitle);
+        ilSportStandardDays = findViewById(R.id.ilSportStandardDays);
+         ilSportDailySteps = findViewById(R.id.ilSportDailySteps);
+         ilSportDailyConsume = findViewById(R.id.ilSportDailyConsume);
+         ilSportTotalDistance= findViewById(R.id.ilSportTotalDistance);
+        ilSportDailyDistance= findViewById(R.id.ilSportDailyDistance);
+        ilSportTotalSteps= findViewById(R.id.ilSportTotalSteps);
 
+
+//        findViewById(R.id.ivDetailsTitleRightIcon).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+
+
+         tvDate= findViewById(R.id.tvDate);
 
         initTitle();
         initItems();
@@ -145,7 +164,12 @@ public class SportActivity extends BaseActivity<SportPresenterImpl, ISportContra
         sportDetailsTitle.setThirdText(R.string.unit_year);
 
         sportDetailsTitle.setLeftIconOnClickListener(onClick);
-        sportDetailsTitle.setRightIconOnClickListener(onClick);
+        sportDetailsTitle.setRightIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppShareUtil.shareCapture(SportActivity.this);
+            }
+        });
         sportDetailsTitle.setFirstOnClickListener(onClick);
         sportDetailsTitle.setSecondOnClickListener(onClick);
         sportDetailsTitle.setThirdOnClickListener(onClick);
@@ -162,7 +186,7 @@ public class SportActivity extends BaseActivity<SportPresenterImpl, ISportContra
                     onBackPressed();
                     break;
                 case R.id.ivDetailsTitleRightIcon:
-                    AppShareUtil.shareCapture(SportActivity.this);
+
                     break;
                 case R.id.rbDetailsTitleFirst:
                     getPresenter().requestLoadWeekChart(App.getSelectedCalendar());

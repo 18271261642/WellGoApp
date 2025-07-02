@@ -23,7 +23,6 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
-import butterknife.BindView;
 
 /**
  * 功能：日程管理页面
@@ -33,17 +32,17 @@ import butterknife.BindView;
 
 public class AddScheduleActivity extends BaseActivity<AddSchedulePresenterImpl, IAddScheduleContract.IView> implements IAddScheduleContract.IView {
 
-    @BindView(R.id.etScheduleContent)
+
     EditText etScheduleContent;
-    @BindView(R.id.tvAddScheduleDate)
+
     TextView tvAddScheduleDate;
-    @BindView(R.id.tvAddScheduleTime)
+
     TextView tvAddScheduleTime;
-    @BindView(R.id.dpAddScheduleDate)
+
     DatePicker dpAddScheduleDate;
-    @BindView(R.id.npAddScheduleWeek)
+
     NumberPicker npAddScheduleWeek;
-    @BindView(R.id.tpAddScheduleTime)
+
     TimePicker tpAddScheduleTime;
 
     private ScheduleBean scheduleBean = new ScheduleBean();
@@ -60,6 +59,15 @@ public class AddScheduleActivity extends BaseActivity<AddSchedulePresenterImpl, 
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
+     etScheduleContent = findViewById(R.id.etScheduleContent);
+         tvAddScheduleDate = findViewById(R.id.tvAddScheduleDate);
+         tvAddScheduleTime = findViewById(R.id.tvAddScheduleTime);
+         dpAddScheduleDate = findViewById(R.id.dpAddScheduleDate);
+      npAddScheduleWeek = findViewById(R.id.npAddScheduleWeek);
+         tpAddScheduleTime = findViewById(R.id.tpAddScheduleTime);
+
+
+
         initItem();
         initDate();
     }

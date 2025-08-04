@@ -94,7 +94,7 @@ public class BandCallPhoneNotifyUtil {
         builder.setTicker(context.getString(R.string.content_band_call_phone));
         Intent intent = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        builder.setContentIntent(PendingIntent.getActivity(context,0, intent,0));
+        builder.setContentIntent(PendingIntent.getActivity(context,0, intent,PendingIntent.FLAG_MUTABLE));
 
         Notification notification = builder.build();
         if (manager != null) {

@@ -330,7 +330,7 @@ dependencies {
 
 
     //PhotoView
-    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+    api 'com.github.chrisbanes:PhotoView:2.3.0'
     //shap框架
     implementation 'com.github.getActivity:ShapeView:8.3'
 }

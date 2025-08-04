@@ -5,6 +5,8 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 30
+    namespace 'com.github.mikephil.charting'
+
     // resourcePrefix 'mpcht'
     defaultConfig {
         minSdkVersion 16

@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 30
+    namespace 'com.sn.db'
 
     defaultConfig {
         minSdkVersion 18

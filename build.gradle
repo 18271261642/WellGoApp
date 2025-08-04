@@ -34,7 +34,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:8.4.2'
         //classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
         //classpath 'com.jakewharton:butterknife-gradle-plugin:9.0.0-rc2'
-        classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.3'
+     //   classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.3'
 //        classpath 'com.mob.sdk:MobSDK-Impl:2021.0309.1445'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

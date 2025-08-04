@@ -4,6 +4,7 @@ plugins {
 
 android {
     compileSdkVersion 30
+    namespace 'com.blala.wifilibrary'
 
     defaultConfig {
         minSdkVersion 18

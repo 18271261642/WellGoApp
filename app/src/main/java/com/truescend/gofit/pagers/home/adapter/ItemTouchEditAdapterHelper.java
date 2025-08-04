@@ -548,7 +548,7 @@ public class ItemTouchEditAdapterHelper {
     }
 
     private void cancelItemSnakeAnimation(View view) {
-        Object tag = view.getTag(R.id.always);
+        Object tag = view.getTag(com.sweetzpot.stravazpot.R.id.always);
         if (tag != null && tag instanceof ValueAnimator) {
             ValueAnimator valueAnimator = (ValueAnimator) tag;
             valueAnimator.removeAllUpdateListeners();
@@ -583,7 +583,7 @@ public class ItemTouchEditAdapterHelper {
         valueAnimator.setRepeatMode(ObjectAnimator.REVERSE);
         valueAnimator.setDuration(100);
         valueAnimator.start();
-        view.setTag(R.id.always, valueAnimator);
+        view.setTag(com.sweetzpot.stravazpot.R.id.always, valueAnimator);
 
     }
 

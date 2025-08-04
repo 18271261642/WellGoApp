@@ -16,6 +16,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 30
+    namespace 'com.google.android.cameraview'
 
     defaultConfig {
         minSdkVersion 18

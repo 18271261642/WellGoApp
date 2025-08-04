@@ -219,14 +219,14 @@ public class ThemeUtil {
     public static void initInThemeActivity(Context context) {
         if(ThemeUtil.mAccentColor ==-1) {
             TypedValue typedValue = new TypedValue();
-            TypedArray a = context.obtainStyledAttributes(typedValue.data, new int[]{R.attr.colorAccent});
+            TypedArray a = context.obtainStyledAttributes(typedValue.data, new int[]{com.hjq.shape.R.attr.colorAccent});
             int color = a.getColor(0, 0);
             a.recycle();
             ThemeUtil.mAccentColor = color;
         }
         if(ThemeUtil.mPrimaryColor ==-1) {
             TypedValue typedValue = new TypedValue();
-            TypedArray a = context.obtainStyledAttributes(typedValue.data, new int[]{R.attr.colorPrimary});
+            TypedArray a = context.obtainStyledAttributes(typedValue.data, new int[]{com.hjq.shape.R.attr.colorPrimary});
             int color = a.getColor(0, 0);
             a.recycle();
             ThemeUtil.mPrimaryColor = color;

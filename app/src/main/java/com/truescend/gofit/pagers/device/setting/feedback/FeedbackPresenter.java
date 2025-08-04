@@ -31,7 +31,10 @@ public class FeedbackPresenter extends BasePresenter<IFeedbackContract.IView> im
 
     public FeedbackPresenter(IFeedbackContract.IView view) {
         this.view = view;
-        view.setPhoneName(Build.BRAND);
+        if(Build.BRAND != null){
+            view.setPhoneName(Build.BRAND);
+        }
+
 
         DeviceInfo currentDeviceInfo = DeviceType.getCurrentDeviceInfo();
         deviceVersion = DeviceStorage.getDeviceVersion();

@@ -129,7 +129,10 @@ public class FeedbackActivity extends BaseActivity<FeedbackPresenter, IFeedbackC
 
     @Override
     public void setPhoneName(String value) {
-        tvFeedBackPhone.setText(value);
+        if(tvFeedBackPhone != null && value != null){
+            tvFeedBackPhone.setText(value);
+        }
+
     }
 
     @Override

@@ -3,7 +3,8 @@ package com.truescend.gofit.service;
 import android.content.Context;
 import android.location.Address;
 
-import com.amap.api.location.AMapLocation;
+
+
 import com.sn.map.bean.SNLocation;
 import com.sn.map.impl.GaoDeLocationImpl;
 import com.sn.map.impl.GoogleLocationImpl;
@@ -77,14 +78,14 @@ public class LocationServiceHelper implements ILocation.LocationListener, Closea
                     longitude = addr.getLongitude();
                 }
             }
-            if (location.getLocation() instanceof AMapLocation) {
-                AMapLocation addr = location.getLocation();
-                if (addr != null && addr.getLatitude() > 0 && addr.getLongitude() > 0) {
-                    city = addr.getCity();
-                    latitude = addr.getLatitude();
-                    longitude = addr.getLongitude();
-                }
-            }
+//            if (location.getLocation() instanceof AMapLocation) {
+//                AMapLocation addr = location.getLocation();
+//                if (addr != null && addr.getLatitude() > 0 && addr.getLongitude() > 0) {
+//                    city = addr.getCity();
+//                    latitude = addr.getLatitude();
+//                    longitude = addr.getLongitude();
+//                }
+//            }
         }
         SNLog.i("天气服务:定位成功:"+city);
         if (onLocationListener != null) {

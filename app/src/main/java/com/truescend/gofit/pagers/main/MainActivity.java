@@ -34,6 +34,7 @@ import com.sn.blesdk.ble.SNBLEScanner;
 import com.sn.utils.IF;
 import com.sn.utils.SNToast;
 import com.sn.utils.SystemUtil;
+import com.truescend.gofit.App;
 import com.truescend.gofit.BuildConfig;
 import com.truescend.gofit.R;
 import com.truescend.gofit.pagers.base.BaseActivity;
@@ -188,6 +189,7 @@ public class MainActivity extends BaseActivity<MainPresenterImpl, IMainContract.
         }
 
 
+        App.getInstance().initAmap();
 
     }
 

@@ -70,6 +70,8 @@ public class App extends Application implements LoginStatusHelper.LoginStatusLis
     private static final int UNKNOWN = 0;
     private static int status = UNKNOWN;
 
+    public static App app;
+
     public static Calendar getSelectedCalendar() {
         return mSelectedCalendar;
     }
@@ -82,7 +84,7 @@ public class App extends Application implements LoginStatusHelper.LoginStatusLis
     public void onCreate() {
         super.onCreate();
 
-
+        app = this;
 
         mSelectedCalendar = DateUtil.getCurrentCalendar();
         context = new WeakReference<>(getApplicationContext());
@@ -106,9 +108,7 @@ public class App extends Application implements LoginStatusHelper.LoginStatusLis
         //刷新设备支持列表
         DeviceType.asyncReLoadDeviceInfo();
 
-        //高德地图
-        MapsInitializer.updatePrivacyShow(this,true,true);
-        MapsInitializer.updatePrivacyAgree(this,true);
+
 
         /**
          * 基础库设置是否允许采集个人及设备信息
@@ -139,6 +139,16 @@ public class App extends Application implements LoginStatusHelper.LoginStatusLis
     }
 
 
+    public static App getInstance(){
+        return app;
+    }
+
+
+    public  void initAmap(){
+        //高德地图
+        MapsInitializer.updatePrivacyShow(this,true,true);
+        MapsInitializer.updatePrivacyAgree(this,true);
+    }
 
     private void initDataBases() {
         SNDBSDK.init(getContext(), "SNDB.db", 51/*数据库升级的具体日志一定要写,并且写在下面的onUpgrade中*/, new ArrayList<Class<?>>() {
